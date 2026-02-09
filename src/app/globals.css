@@ -1,26 +1,40 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f6f1e8;
+  --foreground: #1a1a1a;
+  color-scheme: light;
+}
+
+.dark {
+  --background: #121212;
+  --foreground: #f5f5f5;
+  color-scheme: dark;
+}
+
+@font-face {
+  font-family: "Selecta";
+  src:
+    url("/assets/fonts/Selecta/Selecta-Medium.woff2") format("woff2"),
+    url("/assets/fonts/Selecta/Selecta-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Selecta", system-ui, sans-serif;
+  --font-mono: "Selecta", system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
