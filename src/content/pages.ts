@@ -18,23 +18,12 @@ export type PagesCopy = {
     }
     submit: string
   }
-  info: {
+  about: {
     eyebrow: string
     title: string
     faqs: Array<{ question: string; answer: string }>
     contactTitle: string
     contactLine: string
-  }
-  support: {
-    eyebrow: string
-    title: string
-    description: string
-    cards: Array<{ title: string; body: string }>
-  }
-  updates: {
-    eyebrow: string
-    title: string
-    empty: string
   }
   collaborations: {
     eyebrow: string
@@ -63,8 +52,8 @@ const pagesCopy: Record<Locale, PagesCopy> = {
       },
       submit: "Send preorder request",
     },
-    info: {
-      eyebrow: "Information",
+    about: {
+      eyebrow: "About",
       title: "FAQs and contact",
       faqs: [
         {
@@ -78,27 +67,6 @@ const pagesCopy: Record<Locale, PagesCopy> = {
       ],
       contactTitle: "Contact",
       contactLine: "Email us at",
-    },
-    support: {
-      eyebrow: "Support",
-      title: "Serviceable by design",
-      description:
-        "The Re27 is built to be maintained, repaired, and recycled. Detailed warranty and support guidelines will follow.",
-      cards: [
-        {
-          title: "Warranty",
-          body: "Long-life components and modular construction allow replacement instead of disposal.",
-        },
-        {
-          title: "Repairs",
-          body: "We can guide you through component swaps or coordinate a service visit when needed.",
-        },
-      ],
-    },
-    updates: {
-      eyebrow: "Updates",
-      title: "Latest updates",
-      empty: "No updates yet.",
     },
     collaborations: {
       eyebrow: "Collaborations",
@@ -126,8 +94,8 @@ const pagesCopy: Record<Locale, PagesCopy> = {
       },
       submit: "Envoyer la demande",
     },
-    info: {
-      eyebrow: "Informations",
+    about: {
+      eyebrow: "A propos",
       title: "FAQ et contact",
       faqs: [
         {
@@ -141,27 +109,6 @@ const pagesCopy: Record<Locale, PagesCopy> = {
       ],
       contactTitle: "Contact",
       contactLine: "Ecrivez-nous a",
-    },
-    support: {
-      eyebrow: "Support",
-      title: "Reparable par conception",
-      description:
-        "Le Re27 est concu pour etre maintenu, repare et recycle. Les informations de garantie et support suivront.",
-      cards: [
-        {
-          title: "Garantie",
-          body: "Les composants durables et la conception modulaire privilegient le remplacement.",
-        },
-        {
-          title: "Reparations",
-          body: "Nous pouvons guider les remplacements de pieces ou organiser une intervention.",
-        },
-      ],
-    },
-    updates: {
-      eyebrow: "Actualites",
-      title: "Dernieres actualites",
-      empty: "Pas d'actualites pour le moment.",
     },
     collaborations: {
       eyebrow: "Collaborations",
@@ -189,8 +136,8 @@ const pagesCopy: Record<Locale, PagesCopy> = {
       },
       submit: "Anfrage senden",
     },
-    info: {
-      eyebrow: "Information",
+    about: {
+      eyebrow: "Ueber uns",
       title: "FAQ und Kontakt",
       faqs: [
         {
@@ -204,27 +151,6 @@ const pagesCopy: Record<Locale, PagesCopy> = {
       ],
       contactTitle: "Kontakt",
       contactLine: "Schreiben Sie an",
-    },
-    support: {
-      eyebrow: "Support",
-      title: "Wartbar durch Design",
-      description:
-        "Re27 ist so gebaut, dass er gewartet, repariert und recycelt werden kann. Details zu Garantie und Support folgen.",
-      cards: [
-        {
-          title: "Garantie",
-          body: "Langlebige Komponenten und modulare Konstruktion ermoeglichen Ersatz statt Entsorgung.",
-        },
-        {
-          title: "Reparaturen",
-          body: "Wir begleiten Komponententausch oder koordinieren einen Servicebesuch.",
-        },
-      ],
-    },
-    updates: {
-      eyebrow: "Updates",
-      title: "Neueste Updates",
-      empty: "Noch keine Updates.",
     },
     collaborations: {
       eyebrow: "Kooperationen",

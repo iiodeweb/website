@@ -3,6 +3,8 @@
 :root {
   --background: #f6f1e8;
   --foreground: #1a1a1a;
+  --content-width: 64rem;
+  --content-padding: 1.5rem;
   color-scheme: light;
 }
 
@@ -33,8 +35,21 @@ html {
   scroll-behavior: smooth;
 }
 
+.iiode-container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--content-padding);
+  padding-right: var(--content-padding);
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  font-weight: 500;
+  font-synthesis: none;
+  font-stretch: normal;
+  transition: background-color 200ms linear, color 200ms linear;
 }

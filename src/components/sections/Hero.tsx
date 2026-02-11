@@ -1,20 +1,20 @@
 import Link from "next/link"
 
-import type { MarketingCopy } from "@/content/marketing"
+import type { Re27Copy } from "@/content/re27"
 
 type HeroProps = {
-  copy: MarketingCopy["hero"]
+  copy: Re27Copy["hero"]
 }
 
 export function Hero({ copy }: HeroProps) {
   return (
     <section className="border-b border-foreground/10 bg-background">
-      <div className="mx-auto grid min-h-[70vh] w-full max-w-6xl grid-cols-1 items-center gap-10 px-6 py-20 md:grid-cols-[1.2fr_0.8fr]">
+      <div className="iiode-container grid min-h-[70vh] grid-cols-1 items-center gap-10 py-20 md:grid-cols-[1.2fr_0.8fr]">
         <div className="space-y-6">
-          <p className="text-xs uppercase tracking-[0.4em] text-foreground/60">
+          <p className="text-xs uppercase text-foreground/60">
             {copy.eyebrow}
           </p>
-          <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl">
             {copy.title}
           </h1>
           <p className="text-xl text-foreground/80">{copy.tagline}</p>
@@ -24,13 +24,13 @@ export function Hero({ copy }: HeroProps) {
           <div className="flex flex-wrap gap-4 pt-4">
             <Link
               href={copy.cta.primary.href}
-              className="rounded-full bg-foreground px-6 py-3 text-xs uppercase tracking-[0.2em] text-background"
+              className="rounded-full bg-foreground px-6 py-3 text-xs uppercase text-background"
             >
               {copy.cta.primary.label}
             </Link>
             <Link
               href={copy.cta.secondary.href}
-              className="rounded-full border border-foreground/30 px-6 py-3 text-xs uppercase tracking-[0.2em] text-foreground"
+              className="rounded-full border border-foreground/30 px-6 py-3 text-xs uppercase text-foreground"
             >
               {copy.cta.secondary.label}
             </Link>

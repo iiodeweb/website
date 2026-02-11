@@ -1,19 +1,17 @@
-import type { MarketingCopy } from "@/content/marketing"
+import type { Re27Copy } from "@/content/re27"
 
 type FeaturesProps = {
-  copy: MarketingCopy["features"]
+  copy: Re27Copy["features"]
 }
 
 export function Features({ copy }: FeaturesProps) {
   return (
     <section id="features" className="border-b border-foreground/10 bg-background">
-      <div className="mx-auto w-full max-w-6xl px-6 py-24">
-        <p className="text-xs uppercase tracking-[0.3em] text-foreground/60">
+      <div className="iiode-container py-24">
+        <p className="text-xs uppercase text-foreground/60">
           {copy.eyebrow}
         </p>
-        <h2 className="mt-4 text-3xl font-semibold md:text-4xl">
-          {copy.title}
-        </h2>
+        <h2 className="mt-4 text-3xl md:text-4xl">{copy.title}</h2>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {copy.items.map((item) => (
             <div

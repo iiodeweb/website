@@ -1,9 +1,10 @@
 "use client"
 
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useState, useTransition } from "react"
 
 import { LanguageToggle } from "@/components/i18n/LanguageToggle"
-import { ThemeToggle } from "@/components/theme/ThemeToggle"
 import { getSiteCopy, siteConfig } from "@/content/site"
 import type { Locale } from "@/lib/locale"
 import type { Theme } from "@/lib/theme"
@@ -15,38 +16,130 @@ type TopNavProps = {
 
 export function TopNav({ locale, theme }: TopNavProps) {
   const copy = getSiteCopy(locale)
+  const router = useRouter()
+  const [isPending, startTransition] = useTransition()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const navItems = siteConfig.nav.items.map((item) => ({
+    ...item,
+    label: copy.nav[item.key],
+    isMailto: item.href.startsWith("mailto:"),
+  }))
+  const re27Item = navItems.find((item) => item.key === "re27")
+  const mobileItems = navItems.filter((item) => item.key !== "re27")
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-foreground/10 bg-background/80 backdrop-blur">
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-6 px-6">
-        <Link href="/" className="text-sm font-semibold tracking-[0.2em] lowercase">
+    <header className="sticky top-0 z-40 w-full border-b border-foreground/10 bg-background/80 backdrop-blur transition-colors duration-200">
+      <div className="iiode-container relative flex h-16 items-center gap-6">
+        <button
+          type="button"
+          onClick={() => {
+            const nextTheme = theme === "dark" ? "light" : "dark"
+            document.documentElement.classList.toggle("dark", nextTheme === "dark")
+            startTransition(async () => {
+              await fetch("/api/theme", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ theme: nextTheme }),
+              })
+              router.refresh()
+            })
+          }}
+          disabled={isPending}
+          className="text-sm lowercase transition-opacity duration-100 hover:opacity-70 active:opacity-50"
+          aria-label="Toggle theme"
+        >
           {siteConfig.name}
-        </Link>
-        <nav className="hidden items-center gap-4 text-xs uppercase tracking-[0.2em] text-foreground/60 md:flex">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-foreground/40">
-            {copy.nav.sectionsLabel}
-          </span>
-          {siteConfig.nav.sections.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="transition-colors hover:text-foreground"
-            >
-              {copy.nav[item.key]}
-            </Link>
-          ))}
-        </nav>
-        <div className="flex items-center gap-3">
-          <LanguageToggle locale={locale} />
-          <ThemeToggle theme={theme} labels={copy.theme} />
+        </button>
+        {re27Item ? (
           <Link
-            href={siteConfig.ctas.primary.href}
-            className="rounded-full border border-foreground/30 px-4 py-2 text-xs uppercase tracking-[0.2em] text-foreground transition hover:border-foreground"
+            href={re27Item.href}
+            className="absolute left-1/2 -translate-x-1/2 text-xs text-foreground/70 transition-colors hover:text-foreground md:hidden"
           >
-            {copy.ctas.primary}
+            {re27Item.label}
           </Link>
-        </div>
+        ) : null}
+        <nav className="ml-auto hidden items-center gap-6 text-xs text-foreground/70 md:flex">
+          {navItems.map((item) =>
+            item.isMailto ? (
+              <a
+                key={item.href}
+                href={item.href}
+                className="transition-colors hover:text-foreground"
+              >
+                {item.label}
+              </a>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="transition-colors hover:text-foreground"
+              >
+                {item.label}
+              </Link>
+            )
+          )}
+          <div className="relative w-[96px] flex justify-end">
+            <LanguageToggle locale={locale} />
+          </div>
+        </nav>
+        <button
+          type="button"
+          onClick={() => setIsMenuOpen((open) => !open)}
+          className="ml-auto flex h-8 w-8 items-center justify-center text-foreground/70 transition hover:text-foreground md:hidden"
+          aria-expanded={isMenuOpen}
+          aria-label="Toggle menu"
+        >
+          <span className="relative block h-3 w-5">
+            <span
+              className={`absolute left-0 top-0 h-[2px] w-5 bg-current transition ${
+                isMenuOpen ? "translate-y-[5px] rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`absolute left-0 top-[5px] h-[2px] w-5 bg-current transition ${
+                isMenuOpen ? "opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`absolute left-0 top-[10px] h-[2px] w-5 bg-current transition ${
+                isMenuOpen ? "translate-y-[-5px] -rotate-45" : ""
+              }`}
+            />
+          </span>
+        </button>
       </div>
+      {isMenuOpen ? (
+        <div className="border-t border-foreground/10 bg-background/95 md:hidden">
+          <div className="iiode-container py-4">
+            <div className="flex flex-col gap-3 text-sm text-foreground/80">
+              {mobileItems.map((item) =>
+                item.isMailto ? (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="transition-colors hover:text-foreground"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="transition-colors hover:text-foreground"
+                  >
+                    {item.label}
+                  </Link>
+                )
+              )}
+              <div className="pt-2">
+                <LanguageToggle locale={locale} />
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </header>
   )
 }

@@ -1,15 +1,15 @@
-import type { MarketingCopy } from "@/content/marketing"
+import type { Re27Copy } from "@/content/re27"
 
 type GalleryProps = {
-  copy: MarketingCopy["gallery"]
+  copy: Re27Copy["gallery"]
 }
 
 export function Gallery({ copy }: GalleryProps) {
   if (copy.items.length === 0) {
     return (
       <section className="border-b border-foreground/10 bg-background">
-        <div className="mx-auto w-full max-w-6xl px-6 py-24">
-          <p className="text-xs uppercase tracking-[0.3em] text-foreground/60">
+        <div className="iiode-container py-24">
+          <p className="text-xs uppercase text-foreground/60">
             {copy.eyebrow}
           </p>
           <div className="mt-8 rounded-3xl border border-foreground/10 bg-foreground/5 p-10 text-sm text-foreground/50">
@@ -22,8 +22,8 @@ export function Gallery({ copy }: GalleryProps) {
 
   return (
     <section className="border-b border-foreground/10 bg-background">
-      <div className="mx-auto w-full max-w-6xl px-6 py-24">
-        <p className="text-xs uppercase tracking-[0.3em] text-foreground/60">
+      <div className="iiode-container py-24">
+        <p className="text-xs uppercase text-foreground/60">
           {copy.eyebrow}
         </p>
         <div className="mt-8 grid gap-6 md:grid-cols-3">

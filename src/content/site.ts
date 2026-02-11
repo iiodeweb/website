@@ -1,48 +1,30 @@
 import type { Locale } from "@/lib/locale"
 
 type NavKey =
-  | "story"
-  | "features"
-  | "view3d"
-  | "useCases"
-  | "contact"
+  | "re27"
   | "collaborations"
-  | "info"
-  | "press"
-  | "support"
-  | "updates"
+  | "about"
+  | "downloads"
+  | "contact"
+  | "preorder"
 
 type FooterLinkKey =
   | "preorder"
-  | "info"
-  | "press"
-  | "support"
-  | "updates"
   | "collaborations"
+  | "about"
+  | "downloads"
 
 type SiteCopy = {
   nav: {
-    sectionsLabel: string
-    pagesLabel: string
-    story: string
-    features: string
-    view3d: string
-    useCases: string
+    re27: string
     contact: string
     collaborations: string
-    info: string
-    press: string
-    support: string
-    updates: string
+    about: string
+    downloads: string
     preorder: string
   }
   ctas: {
     primary: string
-    secondary: string
-  }
-  theme: {
-    light: string
-    dark: string
   }
   footer: {
     heading: string
@@ -54,27 +36,15 @@ type SiteCopy = {
 const siteCopy: Record<Locale, SiteCopy> = {
   en: {
     nav: {
-      sectionsLabel: "Re27",
-      pagesLabel: "Pages",
-      story: "Story",
-      features: "Features",
-      view3d: "3D View",
-      useCases: "Use Cases",
+      re27: "Re27",
       contact: "Contact",
       collaborations: "Collaborations",
-      info: "Info",
-      press: "Press",
-      support: "Support",
-      updates: "Updates",
+      about: "About",
+      downloads: "Downloads",
       preorder: "Preorder",
     },
     ctas: {
       primary: "Preorder",
-      secondary: "Archive",
-    },
-    theme: {
-      light: "Light",
-      dark: "Dark",
     },
     footer: {
       heading: "Get in touch",
@@ -84,27 +54,15 @@ const siteCopy: Record<Locale, SiteCopy> = {
   },
   fr: {
     nav: {
-      sectionsLabel: "Re27",
-      pagesLabel: "Pages",
-      story: "Histoire",
-      features: "Fonctionnalites",
-      view3d: "Vue 3D",
-      useCases: "Usages",
+      re27: "Re27",
       contact: "Contact",
       collaborations: "Collaborations",
-      info: "Infos",
-      press: "Presse",
-      support: "Support",
-      updates: "Actualites",
+      about: "A propos",
+      downloads: "Telechargements",
       preorder: "Precommande",
     },
     ctas: {
       primary: "Precommande",
-      secondary: "Archives",
-    },
-    theme: {
-      light: "Clair",
-      dark: "Sombre",
     },
     footer: {
       heading: "Contact",
@@ -114,27 +72,15 @@ const siteCopy: Record<Locale, SiteCopy> = {
   },
   de: {
     nav: {
-      sectionsLabel: "Re27",
-      pagesLabel: "Pages",
-      story: "Geschichte",
-      features: "Merkmale",
-      view3d: "3D-Ansicht",
-      useCases: "Einsatzbereiche",
+      re27: "Re27",
       contact: "Kontakt",
       collaborations: "Kooperationen",
-      info: "Info",
-      press: "Presse",
-      support: "Support",
-      updates: "Updates",
+      about: "Ueber uns",
+      downloads: "Downloads",
       preorder: "Vorbestellung",
     },
     ctas: {
       primary: "Vorbestellung",
-      secondary: "Archiv",
-    },
-    theme: {
-      light: "Hell",
-      dark: "Dunkel",
     },
     footer: {
       heading: "Kontakt",
@@ -148,35 +94,25 @@ export const siteConfig = {
   name: "iiode",
   description:
     "iiode Re27 is a conscious lighting system that combines natural light quality, smart control, and recycled materials in a serviceable design.",
-  email: "admin@iiode.com",
+  email: "info@iiode.com",
   archiveUrl: "https://services.iiode.com",
   nav: {
-    sections: [
-      { key: "story" as NavKey, href: "/#story" },
-      { key: "features" as NavKey, href: "/#features" },
-      { key: "view3d" as NavKey, href: "/#view-3d" },
-      { key: "useCases" as NavKey, href: "/#use-cases" },
-      { key: "contact" as NavKey, href: "/#contact" },
-    ],
-    pages: [
+    items: [
+      { key: "re27" as NavKey, href: "/" },
       { key: "collaborations" as NavKey, href: "/collaborations" },
-      { key: "info" as NavKey, href: "/info" },
-      { key: "press" as NavKey, href: "/press" },
-      { key: "support" as NavKey, href: "/support" },
-      { key: "updates" as NavKey, href: "/updates" },
+      { key: "about" as NavKey, href: "/about" },
+      { key: "downloads" as NavKey, href: "/downloads" },
+      { key: "contact" as NavKey, href: "mailto:info@iiode.com" },
     ],
   },
   ctas: {
     primary: { href: "/preorder" },
-    secondary: { href: "https://services.iiode.com" },
   },
   footerLinks: [
     { key: "preorder" as FooterLinkKey, href: "/preorder" },
-    { key: "info" as FooterLinkKey, href: "/info" },
-    { key: "press" as FooterLinkKey, href: "/press" },
-    { key: "support" as FooterLinkKey, href: "/support" },
-    { key: "updates" as FooterLinkKey, href: "/updates" },
     { key: "collaborations" as FooterLinkKey, href: "/collaborations" },
+    { key: "about" as FooterLinkKey, href: "/about" },
+    { key: "downloads" as FooterLinkKey, href: "/downloads" },
   ],
   locations: [
     {

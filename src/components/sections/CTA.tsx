@@ -1,11 +1,11 @@
 import Link from "next/link"
 
-import type { MarketingCopy } from "@/content/marketing"
+import type { Re27Copy } from "@/content/re27"
 import { getSiteCopy, siteConfig } from "@/content/site"
 import { getLocale } from "@/lib/locale-server"
 
 type CTAProps = {
-  copy: MarketingCopy["cta"]
+  copy: Re27Copy["cta"]
 }
 
 export async function CTA({ copy }: CTAProps) {
@@ -14,18 +14,16 @@ export async function CTA({ copy }: CTAProps) {
 
   return (
     <section className="border-b border-foreground/10 bg-background">
-      <div className="mx-auto flex w-full max-w-6xl flex-col items-start justify-between gap-6 px-6 py-20 md:flex-row md:items-center">
+      <div className="iiode-container flex flex-col items-start justify-between gap-6 py-20 md:flex-row md:items-center">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-foreground/60">
+          <p className="text-xs uppercase text-foreground/60">
             {copy.eyebrow}
           </p>
-          <h2 className="mt-4 text-3xl font-semibold md:text-4xl">
-            {copy.title}
-          </h2>
+          <h2 className="mt-4 text-3xl md:text-4xl">{copy.title}</h2>
         </div>
         <Link
           href={siteConfig.ctas.primary.href}
-          className="rounded-full bg-foreground px-6 py-3 text-xs uppercase tracking-[0.2em] text-background"
+          className="rounded-full bg-foreground px-6 py-3 text-xs uppercase text-background"
         >
           {siteCopy.ctas.primary}
         </Link>
