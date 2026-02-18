@@ -35,6 +35,13 @@ html {
   scroll-behavior: smooth;
 }
 
+.theme-transition,
+.theme-transition * {
+  transition-property: background-color, color, border-color, fill, stroke;
+  transition-duration: 150ms;
+  transition-timing-function: linear;
+}
+
 .iiode-container {
   width: 100%;
   max-width: var(--content-width);
@@ -51,5 +58,4 @@ body {
   font-weight: 500;
   font-synthesis: none;
   font-stretch: normal;
-  transition: background-color 200ms linear, color 200ms linear;
 }

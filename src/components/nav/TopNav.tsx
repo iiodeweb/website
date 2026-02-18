@@ -28,13 +28,17 @@ export function TopNav({ locale, theme }: TopNavProps) {
   const mobileItems = navItems.filter((item) => item.key !== "re27")
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-foreground/10 bg-background/80 backdrop-blur transition-colors duration-200">
+    <header className="sticky top-0 z-40 w-full border-b border-foreground/10 bg-background/80 backdrop-blur">
       <div className="iiode-container relative flex h-16 items-center gap-6">
         <button
           type="button"
           onClick={() => {
             const nextTheme = theme === "dark" ? "light" : "dark"
+            document.documentElement.classList.add("theme-transition")
             document.documentElement.classList.toggle("dark", nextTheme === "dark")
+            window.setTimeout(() => {
+              document.documentElement.classList.remove("theme-transition")
+            }, 170)
             startTransition(async () => {
               await fetch("/api/theme", {
                 method: "POST",
