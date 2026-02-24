@@ -11,7 +11,7 @@ export function Footer({ locale }: FooterProps) {
   const copy = getSiteCopy(locale)
 
   return (
-    <footer id="contact" className="bg-background text-white">
+    <footer id="contact" className="bg-background text-foreground">
       <div className="iiode-container py-8 md:py-10">
         <div className="grid grid-cols-2 gap-x-6 gap-y-5 xl:grid-cols-4 xl:gap-y-4">
           <div className="iiode-hover-group grid content-start gap-y-1">

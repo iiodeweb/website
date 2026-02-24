@@ -7,7 +7,7 @@ type WorkWithUsProps = {
 export function WorkWithUs({ copy }: WorkWithUsProps) {
   return (
     <section className="border-b border-foreground/10 bg-background">
-      <div className="iiode-container py-24">
+      <div className="iiode-container flex min-h-[calc(100svh-4rem)] flex-col justify-center py-16 md:py-20">
         <p className="text-xs uppercase text-foreground/60">
           {copy.eyebrow}
         </p>

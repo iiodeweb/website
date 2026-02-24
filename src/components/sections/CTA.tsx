@@ -14,7 +14,7 @@ export async function CTA({ copy }: CTAProps) {
 
   return (
     <section className="border-b border-foreground/10 bg-background">
-      <div className="iiode-container flex flex-col items-start justify-between gap-6 py-20 md:flex-row md:items-center">
+      <div className="iiode-container flex min-h-[calc(100svh-4rem)] flex-col items-start justify-center gap-6 py-16 md:flex-row md:items-center md:justify-between md:py-20">
         <div>
           <p className="text-xs uppercase text-foreground/60">
             {copy.eyebrow}
@@ -23,7 +23,7 @@ export async function CTA({ copy }: CTAProps) {
         </div>
         <Link
           href={siteConfig.ctas.primary.href}
-          className="rounded-full bg-foreground px-6 py-3 text-xs uppercase text-background"
+          className="bg-foreground px-6 py-3 text-xs uppercase text-background"
         >
           {siteCopy.ctas.primary}
         </Link>

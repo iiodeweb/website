@@ -1,5 +1,3 @@
-import Link from "next/link"
-
 import type { Re27Copy } from "@/content/re27"
 
 type HeroProps = {
@@ -7,42 +5,21 @@ type HeroProps = {
 }
 
 export function Hero({ copy }: HeroProps) {
+  const productName = copy.title.replace(/^iiode\s*/i, "") || "Re27"
+
   return (
-    <section className="border-b border-foreground/10 bg-background">
-      <div className="iiode-container grid min-h-[70vh] grid-cols-1 items-center gap-10 py-20 md:grid-cols-[1.2fr_0.8fr]">
-        <div className="space-y-6">
-          <p className="text-xs uppercase text-foreground/60">
-            {copy.eyebrow}
-          </p>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl">
-            {copy.title}
-          </h1>
-          <p className="text-xl text-foreground/80">{copy.tagline}</p>
-          <p className="max-w-xl text-base text-foreground/60">
-            {copy.description}
-          </p>
-          <div className="flex flex-wrap gap-4 pt-4">
-            <Link
-              href={copy.cta.primary.href}
-              className="rounded-full bg-foreground px-6 py-3 text-xs uppercase text-background"
-            >
-              {copy.cta.primary.label}
-            </Link>
-            <Link
-              href={copy.cta.secondary.href}
-              className="rounded-full border border-foreground/30 px-6 py-3 text-xs uppercase text-foreground"
-            >
-              {copy.cta.secondary.label}
-            </Link>
-          </div>
-        </div>
-        <div className="overflow-hidden rounded-3xl border border-foreground/10 bg-foreground/5">
-          <img
-            src={copy.image}
-            alt="iiode Re27 hero"
-            className="h-full w-full object-cover"
-            loading="eager"
-          />
+    <section className="relative isolate border-b border-foreground/10 bg-background">
+      <img
+        src={copy.image}
+        alt={copy.title}
+        className="absolute inset-0 h-full w-full object-cover"
+        loading="eager"
+      />
+      <div className="absolute inset-0 bg-black/20" />
+      <div className="iiode-container relative z-10 flex min-h-[calc(100svh-4rem)] items-start pt-10 sm:pt-12">
+        <div className="flex w-full items-center justify-between text-base text-white sm:text-lg">
+          <span className="lowercase">iiode</span>
+          <span>{productName}</span>
         </div>
       </div>
     </section>

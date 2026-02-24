@@ -28,7 +28,7 @@ export function TopNav({ locale, theme }: TopNavProps) {
   const mobileItems = navItems.filter((item) => item.key !== "re27")
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-white/15 bg-background/80 text-white backdrop-blur">
+    <header className="sticky top-0 z-40 w-full border-b border-foreground/15 bg-background/80 text-foreground backdrop-blur">
       <div className="iiode-container relative flex h-16 items-center gap-6">
         <button
           type="button"
@@ -111,7 +111,7 @@ export function TopNav({ locale, theme }: TopNavProps) {
         </button>
       </div>
       {isMenuOpen ? (
-        <div className="border-t border-white/15 bg-background/95 text-white md:hidden">
+        <div className="absolute inset-x-0 top-full z-50 h-[calc(100dvh-4rem)] overflow-y-auto border-t border-foreground/15 bg-background/95 text-foreground shadow-lg backdrop-blur md:hidden">
           <div className="iiode-container py-4">
             <div className="iiode-hover-group flex flex-col gap-3 text-sm">
               {mobileItems.map((item) =>

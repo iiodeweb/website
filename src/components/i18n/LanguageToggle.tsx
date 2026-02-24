@@ -52,7 +52,7 @@ export function LanguageToggle({
           type="button"
           onClick={() => setIsOpen((open) => !open)}
           disabled={isPending}
-          className="w-7 text-center text-base uppercase text-current transition-colors"
+          className="w-7 cursor-pointer text-center text-base uppercase text-current transition-colors disabled:cursor-default"
           aria-expanded={isOpen}
         >
           {locale.toUpperCase()}
@@ -64,7 +64,7 @@ export function LanguageToggle({
               type="button"
               onClick={() => handleLocale(option)}
               disabled={isPending}
-              className={`w-7 text-center text-base uppercase text-current transition-colors ${
+              className={`w-7 cursor-pointer text-center text-base uppercase text-current transition-colors disabled:cursor-default ${
                 pushLayout && !isOpen
                   ? "pointer-events-none opacity-0"
                   : "opacity-100"

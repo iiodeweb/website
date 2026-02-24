@@ -3,6 +3,7 @@
 :root {
   --background: #f6f1e8;
   --foreground: #1a1a1a;
+  --interactive-dim: #7a7a7a;
   --content-width: 64rem;
   --content-padding: 1.5rem;
   color-scheme: light;
@@ -11,6 +12,7 @@
 .dark {
   --background: #121212;
   --foreground: #f5f5f5;
+  --interactive-dim: #b8b8b8;
   color-scheme: dark;
 }
 
@@ -52,11 +54,11 @@ html {
 }
 
 .iiode-hover-group {
-  color: #fff;
+  color: var(--foreground);
 }
 
 .iiode-brand-hint {
-  color: #fff;
+  color: var(--foreground);
 }
 
 .iiode-hover-group a,
@@ -68,29 +70,29 @@ html {
 @media (hover: hover) {
   .iiode-brand-hint:hover {
     animation: iiode-brand-blink 220ms ease 1;
-    color: #fff;
+    color: var(--foreground);
   }
 
   .iiode-hover-group:has(a:hover),
   .iiode-hover-group:has(button:hover) {
-    color: #b8b8b8;
+    color: var(--interactive-dim);
   }
 
   .iiode-hover-group a:hover,
   .iiode-hover-group button:hover {
-    color: #fff;
+    color: var(--foreground);
   }
 }
 
 @keyframes iiode-brand-blink {
   0% {
-    color: #fff;
+    color: var(--foreground);
   }
   50% {
-    color: #b8b8b8;
+    color: var(--interactive-dim);
   }
   100% {
-    color: #fff;
+    color: var(--foreground);
   }
 }
 

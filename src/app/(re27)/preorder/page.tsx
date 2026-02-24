@@ -97,7 +97,7 @@ export default async function PreorderPage() {
           </label>
           <button
             type="submit"
-            className="w-full rounded-full bg-foreground px-6 py-3 text-xs uppercase text-background md:w-fit"
+            className="w-full bg-foreground px-6 py-3 text-xs uppercase text-background md:w-fit"
           >
             {copy.submit}
           </button>

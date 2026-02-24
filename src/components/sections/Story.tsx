@@ -7,7 +7,7 @@ type StoryProps = {
 export function Story({ copy }: StoryProps) {
   return (
     <section id="story" className="border-b border-foreground/10 bg-background">
-      <div className="iiode-container flex flex-col gap-6 py-24">
+      <div className="iiode-container flex min-h-[calc(100svh-4rem)] flex-col justify-center gap-6 py-16 md:py-20">
         <p className="text-xs uppercase text-foreground/60">
           {copy.eyebrow}
         </p>
