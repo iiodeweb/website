@@ -6,7 +6,7 @@ export default async function PreorderPage() {
   const copy = getPagesCopy(locale).preorder
 
   return (
-    <section className="bg-background text-foreground">
+    <section id="top" className="bg-background text-foreground">
       <div className="iiode-container py-24">
         <p className="text-xs uppercase text-foreground/60">
           {copy.eyebrow}

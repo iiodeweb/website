@@ -28,7 +28,7 @@ export function TopNav({ locale, theme }: TopNavProps) {
   const mobileItems = navItems.filter((item) => item.key !== "re27")
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-foreground/10 bg-background/80 backdrop-blur">
+    <header className="sticky top-0 z-40 w-full border-b border-white/15 bg-background/80 text-white backdrop-blur">
       <div className="iiode-container relative flex h-16 items-center gap-6">
         <button
           type="button"
@@ -49,7 +49,7 @@ export function TopNav({ locale, theme }: TopNavProps) {
             })
           }}
           disabled={isPending}
-          className="text-sm lowercase transition-opacity duration-100 hover:opacity-70 active:opacity-50"
+          className="iiode-brand-hint cursor-pointer text-base lowercase"
           aria-label="Toggle theme"
         >
           {siteConfig.name}
@@ -57,18 +57,18 @@ export function TopNav({ locale, theme }: TopNavProps) {
         {re27Item ? (
           <Link
             href={re27Item.href}
-            className="absolute left-1/2 -translate-x-1/2 text-xs text-foreground/70 transition-colors hover:text-foreground md:hidden"
+            className="absolute left-1/2 -translate-x-1/2 text-base md:hidden"
           >
             {re27Item.label}
           </Link>
         ) : null}
-        <nav className="ml-auto hidden items-center gap-6 text-xs text-foreground/70 md:flex">
+        <nav className="iiode-hover-group ml-auto hidden items-center gap-7 text-base md:flex">
           {navItems.map((item) =>
             item.isMailto ? (
               <a
                 key={item.href}
                 href={item.href}
-                className="transition-colors hover:text-foreground"
+                className="transition-colors"
               >
                 {item.label}
               </a>
@@ -76,20 +76,18 @@ export function TopNav({ locale, theme }: TopNavProps) {
               <Link
                 key={item.href}
                 href={item.href}
-                className="transition-colors hover:text-foreground"
+                className="transition-colors"
               >
                 {item.label}
               </Link>
             )
           )}
-          <div className="relative w-[96px] flex justify-end">
-            <LanguageToggle locale={locale} />
-          </div>
+          <LanguageToggle locale={locale} pushLayout />
         </nav>
         <button
           type="button"
           onClick={() => setIsMenuOpen((open) => !open)}
-          className="ml-auto flex h-8 w-8 items-center justify-center text-foreground/70 transition hover:text-foreground md:hidden"
+          className="ml-auto flex h-8 w-8 items-center justify-center transition-colors md:hidden"
           aria-expanded={isMenuOpen}
           aria-label="Toggle menu"
         >
@@ -113,16 +111,16 @@ export function TopNav({ locale, theme }: TopNavProps) {
         </button>
       </div>
       {isMenuOpen ? (
-        <div className="border-t border-foreground/10 bg-background/95 md:hidden">
+        <div className="border-t border-white/15 bg-background/95 text-white md:hidden">
           <div className="iiode-container py-4">
-            <div className="flex flex-col gap-3 text-sm text-foreground/80">
+            <div className="iiode-hover-group flex flex-col gap-3 text-sm">
               {mobileItems.map((item) =>
                 item.isMailto ? (
                   <a
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className="transition-colors hover:text-foreground"
+                    className="transition-colors"
                   >
                     {item.label}
                   </a>
@@ -131,7 +129,7 @@ export function TopNav({ locale, theme }: TopNavProps) {
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className="transition-colors hover:text-foreground"
+                    className="transition-colors"
                   >
                     {item.label}
                   </Link>

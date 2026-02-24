@@ -35,6 +35,12 @@ export default async function DownloadsPage() {
           </p>
           <p className="mt-3 text-lg">{downloadsContent.contact.email}</p>
         </div>
+        <div className="mt-8 rounded-3xl border border-foreground/10 bg-foreground/5 p-8 text-sm text-foreground/70">
+          <p className="text-xs uppercase text-foreground/60">
+            {downloadsContent.terms.title}
+          </p>
+          <p className="mt-4">{downloadsContent.terms.body}</p>
+        </div>
       </div>
     </section>
   )

@@ -6,6 +6,10 @@ export type DownloadsContent = {
   description: string
   downloadLabel: string
   downloads: Array<{ label: string; href: string }>
+  terms: {
+    title: string
+    body: string
+  }
   contact: {
     label: string
     email: string
@@ -33,6 +37,10 @@ const downloadsContent: Record<Locale, DownloadsContent> = {
         href: "/assets/press/01%20abat-jour/Re27-Suspension.jpg",
       },
     ],
+    terms: {
+      title: "Download Terms",
+      body: "By submitting your name, surname and email address and downloading any images from this website, you receive a limited, non-exclusive, non-transferable, revocable permission from iiode to use those images for personal use and for editorial or press coverage about iiode only. The images may not be sold, sublicensed, redistributed as standalone files, used for unrelated commercial purposes, or used in any misleading or unlawful manner without prior written permission from iiode. Please credit (c) iiode where reasonably possible. For any other use, please contact info@iiode.com.",
+    },
     contact: {
       label: "Contact",
       email: "info@iiode.com",
@@ -58,6 +66,10 @@ const downloadsContent: Record<Locale, DownloadsContent> = {
         href: "/assets/press/01%20abat-jour/Re27-Suspension.jpg",
       },
     ],
+    terms: {
+      title: "Download Terms",
+      body: "By submitting your name, surname and email address and downloading any images from this website, you receive a limited, non-exclusive, non-transferable, revocable permission from iiode to use those images for personal use and for editorial or press coverage about iiode only. The images may not be sold, sublicensed, redistributed as standalone files, used for unrelated commercial purposes, or used in any misleading or unlawful manner without prior written permission from iiode. Please credit (c) iiode where reasonably possible. For any other use, please contact info@iiode.com.",
+    },
     contact: {
       label: "Contact",
       email: "info@iiode.com",
@@ -83,6 +95,10 @@ const downloadsContent: Record<Locale, DownloadsContent> = {
         href: "/assets/press/01%20abat-jour/Re27-Suspension.jpg",
       },
     ],
+    terms: {
+      title: "Download Terms",
+      body: "By submitting your name, surname and email address and downloading any images from this website, you receive a limited, non-exclusive, non-transferable, revocable permission from iiode to use those images for personal use and for editorial or press coverage about iiode only. The images may not be sold, sublicensed, redistributed as standalone files, used for unrelated commercial purposes, or used in any misleading or unlawful manner without prior written permission from iiode. Please credit (c) iiode where reasonably possible. For any other use, please contact info@iiode.com.",
+    },
     contact: {
       label: "Kontakt",
       email: "info@iiode.com",

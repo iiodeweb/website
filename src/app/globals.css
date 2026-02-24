@@ -51,6 +51,49 @@ html {
   padding-right: var(--content-padding);
 }
 
+.iiode-hover-group {
+  color: #fff;
+}
+
+.iiode-brand-hint {
+  color: #fff;
+}
+
+.iiode-hover-group a,
+.iiode-hover-group button {
+  color: inherit;
+  transition: color 160ms ease;
+}
+
+@media (hover: hover) {
+  .iiode-brand-hint:hover {
+    animation: iiode-brand-blink 220ms ease 1;
+    color: #fff;
+  }
+
+  .iiode-hover-group:has(a:hover),
+  .iiode-hover-group:has(button:hover) {
+    color: #b8b8b8;
+  }
+
+  .iiode-hover-group a:hover,
+  .iiode-hover-group button:hover {
+    color: #fff;
+  }
+}
+
+@keyframes iiode-brand-blink {
+  0% {
+    color: #fff;
+  }
+  50% {
+    color: #b8b8b8;
+  }
+  100% {
+    color: #fff;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

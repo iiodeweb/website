@@ -9,10 +9,9 @@ type NavKey =
   | "preorder"
 
 type FooterLinkKey =
+  | "services"
   | "preorder"
-  | "collaborations"
-  | "about"
-  | "downloads"
+  | "newsletter"
 
 type SiteCopy = {
   nav: {
@@ -26,10 +25,15 @@ type SiteCopy = {
   ctas: {
     primary: string
   }
+  links: {
+    services: string
+    preorder: string
+    newsletter: string
+  }
   footer: {
-    heading: string
-    archive: string
-    tagline: string
+    brandTagline: string
+    instagram: string
+    legal: string
   }
 }
 
@@ -46,10 +50,16 @@ const siteCopy: Record<Locale, SiteCopy> = {
     ctas: {
       primary: "Preorder",
     },
+    links: {
+      services: "Services",
+      preorder: "Pre-Order",
+      newsletter: "Newsletter",
+    },
     footer: {
-      heading: "Get in touch",
-      archive: "Visit archive",
-      tagline: "iiode - Lighting made conscious",
+      brandTagline: "Re27",
+      instagram: "@iiode",
+      legal:
+        "Copyright Notice. Unless otherwise stated, all content on this website, including text, images and downloadable materials, is protected by copyright and related rights. No part of this website may be copied, reproduced, modified, distributed, stored, transmitted or otherwise used in any form without the prior written consent of iiode, except for strictly personal, non-commercial use or as expressly permitted by applicable terms on this website. (c) 2026 iiode. All rights reserved.",
     },
   },
   fr: {
@@ -64,10 +74,16 @@ const siteCopy: Record<Locale, SiteCopy> = {
     ctas: {
       primary: "Precommande",
     },
+    links: {
+      services: "Services",
+      preorder: "Pre-Order",
+      newsletter: "Newsletter",
+    },
     footer: {
-      heading: "Contact",
-      archive: "Voir les archives",
-      tagline: "iiode - Eclairage conscient",
+      brandTagline: "Re27",
+      instagram: "@iiode",
+      legal:
+        "Copyright Notice. Unless otherwise stated, all content on this website, including text, images and downloadable materials, is protected by copyright and related rights. No part of this website may be copied, reproduced, modified, distributed, stored, transmitted or otherwise used in any form without the prior written consent of iiode, except for strictly personal, non-commercial use or as expressly permitted by applicable terms on this website. (c) 2026 iiode. All rights reserved.",
     },
   },
   de: {
@@ -82,10 +98,16 @@ const siteCopy: Record<Locale, SiteCopy> = {
     ctas: {
       primary: "Vorbestellung",
     },
+    links: {
+      services: "Services",
+      preorder: "Pre-Order",
+      newsletter: "Newsletter",
+    },
     footer: {
-      heading: "Kontakt",
-      archive: "Archiv besuchen",
-      tagline: "iiode - Bewusstes Licht",
+      brandTagline: "Re27",
+      instagram: "@iiode",
+      legal:
+        "Copyright Notice. Unless otherwise stated, all content on this website, including text, images and downloadable materials, is protected by copyright and related rights. No part of this website may be copied, reproduced, modified, distributed, stored, transmitted or otherwise used in any form without the prior written consent of iiode, except for strictly personal, non-commercial use or as expressly permitted by applicable terms on this website. (c) 2026 iiode. All rights reserved.",
     },
   },
 }
@@ -96,6 +118,7 @@ export const siteConfig = {
     "iiode Re27 is a conscious lighting system that combines natural light quality, smart control, and recycled materials in a serviceable design.",
   email: "info@iiode.com",
   archiveUrl: "https://services.iiode.com",
+  instagramUrl: "https://www.instagram.com/iiode/",
   nav: {
     items: [
       { key: "re27" as NavKey, href: "/" },
@@ -109,19 +132,23 @@ export const siteConfig = {
     primary: { href: "/preorder" },
   },
   footerLinks: [
-    { key: "preorder" as FooterLinkKey, href: "/preorder" },
-    { key: "collaborations" as FooterLinkKey, href: "/collaborations" },
-    { key: "about" as FooterLinkKey, href: "/about" },
-    { key: "downloads" as FooterLinkKey, href: "/downloads" },
+    { key: "services" as FooterLinkKey, href: "https://services.iiode.com" },
+    { key: "preorder" as FooterLinkKey, href: "/preorder#top" },
+    {
+      key: "newsletter" as FooterLinkKey,
+      href: "https://mailchi.mp/7b98e90f02f7/ii-e27",
+    },
   ],
   locations: [
     {
-      label: "Lausanne",
-      address: "Av. des Alpes 9, CH - 1006 Lausanne",
+      country: "Switzerland",
+      line1: "Avenue des Alpes 9",
+      line2: "CH - 1006 Lausanne",
     },
     {
-      label: "Paris",
-      address: "Rue d'Hauteville 25, FR - 75010 Paris",
+      country: "France",
+      line1: "Rue d'Hauteville 25",
+      line2: "FR - 75010 Paris",
     },
   ],
 }

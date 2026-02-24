@@ -29,6 +29,18 @@ export default async function AboutPage() {
             </p>
           </div>
           <div className="rounded-3xl border border-foreground/10 bg-foreground/5 p-8">
+            <h2 className="text-lg">Studios</h2>
+            <div className="mt-4 grid gap-8 text-sm text-foreground/70 sm:grid-cols-2">
+              {siteConfig.locations.map((location) => (
+                <div key={location.country}>
+                  <p className="text-foreground">{location.country}</p>
+                  <p className="mt-2">{location.line1}</p>
+                  <p>{location.line2}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-3xl border border-foreground/10 bg-foreground/5 p-8">
             <h2 className="text-lg">{copy.contactTitle}</h2>
             <p className="mt-4 text-sm text-foreground/70">
               {copy.contactLine}{" "}

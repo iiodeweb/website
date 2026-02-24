@@ -11,45 +11,37 @@ export function Footer({ locale }: FooterProps) {
   const copy = getSiteCopy(locale)
 
   return (
-    <footer id="contact" className="bg-background">
-      <div className="iiode-container py-20">
-        <div className="grid gap-10 md:grid-cols-[1.1fr_0.6fr_0.3fr]">
-          <div className="space-y-4">
-            <p className="text-xs uppercase text-foreground/60">
-              {copy.footer.heading}
-            </p>
-            <p className="text-2xl">{siteConfig.email}</p>
+    <footer id="contact" className="bg-background text-white">
+      <div className="iiode-container py-8 md:py-10">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-5 xl:grid-cols-4 xl:gap-y-4">
+          <div className="iiode-hover-group grid content-start gap-y-1">
+            <p className="text-base lowercase leading-6">{siteConfig.name}</p>
+            <p className="whitespace-nowrap text-base leading-6">{copy.footer.brandTagline}</p>
             <Link
-              href={siteConfig.archiveUrl}
-              className="inline-flex items-center text-xs uppercase text-foreground/60 transition hover:text-foreground"
+              href={siteConfig.instagramUrl}
+              className="inline-flex items-center text-base leading-6"
+              target="_blank"
+              rel="noreferrer"
             >
-              {copy.footer.archive}
+              {copy.footer.instagram}
             </Link>
           </div>
-          <div className="space-y-6">
-            {siteConfig.locations.map((location) => (
-              <div key={location.label}>
-                <p className="text-xs uppercase text-foreground/60">
-                  {location.label}
-                </p>
-                <p className="text-sm text-foreground/70">{location.address}</p>
-              </div>
-            ))}
-          </div>
-          <div className="space-y-3">
+          <div className="iiode-hover-group grid content-start gap-y-1 text-right xl:text-left">
             {siteConfig.footerLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="block text-xs uppercase text-foreground/60 transition hover:text-foreground"
+                className="block text-base leading-6"
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel={link.href.startsWith("http") ? "noreferrer" : undefined}
               >
-                {copy.nav[link.key]}
+                {copy.links[link.key]}
               </Link>
             ))}
           </div>
-        </div>
-        <div className="mt-12 border-t border-foreground/10 pt-6 text-xs text-foreground/40">
-          {copy.footer.tagline}
+          <div className="col-span-2 text-justify text-[9px] leading-[1.08] sm:text-[9.5px] sm:leading-[1.12] xl:col-span-2 xl:text-[10px] xl:leading-[1.24]">
+            <p>{copy.footer.legal}</p>
+          </div>
         </div>
       </div>
     </footer>
