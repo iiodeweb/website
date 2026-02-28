@@ -18,10 +18,10 @@ export default async function Re27Page() {
       <Hero copy={copy.hero} />
       <Story copy={copy.story} />
       <Features copy={copy.features} />
-      <ThreeD copy={copy.threeD} />
       <UseCases copy={copy.useCases} />
-      <WorkWithUs copy={copy.workWithUs} />
+      <ThreeD copy={copy.threeD} />
       <Gallery copy={copy.gallery} />
+      <WorkWithUs copy={copy.workWithUs} />
       <CTA copy={copy.cta} />
     </>
   )

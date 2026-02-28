@@ -5,22 +5,21 @@ type FeaturesProps = {
 }
 
 export function Features({ copy }: FeaturesProps) {
+  const secondaryLine = copy.items[0] ?? ""
+
   return (
     <section id="features" className="border-b border-foreground/10 bg-background">
-      <div className="iiode-container flex min-h-[calc(100svh-4rem)] flex-col justify-center py-16 md:py-20">
-        <p className="text-xs uppercase text-foreground/60">
-          {copy.eyebrow}
-        </p>
-        <h2 className="mt-4 text-3xl md:text-4xl">{copy.title}</h2>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {copy.items.map((item) => (
-            <div
-              key={item}
-              className="rounded-3xl border border-foreground/10 bg-foreground/5 p-8 text-sm text-foreground/70"
-            >
-              {item}
-            </div>
-          ))}
+      <div className="iiode-container grid min-h-[calc(100svh-4rem)] grid-cols-1 md:grid-cols-2">
+        <div className="flex items-center border-b border-foreground/10 px-0 py-12 md:border-b-0 md:border-r md:px-10">
+          <div>
+            <p className="mb-6 text-xs uppercase text-foreground/60">
+              {copy.eyebrow}
+            </p>
+            <h2 className="text-4xl leading-tight md:text-6xl">{copy.title}</h2>
+          </div>
+        </div>
+        <div className="flex items-center px-0 py-12 md:px-10">
+          <p className="text-4xl leading-tight md:text-6xl">{secondaryLine}</p>
         </div>
       </div>
     </section>

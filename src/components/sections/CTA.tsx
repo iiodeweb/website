@@ -1,32 +1,24 @@
-import Link from "next/link"
-
 import type { Re27Copy } from "@/content/re27"
-import { getSiteCopy, siteConfig } from "@/content/site"
-import { getLocale } from "@/lib/locale-server"
 
 type CTAProps = {
   copy: Re27Copy["cta"]
 }
 
-export async function CTA({ copy }: CTAProps) {
-  const locale = await getLocale()
-  const siteCopy = getSiteCopy(locale)
-
+export function CTA({ copy }: CTAProps) {
   return (
     <section className="border-b border-foreground/10 bg-background">
-      <div className="iiode-container flex min-h-[calc(100svh-4rem)] flex-col items-start justify-center gap-6 py-16 md:flex-row md:items-center md:justify-between md:py-20">
-        <div>
-          <p className="text-xs uppercase text-foreground/60">
-            {copy.eyebrow}
-          </p>
-          <h2 className="mt-4 text-3xl md:text-4xl">{copy.title}</h2>
+      <div className="iiode-container grid min-h-[calc(100svh-4rem)] grid-cols-1 md:grid-cols-2">
+        <div className="flex items-center border-b border-foreground/10 px-0 py-12 md:border-b-0 md:border-r md:px-10">
+          <div>
+            <p className="mb-6 text-xs uppercase text-foreground/60">
+              {copy.eyebrow}
+            </p>
+            <h2 className="text-5xl leading-tight md:text-7xl">{copy.title}</h2>
+          </div>
         </div>
-        <Link
-          href={siteConfig.ctas.primary.href}
-          className="bg-foreground px-6 py-3 text-xs uppercase text-background"
-        >
-          {siteCopy.ctas.primary}
-        </Link>
+        <div className="flex items-center px-0 py-12 md:px-10">
+          <p className="text-4xl md:text-6xl">Re27</p>
+        </div>
       </div>
     </section>
   )

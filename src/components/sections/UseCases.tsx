@@ -7,23 +7,27 @@ type UseCasesProps = {
 export function UseCases({ copy }: UseCasesProps) {
   return (
     <section id="use-cases" className="border-b border-foreground/10 bg-background">
-      <div className="iiode-container flex min-h-[calc(100svh-4rem)] flex-col justify-center py-16 md:py-20">
-        <p className="text-xs uppercase text-foreground/60">
-          {copy.eyebrow}
-        </p>
-        <h2 className="mt-4 text-3xl md:text-4xl">{copy.title}</h2>
-        <p className="mt-4 max-w-2xl text-lg text-foreground/70">
-          {copy.body}
-        </p>
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {copy.items.map((item) => (
-            <div
-              key={item}
-              className="rounded-2xl border border-foreground/10 bg-foreground/5 px-6 py-8 text-xs uppercase text-foreground/70"
-            >
-              {item}
-            </div>
-          ))}
+      <div className="iiode-container grid min-h-[calc(100svh-4rem)] grid-cols-1 md:grid-cols-2">
+        <div className="flex items-center border-b border-foreground/10 px-0 py-12 md:border-b-0 md:border-r md:px-10">
+          <div className="space-y-6">
+            <p className="text-xs uppercase text-foreground/60">
+              {copy.eyebrow}
+            </p>
+            <h2 className="text-3xl leading-tight md:text-5xl">{copy.title}</h2>
+            <p className="text-lg text-foreground/75">{copy.body}</p>
+          </div>
+        </div>
+        <div className="flex items-center px-0 py-12 md:px-10">
+          <div className="grid w-full gap-6">
+            {copy.items.map((item) => (
+              <div
+                key={item}
+                className="border border-foreground/10 bg-foreground/5 p-6 text-sm leading-relaxed whitespace-pre-line text-foreground/75"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

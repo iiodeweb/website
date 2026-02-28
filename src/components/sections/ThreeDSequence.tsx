@@ -68,7 +68,7 @@ export function ThreeDSequence({
         loading="lazy"
         decoding="async"
       />
-      <div className="pointer-events-none absolute bottom-3 left-3 rounded-full border border-foreground/20 bg-background/80 px-3 py-1 text-[11px] text-foreground/70">
+      <div className="pointer-events-none absolute bottom-3 left-3 border border-foreground/20 bg-background/80 px-3 py-1 text-[11px] text-foreground/70">
         Scroll to explore
       </div>
     </div>

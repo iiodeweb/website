@@ -5,8 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node scripts/start-next.mjs",
     "lint": "eslint"
+  },
+  "engines": {
+    "node": ">=24 <25"
   },
   "dependencies": {
     "next": "16.1.6",
