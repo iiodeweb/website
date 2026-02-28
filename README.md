@@ -43,6 +43,8 @@ Use these commands in the app deployment UI:
 - Build command: `npm run build`
 - Start command: `npm run start`
 
+If the platform skips install before build, `npm run build` now auto-runs `npm install --include=dev` when dependencies are missing.
+
 The `start` script in this repo binds automatically to `HOST`/`HOSTNAME` and `PORT` from the platform (fallback: `0.0.0.0:3000`).
 
 Requirements:
