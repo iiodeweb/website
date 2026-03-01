@@ -98,7 +98,7 @@ const re27EnglishCopy: Re27Copy = {
     title: "Composition",
     body:
       "Optical lens in 100% post-production recycled polycarbonate for efficient light diffusion\n\nLED PCB* with dual-channel, tunable white LED array for natural colours\n\nLogic PCB* with Wi-Fi and BLE remote control and data access for smart connectivity\n\nHeatsink in 100% recycled, open-cell aluminium foam for heat dissipation\n\nDriver PCB* with miniaturised AC -> DC driver for power regulation\n\nStandard E27 socket for tool-free replacement\n\n* Printed circuit board",
-    video: "/assets/Re27/videos/Re27_AI%20rotation.mp4",
+    video: "/assets/Re27/images/gallery/Re27_AI rotation.mp4",
     image: "/assets/Re27/videos/frames_10s_webp/frame_000001.webp",
     sequence: {
       basePath: "/assets/Re27/videos/frames_10s_webp/frame_",

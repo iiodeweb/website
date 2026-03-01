@@ -2,6 +2,7 @@ import type { ReactNode } from "react"
 
 import { TopNav } from "@/components/nav/TopNav"
 import { Footer } from "@/components/sections/Footer"
+import { SectionSoftLock } from "@/components/sections/SectionSoftLock"
 import { getLocale } from "@/lib/locale-server"
 import { getTheme } from "@/lib/theme-server"
 
@@ -16,7 +17,10 @@ export default async function Re27Layout({ children }: Re27LayoutProps) {
   return (
     <div className="bg-background text-foreground">
       <TopNav locale={locale} theme={theme} />
-      <main>{children}</main>
+      <main>
+        <SectionSoftLock />
+        {children}
+      </main>
       <Footer locale={locale} />
     </div>
   )

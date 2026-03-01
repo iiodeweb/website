@@ -32,11 +32,13 @@ export function ThreeDSequence({
     const updateFrame = () => {
       const element = containerRef.current
       if (!element) return
-      const rect = element.getBoundingClientRect()
+      const track = element.closest("[data-scroll-track='true']") as HTMLElement | null
+      const reference = track ?? element
+      const rect = reference.getBoundingClientRect()
       const viewHeight = window.innerHeight || 1
-      const start = viewHeight
-      const end = -rect.height
-      const progress = (start - rect.top) / (start - end)
+      const stickyTop = 64
+      const travel = Math.max(1, rect.height - (viewHeight - stickyTop))
+      const progress = (stickyTop - rect.top) / travel
       const clamped = Math.min(1, Math.max(0, progress))
       const next = Math.round(clamped * (frameCount - 1)) + 1
       setFrame(next)

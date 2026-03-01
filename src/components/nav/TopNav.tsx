@@ -1,8 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { useState, useTransition } from "react"
+import { useState } from "react"
 
 import { LanguageToggle } from "@/components/i18n/LanguageToggle"
 import { getSiteCopy, siteConfig } from "@/content/site"
@@ -16,8 +15,7 @@ type TopNavProps = {
 
 export function TopNav({ locale, theme }: TopNavProps) {
   const copy = getSiteCopy(locale)
-  const router = useRouter()
-  const [isPending, startTransition] = useTransition()
+  const [currentTheme, setCurrentTheme] = useState<Theme>(theme)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const navItems = siteConfig.nav.items.map((item) => ({
     ...item,
@@ -33,22 +31,19 @@ export function TopNav({ locale, theme }: TopNavProps) {
         <button
           type="button"
           onClick={() => {
-            const nextTheme = theme === "dark" ? "light" : "dark"
+            const nextTheme = currentTheme === "dark" ? "light" : "dark"
+            setCurrentTheme(nextTheme)
             document.documentElement.classList.add("theme-transition")
             document.documentElement.classList.toggle("dark", nextTheme === "dark")
             window.setTimeout(() => {
               document.documentElement.classList.remove("theme-transition")
             }, 170)
-            startTransition(async () => {
-              await fetch("/api/theme", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ theme: nextTheme }),
-              })
-              router.refresh()
+            void fetch("/api/theme", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ theme: nextTheme }),
             })
           }}
-          disabled={isPending}
           className="iiode-brand-hint cursor-pointer text-base lowercase"
           aria-label="Toggle theme"
         >
