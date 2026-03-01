@@ -1,0 +1,10 @@
+set -e
+
+changed_svgs=$(git diff --cached --name-only --diff-filter=ACMR | grep -E "^public/assets/Re27/exploded/.*\\.svg$" || true)
+
+if [ -z "$changed_svgs" ]; then
+  exit 0
+fi
+
+echo "$changed_svgs" | xargs node scripts/optimize-svg.mjs
+echo "$changed_svgs" | xargs git add

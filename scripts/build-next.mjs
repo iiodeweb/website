@@ -16,6 +16,15 @@ if (!existsSync(nextCliPath)) {
   }
 }
 
+const optimizeSvg = spawnSync(process.execPath, ["scripts/optimize-svg.mjs"], {
+  stdio: "inherit",
+  env: process.env,
+})
+
+if (optimizeSvg.status !== 0) {
+  process.exit(optimizeSvg.status ?? 1)
+}
+
 const build = spawnSync(process.execPath, [nextCliPath, "build"], {
   stdio: "inherit",
   env: process.env,
