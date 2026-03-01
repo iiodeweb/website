@@ -6,31 +6,39 @@ type UseCasesProps = {
 
 export function UseCases({ copy }: UseCasesProps) {
   return (
-    <section id="use-cases" className="border-b border-foreground/10 bg-background">
+    <section id="use-cases" className="bg-background">
       <div className="iiode-section-wrap" data-scroll-track="true">
         <div
-          className="iiode-container iiode-section-panel grid grid-cols-1 md:grid-cols-2"
+          className="iiode-container iiode-section-panel iiode-split-grid grid grid-cols-1 md:grid-cols-2"
           data-scroll-panel="true"
         >
-          <div className="flex items-center border-b border-foreground/10 px-0 py-10 md:border-b-0 md:border-r md:px-10 md:py-0">
-            <div className="space-y-6">
-              <p className="text-xs uppercase text-foreground/60">
-                {copy.eyebrow}
-              </p>
-              <h2 className="text-3xl leading-tight md:text-5xl">{copy.title}</h2>
-              <p className="text-lg text-foreground/75">{copy.body}</p>
+          <div className="iiode-split-half iiode-media-half iiode-media-half-left relative overflow-hidden">
+            <img
+              src={copy.leftImage}
+              alt="Re27 product image"
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-black/25" />
+            <div className="relative z-10 flex h-full items-start px-6 pt-10 md:px-10 md:pt-8">
+              <h2 className="iiode-type-1 max-w-2xl text-white">{copy.leftTitle}</h2>
             </div>
           </div>
-          <div className="flex items-center px-0 py-10 md:px-10 md:py-0">
-            <div className="grid w-full gap-6">
-              {copy.items.map((item) => (
-                <div
-                  key={item}
-                  className="border border-foreground/10 bg-foreground/5 p-6 text-sm leading-relaxed whitespace-pre-line text-foreground/75"
-                >
-                  {item}
+
+          <div className="iiode-split-half flex items-start px-0 pt-10 md:px-10 md:pt-8">
+            <div className="iiode-type-2 grid w-full gap-5 text-foreground">
+              <p>{copy.bridge}</p>
+              {copy.groups.map((group) => (
+                <div key={group.heading} className="border-t border-foreground/20 pt-4">
+                  <p className="mb-2">{group.heading}</p>
+                  <ul className="space-y-1">
+                    {group.bullets.map((bullet) => (
+                      <li key={bullet}>- {bullet}</li>
+                    ))}
+                  </ul>
                 </div>
               ))}
+              <p className="text-[0.72em]">{copy.note}</p>
             </div>
           </div>
         </div>

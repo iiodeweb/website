@@ -21,8 +21,11 @@ export type PagesCopy = {
   about: {
     eyebrow: string
     title: string
-    faqs: Array<{ question: string; answer: string }>
+    sections: string[]
+    servicesLabel: string
     contactTitle: string
+    contactIntro: string
+    addresses: string[]
     contactLine: string
   }
   collaborations: {
@@ -54,19 +57,20 @@ const pagesCopy: Record<Locale, PagesCopy> = {
     },
     about: {
       eyebrow: "About",
-      title: "FAQs and contact",
-      faqs: [
-        {
-          question: "What is iiode Re27?",
-          answer: "Placeholder answer for now. We will add the final copy soon.",
-        },
-        {
-          question: "Who is iiode for?",
-          answer: "Placeholder answer for now. We will add the final copy soon.",
-        },
+      title: "Beyond the bulb",
+      sections: [
+        "iiode is committed to charting the future of sustainable electronics through the development of lasting and responsible solutions, with a focus on conscious lighting.",
+        "We specialise in the development of lighting fixtures, installations, series extensions, and design-to-assembly solutions.",
+        "We also create spaces for events and interiors, crafting sensory narratives that offer immersive experiences.",
       ],
-      contactTitle: "Contact",
-      contactLine: "Email us at",
+      servicesLabel: "For design and production see",
+      contactTitle: "Get in touch",
+      contactIntro: "iiode has offices in both Lausanne & Paris",
+      addresses: [
+        "Av. des Alpes 9, CH - 1006 Lausanne",
+        "Rue d'Hauteville 25, FR - 75010 Paris",
+      ],
+      contactLine: "To contact us, kindly send us a message at",
     },
     collaborations: {
       eyebrow: "Collaborations",
@@ -95,20 +99,21 @@ const pagesCopy: Record<Locale, PagesCopy> = {
       submit: "Envoyer la demande",
     },
     about: {
-      eyebrow: "A propos",
-      title: "FAQ et contact",
-      faqs: [
-        {
-          question: "Qu'est-ce que iiode Re27 ?",
-          answer: "Reponse provisoire pour l'instant. Le texte final arrive bientot.",
-        },
-        {
-          question: "Pour qui est iiode ?",
-          answer: "Reponse provisoire pour l'instant. Le texte final arrive bientot.",
-        },
+      eyebrow: "About",
+      title: "Beyond the bulb",
+      sections: [
+        "iiode is committed to charting the future of sustainable electronics through the development of lasting and responsible solutions, with a focus on conscious lighting.",
+        "We specialise in the development of lighting fixtures, installations, series extensions, and design-to-assembly solutions.",
+        "We also create spaces for events and interiors, crafting sensory narratives that offer immersive experiences.",
       ],
-      contactTitle: "Contact",
-      contactLine: "Ecrivez-nous a",
+      servicesLabel: "For design and production see",
+      contactTitle: "Get in touch",
+      contactIntro: "iiode has offices in both Lausanne & Paris",
+      addresses: [
+        "Av. des Alpes 9, CH - 1006 Lausanne",
+        "Rue d'Hauteville 25, FR - 75010 Paris",
+      ],
+      contactLine: "To contact us, kindly send us a message at",
     },
     collaborations: {
       eyebrow: "Collaborations",
@@ -137,20 +142,21 @@ const pagesCopy: Record<Locale, PagesCopy> = {
       submit: "Anfrage senden",
     },
     about: {
-      eyebrow: "Ueber uns",
-      title: "FAQ und Kontakt",
-      faqs: [
-        {
-          question: "Was ist iiode Re27?",
-          answer: "Platzhalterantwort vorerst. Der finale Text folgt bald.",
-        },
-        {
-          question: "Fuer wen ist iiode?",
-          answer: "Platzhalterantwort vorerst. Der finale Text folgt bald.",
-        },
+      eyebrow: "About",
+      title: "Beyond the bulb",
+      sections: [
+        "iiode is committed to charting the future of sustainable electronics through the development of lasting and responsible solutions, with a focus on conscious lighting.",
+        "We specialise in the development of lighting fixtures, installations, series extensions, and design-to-assembly solutions.",
+        "We also create spaces for events and interiors, crafting sensory narratives that offer immersive experiences.",
       ],
-      contactTitle: "Kontakt",
-      contactLine: "Schreiben Sie an",
+      servicesLabel: "For design and production see",
+      contactTitle: "Get in touch",
+      contactIntro: "iiode has offices in both Lausanne & Paris",
+      addresses: [
+        "Av. des Alpes 9, CH - 1006 Lausanne",
+        "Rue d'Hauteville 25, FR - 75010 Paris",
+      ],
+      contactLine: "To contact us, kindly send us a message at",
     },
     collaborations: {
       eyebrow: "Kooperationen",

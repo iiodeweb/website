@@ -5,30 +5,28 @@ type GalleryProps = {
 }
 
 export function Gallery({ copy }: GalleryProps) {
-  const image = copy.items[0]
-
   return (
-    <section className="border-b border-foreground/10 bg-background">
+    <section className="bg-background">
       <div className="iiode-section-wrap" data-scroll-track="true">
         <div
-          className="iiode-container iiode-section-panel grid grid-cols-1 md:grid-cols-2"
+          className="iiode-container iiode-section-panel iiode-split-grid grid grid-cols-1 md:grid-cols-2"
           data-scroll-panel="true"
         >
-          <div className="flex items-center border-b border-foreground/10 px-0 py-10 md:border-b-0 md:border-r md:px-10 md:py-0">
-            <h2 className="text-4xl leading-tight md:text-6xl">{copy.eyebrow}</h2>
+          <div className="iiode-split-half iiode-media-half iiode-media-half-left relative overflow-hidden">
+            <img
+              src={copy.leftImage}
+              alt={copy.leftTitle}
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-black/25" />
+            <div className="relative z-10 flex h-full items-center justify-center px-6 text-center md:px-10">
+              <h2 className="iiode-type-1 text-white">{copy.leftTitle}</h2>
+            </div>
           </div>
-          <div className="relative flex items-center overflow-hidden px-0 py-10 md:px-10 md:py-0">
-            {image ? (
-              <img
-                src={image}
-                alt="iiode Re27 use cases"
-                className="absolute inset-0 h-full w-full object-cover"
-                loading="lazy"
-              />
-            ) : null}
-            <div className="absolute inset-0 bg-black/30" />
-            <p className="relative z-10 max-w-xl text-xl leading-tight text-white md:text-2xl">
-              {copy.empty}
+          <div className="iiode-split-half flex items-start px-0 pt-10 md:px-10 md:pt-8">
+            <p className="iiode-type-1 max-w-2xl text-foreground">
+              {copy.rightText}
             </p>
           </div>
         </div>

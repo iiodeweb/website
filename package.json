@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "svg:optimize": "node scripts/optimize-svg.mjs",
+    "svg:poster": "node scripts/extract-svg-first-frame.mjs",
     "build": "node scripts/build-next.mjs",
     "start": "node scripts/start-next.mjs",
     "lint": "eslint",

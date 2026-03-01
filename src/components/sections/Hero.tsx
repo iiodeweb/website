@@ -8,7 +8,7 @@ export function Hero({ copy }: HeroProps) {
   const productName = copy.title.replace(/^iiode\s*/i, "") || "Re27"
 
   return (
-    <section className="relative isolate -mt-16 border-b border-foreground/10 bg-background">
+    <section className="relative isolate -mt-16 bg-background">
       <img
         src={copy.image}
         alt={copy.title}

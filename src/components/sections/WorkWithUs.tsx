@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import type { Re27Copy } from "@/content/re27"
 
 type WorkWithUsProps = {
@@ -6,31 +8,38 @@ type WorkWithUsProps = {
 
 export function WorkWithUs({ copy }: WorkWithUsProps) {
   return (
-    <section className="border-b border-foreground/10 bg-background">
+    <section className="bg-background">
       <div className="iiode-section-wrap" data-scroll-track="true">
         <div
-          className="iiode-container iiode-section-panel grid grid-cols-1 md:grid-cols-2"
+          className="iiode-container iiode-section-panel iiode-split-grid grid grid-cols-1 md:grid-cols-2"
           data-scroll-panel="true"
         >
-          <div className="flex items-center border-b border-foreground/10 px-0 py-10 md:border-b-0 md:border-r md:px-10 md:py-0">
-            <div>
-              <p className="mb-6 text-xs uppercase text-foreground/60">
-                {copy.eyebrow}
-              </p>
-              <h2 className="text-4xl md:text-6xl">{copy.title}</h2>
-            </div>
-          </div>
-          <div className="flex items-center px-0 py-10 md:px-10 md:py-0">
-            <div className="grid w-full gap-4">
+          <div className="iiode-split-half flex items-start px-0 pt-10 md:px-10 md:pt-8">
+            <div className="iiode-type-2 grid w-full gap-4 text-foreground">
+              <h2 className="iiode-type-2 mb-2">{copy.leftTitle}</h2>
               {copy.items.map((item) => (
                 <div
                   key={item.title}
-                  className="border border-foreground/10 bg-foreground/5 p-6"
+                  className="border-t border-foreground/20 pt-4"
                 >
-                  <h3 className="text-lg">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-foreground/75">{item.body}</p>
+                  <h3>{item.title}</h3>
+                  <p className="mt-3">{item.body}</p>
                 </div>
               ))}
+            </div>
+          </div>
+          <div className="iiode-split-half iiode-media-half iiode-media-half-right relative overflow-hidden">
+            <img
+              src={copy.rightImage}
+              alt={copy.rightTitle}
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-black/25" />
+            <div className="relative z-10 flex h-full items-center justify-center px-6 text-center md:px-10">
+              <Link href="/preorder" className="iiode-type-1 text-white">
+                {copy.rightTitle}
+              </Link>
             </div>
           </div>
         </div>

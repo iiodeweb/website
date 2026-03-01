@@ -9,66 +9,45 @@ export default async function AboutPage() {
   const copy = getPagesCopy(locale).about
 
   return (
-    <>
-      <section className="border-b border-foreground/10 bg-background text-foreground">
-        <div className="iiode-container flex min-h-[calc(100svh-4rem)] flex-col justify-center py-16 md:py-20">
-          <p className="text-xs uppercase text-foreground/60">
-            {copy.eyebrow}
-          </p>
-          <h1 className="mt-4 text-3xl md:text-4xl">{copy.title}</h1>
-        </div>
-      </section>
-      <section className="border-b border-foreground/10 bg-background text-foreground">
-        <div className="iiode-container flex min-h-[calc(100svh-4rem)] items-center py-16 md:py-20">
-          <div className="w-full border border-foreground/10 bg-foreground/5 p-8 md:max-w-3xl">
-            <h2 className="text-lg">{copy.faqs[0].question}</h2>
-            <p className="mt-4 text-sm text-foreground/70">
-              {copy.faqs[0].answer}
-            </p>
-          </div>
-        </div>
-      </section>
-      <section className="border-b border-foreground/10 bg-background text-foreground">
-        <div className="iiode-container flex min-h-[calc(100svh-4rem)] items-center py-16 md:py-20">
-          <div className="grid w-full gap-8 lg:grid-cols-2">
-            <div className="border border-foreground/10 bg-foreground/5 p-8">
-              <h2 className="text-lg">{copy.faqs[1].question}</h2>
-              <p className="mt-4 text-sm text-foreground/70">
-                {copy.faqs[1].answer}
+    <section className="bg-background text-foreground">
+      <div className="iiode-section-wrap" data-scroll-track="true">
+        <div
+          className="iiode-container iiode-section-panel iiode-split-grid grid grid-cols-1 md:grid-cols-2"
+          data-scroll-panel="true"
+        >
+          <div className="iiode-split-half flex items-start px-0 pt-10 md:px-10 md:pt-8">
+            <div className="iiode-type-2 grid w-full max-w-3xl gap-5 text-foreground">
+              <h1 className="iiode-type-2 text-foreground">{copy.title}</h1>
+              {copy.sections.map((line, index) => (
+                <p key={line} className={index === 0 ? "" : "border-t border-foreground/20 pt-4"}>
+                  {line}
+                </p>
+              ))}
+              <p className="border-t border-foreground/20 pt-4">
+                {copy.servicesLabel}{" "}
+                <Link href={siteConfig.archiveUrl} className="underline underline-offset-4">
+                  services.iiode.com
+                </Link>
               </p>
             </div>
-            <div className="border border-foreground/10 bg-foreground/5 p-8">
-              <h2 className="text-lg">Studios</h2>
-              <div className="mt-4 grid gap-8 text-sm text-foreground/70 sm:grid-cols-2">
-                {siteConfig.locations.map((location) => (
-                  <div key={location.country}>
-                    <p className="text-foreground">{location.country}</p>
-                    <p className="mt-2">{location.line1}</p>
-                    <p>{location.line2}</p>
-                  </div>
-                ))}
-              </div>
+          </div>
+          <div className="iiode-split-half flex items-start px-0 pt-10 md:px-10 md:pt-8">
+            <div className="iiode-type-2 grid w-full max-w-3xl gap-5 text-foreground">
+              <h2 className="iiode-type-2 text-foreground">{copy.contactTitle}</h2>
+              <p>{copy.contactIntro}</p>
+              {copy.addresses.map((line) => (
+                <p key={line}>{line}</p>
+              ))}
+              <p>
+                {copy.contactLine}{" "}
+                <Link href={`mailto:${siteConfig.email}`} className="underline underline-offset-4">
+                  {siteConfig.email}
+                </Link>
+              </p>
             </div>
           </div>
         </div>
-      </section>
-      <section className="bg-background text-foreground">
-        <div className="iiode-container flex min-h-[calc(100svh-4rem)] items-center py-16 md:py-20">
-          <div className="w-full border border-foreground/10 bg-foreground/5 p-8 md:max-w-2xl">
-            <h2 className="text-lg">{copy.contactTitle}</h2>
-            <p className="mt-4 text-sm text-foreground/70">
-              {copy.contactLine}{" "}
-              <Link
-                href={`mailto:${siteConfig.email}`}
-                className="text-foreground"
-              >
-                {siteConfig.email}
-              </Link>
-              .
-            </p>
-          </div>
-        </div>
-      </section>
-    </>
+      </div>
+    </section>
   )
 }

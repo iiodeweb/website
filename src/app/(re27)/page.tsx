@@ -1,5 +1,3 @@
-import { CTA } from "@/components/sections/CTA"
-import { Features } from "@/components/sections/Features"
 import { Gallery } from "@/components/sections/Gallery"
 import { Hero } from "@/components/sections/Hero"
 import { Story } from "@/components/sections/Story"
@@ -17,12 +15,10 @@ export default async function Re27Page() {
     <>
       <Hero copy={copy.hero} />
       <Story copy={copy.story} />
-      <Features copy={copy.features} />
       <UseCases copy={copy.useCases} />
       <ThreeD copy={copy.threeD} />
       <Gallery copy={copy.gallery} />
       <WorkWithUs copy={copy.workWithUs} />
-      <CTA copy={copy.cta} />
     </>
   )
 }

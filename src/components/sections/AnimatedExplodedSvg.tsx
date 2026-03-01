@@ -4,9 +4,11 @@ import { useEffect, useRef, useState } from "react"
 
 type AnimatedExplodedSvgProps = {
   src: string
+  posterSrc?: string
   durationSeconds?: number
   triggerProgress?: number
   className?: string
+  onPlaybackComplete?: () => void
   fallback?: React.ReactNode
 }
 
@@ -48,6 +50,18 @@ function disableSmil(svg: SVGSVGElement) {
   animations.forEach((node) => node.remove())
 }
 
+function sanitizeSvgMarkup(text: string) {
+  return text
+    .replace(/begin="([^"]+)"/g, (_, value: string) => {
+      const firstBegin = value
+        .split(";")
+        .map((token) => token.trim())
+        .find(Boolean)
+      return `begin="${firstBegin ?? "0s"}"`
+    })
+    .replace(/\srepeatCount="indefinite"/g, "")
+}
+
 function syncThemeFilter(host: HTMLElement) {
   const isDark = document.documentElement.classList.contains("dark")
   host.style.filter = isDark ? "invert(1)" : "none"
@@ -55,15 +69,19 @@ function syncThemeFilter(host: HTMLElement) {
 
 export function AnimatedExplodedSvg({
   src,
+  posterSrc,
   durationSeconds = 2.2,
   triggerProgress = 0.42,
   className,
+  onPlaybackComplete,
   fallback = null,
 }: AnimatedExplodedSvgProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const hostRef = useRef<HTMLDivElement | null>(null)
   const svgRef = useRef<SVGSVGElement | null>(null)
+  const onCompleteRef = useRef(onPlaybackComplete)
   const playedRef = useRef(false)
+  const completedRef = useRef(false)
   const playRafRef = useRef<number | null>(null)
 
   const [markup, setMarkup] = useState<string | null>(null)
@@ -71,8 +89,13 @@ export function AnimatedExplodedSvg({
   const [errored, setErrored] = useState(false)
 
   useEffect(() => {
+    onCompleteRef.current = onPlaybackComplete
+  }, [onPlaybackComplete])
+
+  useEffect(() => {
     let cancelled = false
     playedRef.current = false
+    completedRef.current = false
     if (playRafRef.current) {
       cancelAnimationFrame(playRafRef.current)
       playRafRef.current = null
@@ -86,7 +109,7 @@ export function AnimatedExplodedSvg({
         const response = await fetch(src)
         if (!response.ok) throw new Error("Failed to fetch SVG")
         const text = await response.text()
-        const sanitized = text.replace(/begin="0s;\s*[^"]+\.end"/g, 'begin="0s"')
+        const sanitized = sanitizeSvgMarkup(text)
         if (!cancelled) setMarkup(sanitized)
       } catch {
         if (!cancelled) setErrored(true)
@@ -136,6 +159,10 @@ export function AnimatedExplodedSvg({
     } else {
       disableSmil(svg)
       setMode("static")
+      if (!completedRef.current) {
+        completedRef.current = true
+        onCompleteRef.current?.()
+      }
     }
 
     const observer = new MutationObserver(() => {
@@ -182,6 +209,10 @@ export function AnimatedExplodedSvg({
           svg.pauseAnimations()
           svg.setCurrentTime(durationSeconds)
           playRafRef.current = null
+          if (!completedRef.current) {
+            completedRef.current = true
+            onCompleteRef.current?.()
+          }
         }
       }
 
@@ -244,7 +275,18 @@ export function AnimatedExplodedSvg({
           dangerouslySetInnerHTML={{ __html: markup }}
         />
       ) : (
-        <>{fallback}</>
+        <>
+          {posterSrc ? (
+            <img
+              src={posterSrc}
+              alt=""
+              className="h-full w-full object-contain"
+              aria-hidden
+            />
+          ) : (
+            <div className="h-full w-full bg-foreground/[0.04]" aria-hidden />
+          )}
+        </>
       )}
     </div>
   )
