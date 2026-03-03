@@ -9,12 +9,9 @@ export type PagesCopy = {
       name: string
       surname: string
       company: string
-      address: string
-      number: string
-      postCode: string
-      city: string
+      email: string
       quantity: string
-      message: string
+      note: string
     }
     submit: string
   }
@@ -29,9 +26,11 @@ export type PagesCopy = {
     contactLine: string
   }
   collaborations: {
-    eyebrow: string
-    title: string
-    description: string
+    introLeft: string
+    introImage: string
+    abatJourTitle: string
+    contributors: string[]
+    images: string[]
   }
 }
 
@@ -39,19 +38,16 @@ const pagesCopy: Record<Locale, PagesCopy> = {
   en: {
     preorder: {
       eyebrow: "Preorder",
-      title: "Start a preorder request",
+      title: "Pre-Order",
       description:
-        "We collect preorder interest manually. Send your request and we will follow up with availability and pricing.",
+        "We currently collect preorder interest manually. Send your request and we will follow up with availability and pricing.",
       fields: {
         name: "Name",
         surname: "Surname",
         company: "Company",
-        address: "Address",
-        number: "Number",
-        postCode: "Post code",
-        city: "City",
+        email: "E-mail",
         quantity: "Quantity",
-        message: "Message",
+        note: "Note",
       },
       submit: "Send preorder request",
     },
@@ -73,30 +69,39 @@ const pagesCopy: Record<Locale, PagesCopy> = {
       contactLine: "To contact us, kindly send us a message at",
     },
     collaborations: {
-      eyebrow: "Collaborations",
-      title: "Collaborative exhibitions",
-      description:
-        "This page will grow with upcoming exhibition formats and collaborators.",
+      introLeft: "Beside limited editions around the Re27",
+      introImage: "/assets/collaborations/01 abat-jour/images/Re27-Suspension.jpg",
+      abatJourTitle: 'The first collective exhibition is dedicated to "abat-jour". Following designers/ studio contributed:',
+      contributors: [
+        "Dimitri Bähler",
+        "Jörg boner",
+        "Big-Game",
+        "FROM",
+        "Alexandra Gerber",
+        "Vanessa Schindler",
+        "Panter&Tourron",
+        "Charlotte Talbot Jonathan Mauloubier",
+      ],
+      images: [
+        "/assets/collaborations/01 abat-jour/images/Re27-Suspension.jpg",
+      ],
     },
   },
   fr: {
     preorder: {
       eyebrow: "Precommande",
-      title: "Demarrer une demande de precommande",
+      title: "Pre-Order",
       description:
-        "Nous collectons les demandes de precommande manuellement. Envoyez votre demande et nous reviendrons avec disponibilite et prix.",
+        "We currently collect preorder interest manually. Send your request and we will follow up with availability and pricing.",
       fields: {
-        name: "Prenom",
-        surname: "Nom",
-        company: "Societe",
-        address: "Adresse",
-        number: "Numero",
-        postCode: "Code postal",
-        city: "Ville",
-        quantity: "Quantite",
-        message: "Message",
+        name: "Name",
+        surname: "Surname",
+        company: "Company",
+        email: "E-mail",
+        quantity: "Quantity",
+        note: "Note",
       },
-      submit: "Envoyer la demande",
+      submit: "Send preorder request",
     },
     about: {
       eyebrow: "About",
@@ -116,30 +121,39 @@ const pagesCopy: Record<Locale, PagesCopy> = {
       contactLine: "To contact us, kindly send us a message at",
     },
     collaborations: {
-      eyebrow: "Collaborations",
-      title: "Expositions collaboratives",
-      description:
-        "Cette page evoluera avec les prochaines expositions et collaborateurs.",
+      introLeft: "Beside limited editions around the Re27",
+      introImage: "/assets/collaborations/01 abat-jour/images/Re27-Suspension.jpg",
+      abatJourTitle: 'The first collective exhibition is dedicated to "abat-jour". Following designers/ studio contributed:',
+      contributors: [
+        "Dimitri Bähler",
+        "Jörg boner",
+        "Big-Game",
+        "FROM",
+        "Alexandra Gerber",
+        "Vanessa Schindler",
+        "Panter&Tourron",
+        "Charlotte Talbot Jonathan Mauloubier",
+      ],
+      images: [
+        "/assets/collaborations/01 abat-jour/images/Re27-Suspension.jpg",
+      ],
     },
   },
   de: {
     preorder: {
       eyebrow: "Vorbestellung",
-      title: "Vorbestellung anfragen",
+      title: "Pre-Order",
       description:
-        "Wir sammeln Vorbestellungen manuell. Senden Sie Ihre Anfrage und wir melden uns mit Verfuegbarkeit und Preisen.",
+        "We currently collect preorder interest manually. Send your request and we will follow up with availability and pricing.",
       fields: {
-        name: "Vorname",
-        surname: "Nachname",
-        company: "Firma",
-        address: "Adresse",
-        number: "Nummer",
-        postCode: "PLZ",
-        city: "Stadt",
-        quantity: "Menge",
-        message: "Nachricht",
+        name: "Name",
+        surname: "Surname",
+        company: "Company",
+        email: "E-mail",
+        quantity: "Quantity",
+        note: "Note",
       },
-      submit: "Anfrage senden",
+      submit: "Send preorder request",
     },
     about: {
       eyebrow: "About",
@@ -159,10 +173,22 @@ const pagesCopy: Record<Locale, PagesCopy> = {
       contactLine: "To contact us, kindly send us a message at",
     },
     collaborations: {
-      eyebrow: "Kooperationen",
-      title: "Kollaborative Ausstellungen",
-      description:
-        "Diese Seite waechst mit kommenden Ausstellungen und Partnern.",
+      introLeft: "Beside limited editions around the Re27",
+      introImage: "/assets/collaborations/01 abat-jour/images/Re27-Suspension.jpg",
+      abatJourTitle: 'The first collective exhibition is dedicated to "abat-jour". Following designers/ studio contributed:',
+      contributors: [
+        "Dimitri Bähler",
+        "Jörg boner",
+        "Big-Game",
+        "FROM",
+        "Alexandra Gerber",
+        "Vanessa Schindler",
+        "Panter&Tourron",
+        "Charlotte Talbot Jonathan Mauloubier",
+      ],
+      images: [
+        "/assets/collaborations/01 abat-jour/images/Re27-Suspension.jpg",
+      ],
     },
   },
 }

@@ -65,7 +65,26 @@ html {
   line-height: 1.45;
 }
 
+.iiode-half-pad-1 {
+  padding-left: var(--content-padding);
+  padding-right: var(--content-padding);
+}
+
+.iiode-half-pad-2 {
+  padding-left: var(--content-padding);
+  padding-right: var(--content-padding);
+}
+
+.iiode-copy-narrow {
+  width: 100%;
+  max-width: 44ch;
+}
+
 .iiode-media-half {
+  position: relative;
+}
+
+.iiode-text-half {
   position: relative;
 }
 
@@ -143,6 +162,12 @@ body {
     margin-right: calc(-1 * var(--content-padding));
   }
 
+  .iiode-text-half {
+    width: calc(100% + (2 * var(--content-padding)));
+    margin-left: calc(-1 * var(--content-padding));
+    margin-right: calc(-1 * var(--content-padding));
+  }
+
   .iiode-section-wrap {
     min-height: auto;
   }
@@ -161,11 +186,21 @@ body {
   }
 
   .iiode-split-half {
-    min-height: clamp(20rem, 50svh, 34rem);
+    min-height: 100svh;
   }
 }
 
 @media (min-width: 768px) {
+  .iiode-half-pad-1 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .iiode-half-pad-2 {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
   .iiode-media-half {
     --iiode-half-bleed: calc(var(--content-padding) + max(0px, (100vw - var(--content-width)) / 2));
     width: calc(100% + var(--iiode-half-bleed) + 2px);

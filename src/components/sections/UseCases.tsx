@@ -20,13 +20,13 @@ export function UseCases({ copy }: UseCasesProps) {
               loading="lazy"
             />
             <div className="absolute inset-0 bg-black/25" />
-            <div className="relative z-10 flex h-full items-start px-6 pt-10 md:px-10 md:pt-8">
-              <h2 className="iiode-type-1 max-w-2xl text-white">{copy.leftTitle}</h2>
+            <div className="iiode-half-pad-1 relative z-10 flex h-full items-start pt-10 md:pt-8">
+              <h2 className="iiode-type-1 text-white">{copy.leftTitle}</h2>
             </div>
           </div>
 
-          <div className="iiode-split-half flex items-start px-0 pt-10 md:px-10 md:pt-8">
-            <div className="iiode-type-2 grid w-full gap-5 text-foreground">
+          <div className="iiode-split-half iiode-media-half iiode-media-half-right iiode-text-half iiode-half-pad-2 flex items-start pt-10 md:pt-8">
+            <div className="iiode-type-2 iiode-copy-narrow grid gap-5 text-foreground md:mr-auto">
               <p>{copy.bridge}</p>
               {copy.groups.map((group) => (
                 <div key={group.heading} className="border-t border-foreground/20 pt-4">

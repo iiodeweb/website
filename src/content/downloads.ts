@@ -1,107 +1,60 @@
 import type { Locale } from "@/lib/locale"
 
 export type DownloadsContent = {
-  eyebrow: string
   title: string
-  description: string
-  downloadLabel: string
-  downloads: Array<{ label: string; href: string }>
-  terms: {
-    title: string
-    body: string
-  }
-  contact: {
-    label: string
+  intro: string
+  termsTitle: string
+  termsBody: string
+  buttonLabel: string
+  assetHref: string
+  fields: {
+    name: string
+    surname: string
     email: string
   }
 }
 
+const termsText =
+  "By submitting your name, surname and email address and downloading any images from this website, you receive a limited, non-exclusive, non-transferable, revocable permission from iiode to use those images for personal use and for editorial or press coverage about iiode only. The images may not be sold, sublicensed, redistributed as standalone files, used for unrelated commercial purposes, or used in any misleading or unlawful manner without prior written permission from iiode. Please credit (c) iiode where reasonably possible. For any other use, please contact info@iiode.com."
+
 const downloadsContent: Record<Locale, DownloadsContent> = {
   en: {
-    eyebrow: "Downloads",
     title: "Downloads",
-    description:
-      "A concise kit with essential assets for editors, curators, and collaborators.",
-    downloadLabel: "Download",
-    downloads: [
-      {
-        label: "Logo (SVG, white)",
-        href: "/assets/brand/logo/3111%20BLANC/SVG/iiode-logo%20txt.svg",
-      },
-      {
-        label: "Logo (SVG, black)",
-        href: "/assets/brand/logo/3112%20NOIR/SVG/iiode-logo%20txt.svg",
-      },
-      {
-        label: "Exhibition image (JPG)",
-        href: "/assets/press/01%20abat-jour/Re27-Suspension.jpg",
-      },
-    ],
-    terms: {
-      title: "Download Terms",
-      body: "By submitting your name, surname and email address and downloading any images from this website, you receive a limited, non-exclusive, non-transferable, revocable permission from iiode to use those images for personal use and for editorial or press coverage about iiode only. The images may not be sold, sublicensed, redistributed as standalone files, used for unrelated commercial purposes, or used in any misleading or unlawful manner without prior written permission from iiode. Please credit (c) iiode where reasonably possible. For any other use, please contact info@iiode.com.",
-    },
-    contact: {
-      label: "Contact",
-      email: "info@iiode.com",
+    intro: "Please fill out your details to download the selected assets.",
+    termsTitle: "Download Terms",
+    termsBody: termsText,
+    buttonLabel: "Matter and Shape 2026 Press Kit",
+    assetHref: "/assets/press/01%20abat-jour/Re27-Suspension.jpg",
+    fields: {
+      name: "Name",
+      surname: "Surname",
+      email: "E-mail",
     },
   },
   fr: {
-    eyebrow: "Telechargements",
-    title: "Telechargements",
-    description:
-      "Un kit concis avec les assets essentiels pour editeurs, curateurs et partenaires.",
-    downloadLabel: "Telecharger",
-    downloads: [
-      {
-        label: "Logo (SVG, blanc)",
-        href: "/assets/brand/logo/3111%20BLANC/SVG/iiode-logo%20txt.svg",
-      },
-      {
-        label: "Logo (SVG, noir)",
-        href: "/assets/brand/logo/3112%20NOIR/SVG/iiode-logo%20txt.svg",
-      },
-      {
-        label: "Image exposition (JPG)",
-        href: "/assets/press/01%20abat-jour/Re27-Suspension.jpg",
-      },
-    ],
-    terms: {
-      title: "Download Terms",
-      body: "By submitting your name, surname and email address and downloading any images from this website, you receive a limited, non-exclusive, non-transferable, revocable permission from iiode to use those images for personal use and for editorial or press coverage about iiode only. The images may not be sold, sublicensed, redistributed as standalone files, used for unrelated commercial purposes, or used in any misleading or unlawful manner without prior written permission from iiode. Please credit (c) iiode where reasonably possible. For any other use, please contact info@iiode.com.",
-    },
-    contact: {
-      label: "Contact",
-      email: "info@iiode.com",
+    title: "Downloads",
+    intro: "Please fill out your details to download the selected assets.",
+    termsTitle: "Download Terms",
+    termsBody: termsText,
+    buttonLabel: "Matter and Shape 2026 Press Kit",
+    assetHref: "/assets/press/01%20abat-jour/Re27-Suspension.jpg",
+    fields: {
+      name: "Name",
+      surname: "Surname",
+      email: "E-mail",
     },
   },
   de: {
-    eyebrow: "Downloads",
     title: "Downloads",
-    description:
-      "Ein kompaktes Kit mit den wichtigsten Assets fuer Redaktion, Kuratoren und Partner.",
-    downloadLabel: "Download",
-    downloads: [
-      {
-        label: "Logo (SVG, weiss)",
-        href: "/assets/brand/logo/3111%20BLANC/SVG/iiode-logo%20txt.svg",
-      },
-      {
-        label: "Logo (SVG, schwarz)",
-        href: "/assets/brand/logo/3112%20NOIR/SVG/iiode-logo%20txt.svg",
-      },
-      {
-        label: "Ausstellungsbild (JPG)",
-        href: "/assets/press/01%20abat-jour/Re27-Suspension.jpg",
-      },
-    ],
-    terms: {
-      title: "Download Terms",
-      body: "By submitting your name, surname and email address and downloading any images from this website, you receive a limited, non-exclusive, non-transferable, revocable permission from iiode to use those images for personal use and for editorial or press coverage about iiode only. The images may not be sold, sublicensed, redistributed as standalone files, used for unrelated commercial purposes, or used in any misleading or unlawful manner without prior written permission from iiode. Please credit (c) iiode where reasonably possible. For any other use, please contact info@iiode.com.",
-    },
-    contact: {
-      label: "Kontakt",
-      email: "info@iiode.com",
+    intro: "Please fill out your details to download the selected assets.",
+    termsTitle: "Download Terms",
+    termsBody: termsText,
+    buttonLabel: "Matter and Shape 2026 Press Kit",
+    assetHref: "/assets/press/01%20abat-jour/Re27-Suspension.jpg",
+    fields: {
+      name: "Name",
+      surname: "Surname",
+      email: "E-mail",
     },
   },
 }

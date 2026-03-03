@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react"
 type AnimatedExplodedSvgProps = {
   src: string
   posterSrc?: string
+  explodedPosterSrc?: string
   durationSeconds?: number
   triggerProgress?: number
   className?: string
@@ -70,6 +71,7 @@ function syncThemeFilter(host: HTMLElement) {
 export function AnimatedExplodedSvg({
   src,
   posterSrc,
+  explodedPosterSrc,
   durationSeconds = 2.2,
   triggerProgress = 0.42,
   className,
@@ -87,10 +89,63 @@ export function AnimatedExplodedSvg({
   const [markup, setMarkup] = useState<string | null>(null)
   const [mode, setMode] = useState<"loading" | "ready" | "static">("loading")
   const [errored, setErrored] = useState(false)
+  const [showExplodedPoster, setShowExplodedPoster] = useState(false)
+  const [explodedPosterReady, setExplodedPosterReady] = useState(false)
+  const [isDarkTheme, setIsDarkTheme] = useState(false)
+
+  const finalPosterSrc = explodedPosterSrc ?? posterSrc
 
   useEffect(() => {
     onCompleteRef.current = onPlaybackComplete
   }, [onPlaybackComplete])
+
+  useEffect(() => {
+    const updateTheme = () => {
+      setIsDarkTheme(document.documentElement.classList.contains("dark"))
+    }
+
+    updateTheme()
+    const observer = new MutationObserver(updateTheme)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    })
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
+  useEffect(() => {
+    let cancelled = false
+
+    if (!finalPosterSrc) {
+      setExplodedPosterReady(true)
+      return () => {
+        cancelled = true
+      }
+    }
+
+    setExplodedPosterReady(false)
+    const image = new Image()
+    image.decoding = "async"
+    image.onload = () => {
+      if (!cancelled) setExplodedPosterReady(true)
+    }
+    image.onerror = () => {
+      // Do not block the swap forever if preloading fails.
+      if (!cancelled) setExplodedPosterReady(true)
+    }
+    image.src = finalPosterSrc
+
+    if (image.complete) {
+      setExplodedPosterReady(true)
+    }
+
+    return () => {
+      cancelled = true
+    }
+  }, [finalPosterSrc])
 
   useEffect(() => {
     let cancelled = false
@@ -103,6 +158,7 @@ export function AnimatedExplodedSvg({
     setMarkup(null)
     setMode("loading")
     setErrored(false)
+    setShowExplodedPoster(false)
 
     async function loadSvg() {
       try {
@@ -209,6 +265,7 @@ export function AnimatedExplodedSvg({
           svg.pauseAnimations()
           svg.setCurrentTime(durationSeconds)
           playRafRef.current = null
+          setShowExplodedPoster(true)
           if (!completedRef.current) {
             completedRef.current = true
             onCompleteRef.current?.()
@@ -263,12 +320,22 @@ export function AnimatedExplodedSvg({
 
   if (errored) return <>{fallback}</>
 
+  const canShowExplodedPoster = showExplodedPoster && Boolean(finalPosterSrc) && explodedPosterReady
+
   return (
     <div
       ref={containerRef}
       className={`relative h-full min-h-[20rem] w-full overflow-hidden ${className ?? ""}`}
     >
-      {markup ? (
+      {canShowExplodedPoster ? (
+        <img
+          src={finalPosterSrc}
+          alt=""
+          className="h-full w-full object-contain"
+          style={{ filter: isDarkTheme ? "invert(1)" : "none" }}
+          aria-hidden
+        />
+      ) : markup ? (
         <div
           ref={hostRef}
           className="h-full w-full"
@@ -281,6 +348,7 @@ export function AnimatedExplodedSvg({
               src={posterSrc}
               alt=""
               className="h-full w-full object-contain"
+              style={{ filter: isDarkTheme ? "invert(1)" : "none" }}
               aria-hidden
             />
           ) : (

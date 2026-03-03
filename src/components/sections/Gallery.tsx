@@ -20,12 +20,12 @@ export function Gallery({ copy }: GalleryProps) {
               loading="lazy"
             />
             <div className="absolute inset-0 bg-black/25" />
-            <div className="relative z-10 flex h-full items-center justify-center px-6 text-center md:px-10">
+            <div className="iiode-half-pad-1 relative z-10 flex h-full items-center justify-center text-center">
               <h2 className="iiode-type-1 text-white">{copy.leftTitle}</h2>
             </div>
           </div>
-          <div className="iiode-split-half flex items-start px-0 pt-10 md:px-10 md:pt-8">
-            <p className="iiode-type-1 max-w-2xl text-foreground">
+          <div className="iiode-split-half iiode-media-half iiode-media-half-right iiode-text-half iiode-half-pad-1 flex items-start pt-10 md:pt-8">
+            <p className="iiode-type-1 w-full text-foreground">
               {copy.rightText}
             </p>
           </div>

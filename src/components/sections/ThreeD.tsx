@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import type { Re27Copy } from "@/content/re27"
 
@@ -12,7 +12,7 @@ type ThreeDProps = {
 
 export function ThreeD({ copy }: ThreeDProps) {
   const partMarkers = [14, 31, 43, 57, 73, 89]
-  const overlayRef = useRef<HTMLDivElement | null>(null)
+  const [overlayEnabled, setOverlayEnabled] = useState(false)
 
   return (
     <section id="view-3d" className="bg-background">
@@ -21,32 +21,29 @@ export function ThreeD({ copy }: ThreeDProps) {
           className="iiode-container iiode-section-panel iiode-split-grid grid grid-cols-1 md:grid-cols-2"
           data-scroll-panel="true"
         >
-          <div className="iiode-split-half iiode-media-half iiode-media-half-left relative overflow-hidden">
+          <div className="iiode-split-half iiode-media-half iiode-media-half-left order-2 relative overflow-hidden md:order-1">
             <div className="absolute inset-0">
               <AnimatedExplodedSvg
                 src={copy.animationSrc}
                 posterSrc={copy.animationPoster}
+                explodedPosterSrc={copy.explodedPosterSrc}
                 durationSeconds={copy.durationSeconds}
                 triggerProgress={copy.triggerProgress}
-                onPlaybackComplete={() => {
-                  const overlay = overlayRef.current
-                  if (!overlay) return
-                  overlay.classList.remove("opacity-0", "pointer-events-none")
-                  overlay.classList.add("opacity-100", "pointer-events-auto")
-                }}
+                onPlaybackComplete={() => setOverlayEnabled(true)}
                 className="h-full w-full"
               />
             </div>
 
             <CompositionOverlay
-              overlayRef={overlayRef}
+              key={overlayEnabled ? "enabled" : "disabled"}
+              enabled={overlayEnabled}
               partMarkers={partMarkers}
               items={copy.compositionItems}
               note={copy.compositionNote}
             />
           </div>
 
-          <div className="iiode-split-half iiode-media-half iiode-media-half-right relative overflow-hidden">
+          <div className="iiode-split-half iiode-media-half iiode-media-half-right order-1 relative overflow-hidden md:order-2">
             <img
               src={copy.rightImage}
               alt={copy.rightTitle}
@@ -54,7 +51,7 @@ export function ThreeD({ copy }: ThreeDProps) {
               loading="lazy"
             />
             <div className="absolute inset-0 bg-black/25" />
-            <div className="relative z-10 flex h-full items-center justify-center px-6 text-center md:px-10">
+            <div className="iiode-half-pad-1 relative z-10 flex h-full items-center justify-center text-center">
               <h2 className="iiode-type-1 text-white">{copy.rightTitle}</h2>
             </div>
           </div>
@@ -65,34 +62,61 @@ export function ThreeD({ copy }: ThreeDProps) {
 }
 
 type CompositionOverlayProps = {
-  overlayRef: React.RefObject<HTMLDivElement | null>
+  enabled: boolean
   partMarkers: number[]
   items: string[]
   note: string
 }
 
-function CompositionOverlay({ overlayRef, partMarkers, items, note }: CompositionOverlayProps) {
+function CompositionOverlay({ enabled, partMarkers, items, note }: CompositionOverlayProps) {
   const [activePart, setActivePart] = useState<number | null>(null)
+  const hideTimerRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (hideTimerRef.current !== null) {
+        window.clearTimeout(hideTimerRef.current)
+      }
+    }
+  }, [])
+
+  const triggerPart = (index: number) => {
+    setActivePart(index)
+    if (hideTimerRef.current !== null) {
+      window.clearTimeout(hideTimerRef.current)
+    }
+    hideTimerRef.current = window.setTimeout(() => {
+      setActivePart(null)
+      hideTimerRef.current = null
+    }, 2000)
+  }
 
   return (
     <div
-      ref={overlayRef}
-      className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-500"
-      onMouseLeave={() => setActivePart(null)}
+      className={`absolute inset-0 z-10 transition-opacity duration-500 ${
+        enabled ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+      }`}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) {
+          setActivePart(null)
+          if (hideTimerRef.current !== null) {
+            window.clearTimeout(hideTimerRef.current)
+            hideTimerRef.current = null
+          }
+        }
+      }}
     >
       {items.map((item, index) => (
         <button
           key={item}
           type="button"
-          className="absolute left-1/2 z-20 h-16 w-24 -translate-x-1/2 opacity-0"
+          className="absolute left-1/2 z-20 h-24 w-36 -translate-x-1/2 cursor-pointer opacity-0 md:h-28 md:w-44"
           style={{ top: `${partMarkers[index]}%` }}
           aria-label={item}
-          onMouseEnter={() => setActivePart(index)}
-          onMouseLeave={() => setActivePart(null)}
-          onFocus={() => setActivePart(index)}
+          onFocus={() => triggerPart(index)}
           onBlur={() => setActivePart(null)}
           onClick={() => {
-            setActivePart((current) => (current === index ? null : index))
+            triggerPart(index)
           }}
         />
       ))}
@@ -106,9 +130,11 @@ function CompositionOverlay({ overlayRef, partMarkers, items, note }: Compositio
         </p>
       ) : null}
 
-      <p className="pointer-events-none absolute bottom-3 left-4 text-[11px] text-foreground md:left-10">
-        {note}
-      </p>
+      {note ? (
+        <p className="pointer-events-none absolute bottom-3 left-4 text-[11px] text-foreground md:left-10">
+          {note}
+        </p>
+      ) : null}
     </div>
   )
 }

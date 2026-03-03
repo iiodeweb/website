@@ -15,8 +15,8 @@ export default async function AboutPage() {
           className="iiode-container iiode-section-panel iiode-split-grid grid grid-cols-1 md:grid-cols-2"
           data-scroll-panel="true"
         >
-          <div className="iiode-split-half flex items-start px-0 pt-10 md:px-10 md:pt-8">
-            <div className="iiode-type-2 grid w-full max-w-3xl gap-5 text-foreground">
+          <div className="iiode-split-half iiode-media-half iiode-media-half-left iiode-text-half iiode-half-pad-2 flex items-start pt-10 md:pt-8">
+            <div className="iiode-type-2 iiode-copy-narrow grid gap-5 text-foreground md:ml-auto">
               <h1 className="iiode-type-2 text-foreground">{copy.title}</h1>
               {copy.sections.map((line, index) => (
                 <p key={line} className={index === 0 ? "" : "border-t border-foreground/20 pt-4"}>
@@ -31,8 +31,8 @@ export default async function AboutPage() {
               </p>
             </div>
           </div>
-          <div className="iiode-split-half flex items-start px-0 pt-10 md:px-10 md:pt-8">
-            <div className="iiode-type-2 grid w-full max-w-3xl gap-5 text-foreground">
+          <div className="iiode-split-half iiode-media-half iiode-media-half-right iiode-text-half iiode-half-pad-2 flex items-start pt-10 md:pt-8">
+            <div className="iiode-type-2 iiode-copy-narrow grid gap-5 text-foreground md:mr-auto">
               <h2 className="iiode-type-2 text-foreground">{copy.contactTitle}</h2>
               <p>{copy.contactIntro}</p>
               {copy.addresses.map((line) => (

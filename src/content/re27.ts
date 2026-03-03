@@ -27,6 +27,7 @@ export type Re27Copy = {
   threeD: {
     animationSrc: string
     animationPoster: string
+    explodedPosterSrc: string
     triggerProgress: number
     durationSeconds: number
     compositionTitle: string
@@ -105,20 +106,21 @@ const re27EnglishCopy: Re27Copy = {
     items: [""],
   },
   threeD: {
-    animationSrc: "/assets/Re27/exploded/Re27_Animation30FPS.svg?v=3",
+    animationSrc: "/assets/Re27/exploded/Re27_Animation30FPS.sync.svg?v=2",
     animationPoster: "/assets/Re27/exploded/Re27_Animation30FPS.poster.svg?v=1",
+    explodedPosterSrc: "/assets/Re27/exploded/Re27_Animation30FPS.exploded.static.svg?v=1",
     triggerProgress: 0.32,
-    durationSeconds: 2.2,
+    durationSeconds: 1.0,
     compositionTitle: "Composition",
     compositionItems: [
       "Optical lens in 100% post-production recycled polycarbonate for efficient light diffusion",
-      "LED PCB* with dual-channel, tunable white LED array for natural colours",
-      "Logic PCB* with Wi-Fi and BLE remote control and data access for smart connectivity",
+      "LED Printed Circuit Board with dual-channel, tunable white LED array for natural colours",
+      "Logic Printed Circuit Board with Wi-Fi and BLE remote control and data access for smart connectivity",
       "Heatsink in 100% recycled, open-cell aluminium foam for heat dissipation",
-      "Driver PCB* with miniaturised AC -> DC driver for power regulation",
+      "Driver Printed Circuit Board with miniaturised AC -> DC driver for power regulation",
       "Standard E27 socket for tool-free replacement",
     ],
-    compositionNote: "* Printed circuit board",
+    compositionNote: "*Click to display information",
     rightTitle: "Building a better bulb",
     rightImage: "/assets/mood/ABC_IIODE-CharlesNegre_03.jpg",
   },

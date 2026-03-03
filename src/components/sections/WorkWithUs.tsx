@@ -14,8 +14,8 @@ export function WorkWithUs({ copy }: WorkWithUsProps) {
           className="iiode-container iiode-section-panel iiode-split-grid grid grid-cols-1 md:grid-cols-2"
           data-scroll-panel="true"
         >
-          <div className="iiode-split-half flex items-start px-0 pt-10 md:px-10 md:pt-8">
-            <div className="iiode-type-2 grid w-full gap-4 text-foreground">
+          <div className="iiode-split-half iiode-media-half iiode-media-half-left iiode-text-half iiode-half-pad-2 flex items-start pt-10 md:pt-8">
+            <div className="iiode-type-2 iiode-copy-narrow grid gap-4 text-foreground md:ml-auto">
               <h2 className="iiode-type-2 mb-2">{copy.leftTitle}</h2>
               {copy.items.map((item) => (
                 <div
@@ -36,7 +36,7 @@ export function WorkWithUs({ copy }: WorkWithUsProps) {
               loading="lazy"
             />
             <div className="absolute inset-0 bg-black/25" />
-            <div className="relative z-10 flex h-full items-center justify-center px-6 text-center md:px-10">
+            <div className="iiode-half-pad-1 relative z-10 flex h-full items-center justify-center text-center">
               <Link href="/preorder" className="iiode-type-1 text-white">
                 {copy.rightTitle}
               </Link>
