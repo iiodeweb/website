@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 
 import type { Re27Copy } from "@/content/re27"
+import { getMobileVariant } from "@/lib/responsive-asset"
 
 import { AnimatedExplodedSvg } from "./AnimatedExplodedSvg"
 
@@ -13,6 +14,7 @@ type ThreeDProps = {
 export function ThreeD({ copy }: ThreeDProps) {
   const partMarkers = [14, 31, 43, 57, 73, 89]
   const [overlayEnabled, setOverlayEnabled] = useState(false)
+  const mobileRightImage = getMobileVariant(copy.rightImage)
 
   return (
     <section id="view-3d" className="bg-background">
@@ -44,12 +46,15 @@ export function ThreeD({ copy }: ThreeDProps) {
           </div>
 
           <div className="iiode-split-half iiode-media-half iiode-media-half-right order-1 relative overflow-hidden md:order-2">
-            <img
-              src={copy.rightImage}
-              alt={copy.rightTitle}
-              className="absolute inset-0 h-full w-full object-cover"
-              loading="lazy"
-            />
+            <picture>
+              {mobileRightImage ? <source media="(max-width: 767px)" srcSet={mobileRightImage} /> : null}
+              <img
+                src={copy.rightImage}
+                alt={copy.rightTitle}
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+              />
+            </picture>
             <div className="absolute inset-0 bg-black/25" />
             <div className="iiode-half-pad-1 relative z-10 flex h-full items-center justify-center text-center">
               <h2 className="iiode-type-1 text-white">{copy.rightTitle}</h2>

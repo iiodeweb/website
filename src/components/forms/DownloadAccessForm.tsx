@@ -47,8 +47,7 @@ export function DownloadAccessForm({ fields, buttonLabel, assetHref }: DownloadA
 
       const anchor = document.createElement("a")
       anchor.href = assetHref
-      anchor.target = "_blank"
-      anchor.rel = "noopener noreferrer"
+      anchor.setAttribute("download", "")
       document.body.appendChild(anchor)
       anchor.click()
       document.body.removeChild(anchor)

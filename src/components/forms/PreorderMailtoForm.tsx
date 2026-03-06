@@ -2,7 +2,9 @@
 
 import { FormEvent, useMemo, useState } from "react"
 
-type PreorderFields = {
+import { isValidPreorderEmail, type PreorderPayload } from "@/lib/preorder"
+
+type FormLabels = {
   name: string
   surname: string
   company: string
@@ -11,21 +13,13 @@ type PreorderFields = {
   note: string
 }
 
-type PreorderMailtoFormProps = {
-  labels: {
-    name: string
-    surname: string
-    company: string
-    email: string
-    quantity: string
-    note: string
-  }
+type PreorderRequestFormProps = {
+  labels: FormLabels
   submitLabel: string
-  recipient: string
 }
 
-export function PreorderMailtoForm({ labels, submitLabel, recipient }: PreorderMailtoFormProps) {
-  const [values, setValues] = useState<PreorderFields>({
+export function PreorderRequestForm({ labels, submitLabel }: PreorderRequestFormProps) {
+  const [values, setValues] = useState<PreorderPayload>({
     name: "",
     surname: "",
     company: "",
@@ -33,40 +27,63 @@ export function PreorderMailtoForm({ labels, submitLabel, recipient }: PreorderM
     quantity: "",
     note: "",
   })
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const quantityValue = Number(values.quantity.trim())
 
   const canSubmit = useMemo(() => {
-    return Boolean(values.name.trim() && values.surname.trim() && values.email.trim())
-  }, [values.email, values.name, values.surname])
+    return Boolean(
+      values.name.trim() &&
+        values.surname.trim() &&
+        values.company.trim() &&
+        values.email.trim() &&
+        isValidPreorderEmail(values.email.trim()) &&
+        values.note.trim() &&
+        Number.isInteger(quantityValue) &&
+        quantityValue > 0,
+    )
+  }, [quantityValue, values.company, values.email, values.name, values.note, values.quantity, values.surname])
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (!canSubmit) return
+    if (!canSubmit || status === "submitting") return
 
-    const company = values.company.trim() || "-"
-    const name = values.name.trim()
-    const surname = values.surname.trim()
-    const email = values.email.trim()
-    const quantity = values.quantity.trim() || "-"
-    const note = values.note.trim() || "-"
-    const noteSingleLine = note.replace(/\s+/g, " ")
+    setStatus("submitting")
+    setErrorMessage("")
 
-    const subject = `Pre-Order "${company}" "${name}" "${surname}"`
-    const body = [
-      "Pre-Order Request",
-      "",
-      `Company: ${company}`,
-      `Name: ${name}`,
-      `Surname: ${surname}`,
-      `E-mail: ${email}`,
-      `Quantity: ${quantity}`,
-      "Note:",
-      note,
-      "",
-      "Sheet row (TSV):",
-      `${company}\t${name}\t${surname}\t${email}\t${quantity}\t${noteSingleLine}`,
-    ].join("\n")
+    try {
+      const response = await fetch("/api/preorder/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: values.name.trim(),
+          surname: values.surname.trim(),
+          company: values.company.trim(),
+          email: values.email.trim(),
+          quantity: String(quantityValue),
+          note: values.note.trim(),
+        }),
+      })
 
-    window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+      if (!response.ok) {
+        const data = (await response.json().catch(() => ({}))) as { error?: string }
+        throw new Error(data.error || "Send failed")
+      }
+
+      setStatus("success")
+      setValues({
+        name: "",
+        surname: "",
+        company: "",
+        email: "",
+        quantity: "",
+        note: "",
+      })
+    } catch (error) {
+      setStatus("error")
+      setErrorMessage(error instanceof Error ? error.message : "Send failed")
+    }
   }
 
   return (
@@ -101,6 +118,7 @@ export function PreorderMailtoForm({ labels, submitLabel, recipient }: PreorderM
           value={values.company}
           onChange={(event) => setValues((current) => ({ ...current, company: event.target.value }))}
           className="mt-2 w-full border border-foreground/20 bg-foreground/5 px-4 py-3 text-foreground outline-none focus:border-foreground"
+          required
         />
       </label>
 
@@ -123,9 +141,11 @@ export function PreorderMailtoForm({ labels, submitLabel, recipient }: PreorderM
             name="quantity"
             type="number"
             min="1"
+            step="1"
             value={values.quantity}
             onChange={(event) => setValues((current) => ({ ...current, quantity: event.target.value }))}
             className="mt-2 w-full border border-foreground/20 bg-foreground/5 px-4 py-3 text-foreground outline-none focus:border-foreground"
+            required
           />
         </label>
       </div>
@@ -138,16 +158,24 @@ export function PreorderMailtoForm({ labels, submitLabel, recipient }: PreorderM
           value={values.note}
           onChange={(event) => setValues((current) => ({ ...current, note: event.target.value }))}
           className="mt-2 w-full border border-foreground/20 bg-foreground/5 px-4 py-3 text-foreground outline-none focus:border-foreground"
+          required
         />
       </label>
 
       <button
         type="submit"
-        disabled={!canSubmit}
+        disabled={!canSubmit || status === "submitting"}
         className="w-full bg-foreground px-6 py-3 text-xs uppercase text-background disabled:cursor-not-allowed disabled:opacity-60 md:w-fit"
       >
-        {submitLabel}
+        {status === "submitting" ? "Sending..." : submitLabel}
       </button>
+
+      {status === "success" ? (
+        <p className="text-sm text-foreground">Pre-order request sent.</p>
+      ) : null}
+      {status === "error" ? (
+        <p className="text-sm text-foreground">{errorMessage || "Pre-order send failed."}</p>
+      ) : null}
     </form>
   )
 }

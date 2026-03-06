@@ -56,7 +56,7 @@ export type Re27Copy = {
 const re27EnglishCopy: Re27Copy = {
   hero: {
     title: "iiode Re27",
-    image: "/assets/Re27/images/hero/Re27-Pola.jpg",
+    image: "/assets/Re27/images/hero/desktop/iiode-Re27-Hand.webp",
   },
   story: {
     leftText:
@@ -68,7 +68,7 @@ const re27EnglishCopy: Re27Copy = {
   useCases: {
     leftTitle:
       "iiode Re27 is the only light bulb that combines natural light quality, smart integrated control, and recycled materials in one serviceable design.",
-    leftImage: "/assets/Re27/images/gallery/Re27-Pola.jpg",
+    leftImage: "/assets/Re27/images/gallery/desktop/iiode-Re27-Engine.webp",
     intro:
       "iiode Re27 is the only light bulb that combines natural light quality, smart integrated control, and recycled materials in one serviceable design.",
     bridge: "It makes life inside as beautiful as life outside.",
@@ -126,7 +126,7 @@ const re27EnglishCopy: Re27Copy = {
   },
   gallery: {
     leftTitle: "One bulb for every environment",
-    leftImage: "/assets/Re27/images/gallery/Re27-Wall.jpg",
+    leftImage: "/assets/Re27/images/gallery/desktop/iiode-Re27-Portrait.webp",
     rightText:
       "From home and hospitality venues to retail and work spaces, iiode Re27 illuminates space for comfort, beauty, and productivity.",
   },

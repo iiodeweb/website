@@ -1,6 +1,5 @@
-import { PreorderMailtoForm } from "@/components/forms/PreorderMailtoForm"
+import { PreorderRequestForm } from "@/components/forms/PreorderMailtoForm"
 import { getPagesCopy } from "@/content/pages"
-import { siteConfig } from "@/content/site"
 import { getLocale } from "@/lib/locale-server"
 
 export default async function PreorderPage() {
@@ -23,10 +22,9 @@ export default async function PreorderPage() {
 
           <div className="iiode-split-half iiode-media-half iiode-media-half-right iiode-text-half iiode-half-pad-2 flex items-start pt-10 md:pt-8">
             <div className="iiode-copy-narrow w-full md:mr-auto">
-              <PreorderMailtoForm
+              <PreorderRequestForm
                 labels={copy.fields}
                 submitLabel={copy.submit}
-                recipient={siteConfig.email}
               />
             </div>
           </div>

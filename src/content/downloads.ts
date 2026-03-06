@@ -24,7 +24,7 @@ const downloadsContent: Record<Locale, DownloadsContent> = {
     termsTitle: "Download Terms",
     termsBody: termsText,
     buttonLabel: "Matter and Shape 2026 Press Kit",
-    assetHref: "/assets/press/01%20abat-jour/Re27-Suspension.jpg",
+    assetHref: "/api/downloads/press-kit",
     fields: {
       name: "Name",
       surname: "Surname",
@@ -37,7 +37,7 @@ const downloadsContent: Record<Locale, DownloadsContent> = {
     termsTitle: "Download Terms",
     termsBody: termsText,
     buttonLabel: "Matter and Shape 2026 Press Kit",
-    assetHref: "/assets/press/01%20abat-jour/Re27-Suspension.jpg",
+    assetHref: "/api/downloads/press-kit",
     fields: {
       name: "Name",
       surname: "Surname",
@@ -50,7 +50,7 @@ const downloadsContent: Record<Locale, DownloadsContent> = {
     termsTitle: "Download Terms",
     termsBody: termsText,
     buttonLabel: "Matter and Shape 2026 Press Kit",
-    assetHref: "/assets/press/01%20abat-jour/Re27-Suspension.jpg",
+    assetHref: "/api/downloads/press-kit",
     fields: {
       name: "Name",
       surname: "Surname",

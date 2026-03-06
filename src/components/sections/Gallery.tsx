@@ -1,10 +1,13 @@
 import type { Re27Copy } from "@/content/re27"
+import { getMobileVariant } from "@/lib/responsive-asset"
 
 type GalleryProps = {
   copy: Re27Copy["gallery"]
 }
 
 export function Gallery({ copy }: GalleryProps) {
+  const mobileLeftImage = getMobileVariant(copy.leftImage)
+
   return (
     <section className="bg-background">
       <div className="iiode-section-wrap" data-scroll-track="true">
@@ -13,12 +16,15 @@ export function Gallery({ copy }: GalleryProps) {
           data-scroll-panel="true"
         >
           <div className="iiode-split-half iiode-media-half iiode-media-half-left relative overflow-hidden">
-            <img
-              src={copy.leftImage}
-              alt={copy.leftTitle}
-              className="absolute inset-0 h-full w-full object-cover"
-              loading="lazy"
-            />
+            <picture>
+              {mobileLeftImage ? <source media="(max-width: 767px)" srcSet={mobileLeftImage} /> : null}
+              <img
+                src={copy.leftImage}
+                alt={copy.leftTitle}
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+              />
+            </picture>
             <div className="absolute inset-0 bg-black/25" />
             <div className="iiode-half-pad-1 relative z-10 flex h-full items-center justify-center text-center">
               <h2 className="iiode-type-1 text-white">{copy.leftTitle}</h2>

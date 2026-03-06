@@ -1,10 +1,13 @@
 import type { Re27Copy } from "@/content/re27"
+import { getMobileVariant } from "@/lib/responsive-asset"
 
 type UseCasesProps = {
   copy: Re27Copy["useCases"]
 }
 
 export function UseCases({ copy }: UseCasesProps) {
+  const mobileLeftImage = getMobileVariant(copy.leftImage)
+
   return (
     <section id="use-cases" className="bg-background">
       <div className="iiode-section-wrap" data-scroll-track="true">
@@ -13,12 +16,15 @@ export function UseCases({ copy }: UseCasesProps) {
           data-scroll-panel="true"
         >
           <div className="iiode-split-half iiode-media-half iiode-media-half-left relative overflow-hidden">
-            <img
-              src={copy.leftImage}
-              alt="Re27 product image"
-              className="absolute inset-0 h-full w-full object-cover"
-              loading="lazy"
-            />
+            <picture>
+              {mobileLeftImage ? <source media="(max-width: 767px)" srcSet={mobileLeftImage} /> : null}
+              <img
+                src={copy.leftImage}
+                alt="Re27 product image"
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+              />
+            </picture>
             <div className="absolute inset-0 bg-black/25" />
             <div className="iiode-half-pad-1 relative z-10 flex h-full items-start pt-10 md:pt-8">
               <h2 className="iiode-type-1 text-white">{copy.leftTitle}</h2>

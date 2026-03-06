@@ -15,15 +15,24 @@ export default async function CollaborationsPage() {
             data-scroll-panel="true"
           >
             <div className="iiode-split-half iiode-media-half iiode-media-half-left iiode-text-half iiode-half-pad-2 flex items-start pt-10 md:pt-8">
-              <p className="iiode-type-2 iiode-copy-narrow md:ml-auto">{copy.introLeft}</p>
+              <p className="iiode-type-2 iiode-copy-narrow whitespace-pre-line md:ml-auto">{copy.introLeft}</p>
             </div>
             <div className="iiode-split-half iiode-media-half iiode-media-half-right overflow-hidden">
-              <img
-                src={copy.introImage}
-                alt="Collaborations intro"
-                className="h-full w-full object-cover"
-                loading="lazy"
-              />
+              <div className="grid h-full w-full grid-cols-2 grid-rows-2">
+                {copy.introImages.slice(0, 4).map((image) => (
+                  <div key={image.desktop} className="group relative overflow-hidden">
+                    <picture>
+                      <source media="(max-width: 767px)" srcSet={image.mobile} />
+                      <img
+                        src={image.desktop}
+                        alt="Collaborations intro"
+                        className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    </picture>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -37,12 +46,14 @@ export default async function CollaborationsPage() {
           >
             <div className="iiode-split-half iiode-media-half iiode-media-half-left iiode-text-half iiode-half-pad-2 flex items-start pt-10 md:pt-8">
               <div className="iiode-type-2 iiode-copy-narrow grid gap-5 md:ml-auto">
-                <p>{copy.abatJourTitle}</p>
-                <div className="grid gap-1">
-                  {copy.contributors.map((name) => (
-                    <p key={name}>{name}</p>
-                  ))}
-                </div>
+                <p className="whitespace-pre-line">{copy.abatJourTitle}</p>
+                {copy.contributors.length > 0 ? (
+                  <div className="grid gap-1">
+                    {copy.contributors.map((name) => (
+                      <p key={name}>{name}</p>
+                    ))}
+                  </div>
+                ) : null}
               </div>
             </div>
             <div className="iiode-split-half iiode-media-half iiode-media-half-right overflow-hidden">
