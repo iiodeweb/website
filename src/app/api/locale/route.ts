@@ -1,8 +1,17 @@
 import { NextResponse } from "next/server"
 
-import { defaultLocale, isLocale } from "@/lib/locale"
+import { defaultLocale, isLocale, localeSwitchEnabled } from "@/lib/locale"
 
 export async function POST(request: Request) {
+  if (!localeSwitchEnabled) {
+    const response = NextResponse.json({ ok: true, disabled: true })
+    response.cookies.set("iiode-locale", defaultLocale, {
+      path: "/",
+      sameSite: "lax",
+    })
+    return response
+  }
+
   let locale = defaultLocale
 
   try {

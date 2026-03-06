@@ -61,25 +61,3 @@ export function validatePreorderPayload(input: unknown):
     },
   }
 }
-
-export function buildPreorderEmail(payload: PreorderPayload) {
-  const noteSingleLine = payload.note.replace(/\s+/g, " ")
-
-  return {
-    subject: `Pre-Order "${payload.company}" "${payload.name}" "${payload.surname}"`,
-    text: [
-      "Pre-Order Request",
-      "",
-      `Company: ${payload.company}`,
-      `Name: ${payload.name}`,
-      `Surname: ${payload.surname}`,
-      `E-mail: ${payload.email}`,
-      `Quantity: ${payload.quantity}`,
-      "Note:",
-      payload.note,
-      "",
-      "Sheet row (TSV):",
-      `${payload.company}\t${payload.name}\t${payload.surname}\t${payload.email}\t${payload.quantity}\t${noteSingleLine}`,
-    ].join("\n"),
-  }
-}

@@ -5,7 +5,7 @@ import { useState } from "react"
 
 import { LanguageToggle } from "@/components/i18n/LanguageToggle"
 import { getSiteCopy, siteConfig } from "@/content/site"
-import type { Locale } from "@/lib/locale"
+import { localeSwitchEnabled, type Locale } from "@/lib/locale"
 import type { Theme } from "@/lib/theme"
 
 type TopNavProps = {
@@ -77,7 +77,11 @@ export function TopNav({ locale, theme }: TopNavProps) {
               </Link>
             )
           )}
-          <LanguageToggle locale={locale} pushLayout />
+          {localeSwitchEnabled ? (
+            <LanguageToggle locale={locale} pushLayout />
+          ) : (
+            <span className="w-7 text-center text-base uppercase text-current">EN</span>
+          )}
         </nav>
         <button
           type="button"
@@ -131,7 +135,11 @@ export function TopNav({ locale, theme }: TopNavProps) {
                 )
               )}
               <div className="pt-2">
-                <LanguageToggle locale={locale} />
+                {localeSwitchEnabled ? (
+                  <LanguageToggle locale={locale} />
+                ) : (
+                  <span className="text-sm uppercase text-current">EN</span>
+                )}
               </div>
             </div>
           </div>

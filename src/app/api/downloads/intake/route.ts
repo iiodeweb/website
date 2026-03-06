@@ -1,7 +1,6 @@
-import { appendFile, mkdir } from "node:fs/promises"
-import path from "node:path"
-
 import { NextResponse } from "next/server"
+
+import { isMailchimpConfigured, upsertMailchimpContact } from "@/lib/mailchimp"
 
 type IntakePayload = {
   name?: string
@@ -10,14 +9,6 @@ type IntakePayload = {
   asset?: string
   href?: string
   source?: string
-}
-
-function getDataPath() {
-  const rootDir = process.env.IIODE_DATA_DIR || path.join(process.cwd(), ".iiode-data")
-  return {
-    dir: rootDir,
-    file: path.join(rootDir, "downloads-intake.ndjson"),
-  }
 }
 
 export async function POST(request: Request) {
@@ -31,25 +22,32 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: false, error: "Missing required fields" }, { status: 400 })
     }
 
-    const { dir, file } = getDataPath()
-    await mkdir(dir, { recursive: true })
-
-    const record = {
-      timestamp: new Date().toISOString(),
-      name,
-      surname,
-      email,
-      asset: payload.asset?.trim() || "",
-      href: payload.href?.trim() || "",
-      source: payload.source?.trim() || "",
-      ip: request.headers.get("x-forwarded-for") || "",
-      userAgent: request.headers.get("user-agent") || "",
+    if (!isMailchimpConfigured()) {
+      return NextResponse.json({ ok: false, error: "Mailchimp is not configured" }, { status: 500 })
     }
 
-    await appendFile(file, `${JSON.stringify(record)}\n`, "utf8")
+    const sourceTag = payload.source?.trim() || ""
+    const downloadTag = process.env.IIODE_MAILCHIMP_TAG_DOWNLOAD?.trim() || "download-presskit"
+    const tags = [downloadTag]
+    if (sourceTag) {
+      tags.push(sourceTag)
+    }
+
+    await upsertMailchimpContact({
+      email,
+      firstName: name,
+      lastName: surname,
+      tags,
+    })
 
     return NextResponse.json({ ok: true })
-  } catch {
-    return NextResponse.json({ ok: false, error: "Intake failed" }, { status: 500 })
+  } catch (error) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: error instanceof Error ? error.message : "Intake failed",
+      },
+      { status: 500 },
+    )
   }
 }
