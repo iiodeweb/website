@@ -47,7 +47,7 @@ export function hasFileContactLogConfig(): boolean {
   return Boolean(getConfiguredLogFilePath())
 }
 
-export async function appendContactLog(record: ContactRecord): Promise<void> {
+export async function appendContactLog(record: ContactRecord): Promise<string> {
   const configuredPath = getConfiguredLogFilePath()
   if (!configuredPath) {
     throw new Error("File contact log is not configured")
@@ -62,4 +62,5 @@ export async function appendContactLog(record: ContactRecord): Promise<void> {
   }
 
   await appendFile(absolutePath, `${JSON.stringify(payload)}\n`, "utf8")
+  return absolutePath
 }

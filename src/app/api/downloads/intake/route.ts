@@ -24,6 +24,7 @@ export async function POST(request: Request) {
     }
 
     let stored = false
+    const providers: string[] = []
 
     if (isMailchimpConfigured()) {
       const sourceTag = payload.source?.trim() || ""
@@ -40,10 +41,11 @@ export async function POST(request: Request) {
         tags,
       })
       stored = true
+      providers.push("mailchimp")
     }
 
     if (hasFileContactLogConfig()) {
-      await appendContactLog({
+      const filePath = await appendContactLog({
         source: payload.source?.trim() || "downloads",
         name,
         surname,
@@ -52,6 +54,7 @@ export async function POST(request: Request) {
         href: payload.href?.trim() || "",
       })
       stored = true
+      providers.push(`file:${filePath}`)
     }
 
     if (!stored) {
@@ -61,7 +64,8 @@ export async function POST(request: Request) {
       )
     }
 
-    return NextResponse.json({ ok: true })
+    console.info(`[intake] downloads stored via ${providers.join(", ")}`)
+    return NextResponse.json({ ok: true, providers })
   } catch (error) {
     return NextResponse.json(
       {

@@ -29,6 +29,7 @@ export function PreorderRequestForm({ labels, submitLabel }: PreorderRequestForm
   })
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
   const [errorMessage, setErrorMessage] = useState("")
+  const [providerMessage, setProviderMessage] = useState("")
 
   const quantityValue = Number(values.quantity.trim())
 
@@ -51,6 +52,7 @@ export function PreorderRequestForm({ labels, submitLabel }: PreorderRequestForm
 
     setStatus("submitting")
     setErrorMessage("")
+    setProviderMessage("")
 
     try {
       const response = await fetch("/api/preorder/send", {
@@ -66,12 +68,18 @@ export function PreorderRequestForm({ labels, submitLabel }: PreorderRequestForm
         }),
       })
 
+      const data = (await response.json().catch(() => ({}))) as {
+        error?: string
+        providers?: string[]
+      }
       if (!response.ok) {
-        const data = (await response.json().catch(() => ({}))) as { error?: string }
         throw new Error(data.error || "Send failed")
       }
 
       setStatus("success")
+      if (Array.isArray(data.providers) && data.providers.length > 0) {
+        setProviderMessage(`Stored via ${data.providers.join(", ")}`)
+      }
       setValues({
         name: "",
         surname: "",
@@ -171,7 +179,10 @@ export function PreorderRequestForm({ labels, submitLabel }: PreorderRequestForm
       </button>
 
       {status === "success" ? (
-        <p className="text-sm text-foreground">Pre-order request sent.</p>
+        <p className="text-sm text-foreground">
+          Pre-order request sent.
+          {providerMessage ? ` ${providerMessage}` : ""}
+        </p>
       ) : null}
       {status === "error" ? (
         <p className="text-sm text-foreground">{errorMessage || "Pre-order send failed."}</p>

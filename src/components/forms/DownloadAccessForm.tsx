@@ -17,6 +17,7 @@ export function DownloadAccessForm({ fields, buttonLabel, assetHref }: DownloadA
   const [surname, setSurname] = useState("")
   const [email, setEmail] = useState("")
   const [status, setStatus] = useState<"idle" | "submitting" | "starting" | "error">("idle")
+  const [providerMessage, setProviderMessage] = useState("")
   const resetTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const canSubmit = useMemo(() => {
@@ -36,6 +37,7 @@ export function DownloadAccessForm({ fields, buttonLabel, assetHref }: DownloadA
     if (!canSubmit || status === "submitting") return
 
     setStatus("submitting")
+    setProviderMessage("")
     try {
       const response = await fetch("/api/downloads/intake", {
         method: "POST",
@@ -50,8 +52,15 @@ export function DownloadAccessForm({ fields, buttonLabel, assetHref }: DownloadA
         }),
       })
 
+      const data = (await response.json().catch(() => ({}))) as {
+        providers?: string[]
+      }
+
       if (!response.ok) {
         throw new Error("Intake failed")
+      }
+      if (Array.isArray(data.providers) && data.providers.length > 0) {
+        setProviderMessage(`Stored via ${data.providers.join(", ")}`)
       }
 
       const anchor = document.createElement("a")
@@ -119,6 +128,7 @@ export function DownloadAccessForm({ fields, buttonLabel, assetHref }: DownloadA
         <p className="flex items-center gap-2 text-sm text-foreground">
           <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-foreground/30 border-t-foreground" />
           Download is starting...
+          {providerMessage ? ` ${providerMessage}` : ""}
         </p>
       ) : null}
 

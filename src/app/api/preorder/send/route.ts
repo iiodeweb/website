@@ -14,6 +14,7 @@ export async function POST(request: Request) {
     }
 
     let stored = false
+    const providers: string[] = []
 
     if (isMailchimpConfigured()) {
       await upsertMailchimpContact({
@@ -23,10 +24,11 @@ export async function POST(request: Request) {
         tags: [process.env.IIODE_MAILCHIMP_TAG_PREORDER?.trim() || "preorder"],
       })
       stored = true
+      providers.push("mailchimp")
     }
 
     if (hasFileContactLogConfig()) {
-      await appendContactLog({
+      const filePath = await appendContactLog({
         source: "preorder",
         company: validation.data.company,
         name: validation.data.name,
@@ -36,6 +38,7 @@ export async function POST(request: Request) {
         note: validation.data.note,
       })
       stored = true
+      providers.push(`file:${filePath}`)
     }
 
     if (!stored) {
@@ -45,7 +48,8 @@ export async function POST(request: Request) {
       )
     }
 
-    return NextResponse.json({ ok: true })
+    console.info(`[intake] preorder stored via ${providers.join(", ")}`)
+    return NextResponse.json({ ok: true, providers })
   } catch (error) {
     return NextResponse.json(
       {
