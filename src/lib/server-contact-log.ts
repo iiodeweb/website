@@ -1,15 +1,17 @@
 import { appendFile, mkdir } from "node:fs/promises"
 import path from "node:path"
 
+import { readRuntimeEnv } from "@/lib/runtime-env"
+
 type ContactRecord = Record<string, unknown>
 
 function getConfiguredLogFilePath(): string {
-  const explicitFile = process.env.IIODE_CONTACTS_LOG_FILE?.trim() || ""
+  const explicitFile = readRuntimeEnv("IIODE_CONTACTS_LOG_FILE")
   if (explicitFile) {
     return explicitFile
   }
 
-  const legacyDir = process.env.IIODE_DATA_DIR?.trim() || ""
+  const legacyDir = readRuntimeEnv("IIODE_DATA_DIR")
   if (legacyDir) {
     return path.join(legacyDir, "contacts.ndjson")
   }

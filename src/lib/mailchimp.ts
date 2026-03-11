@@ -1,5 +1,7 @@
 import { createHash } from "node:crypto"
 
+import { readRuntimeEnv } from "@/lib/runtime-env"
+
 type MailchimpConfig = {
   apiKey: string
   audienceId: string
@@ -14,11 +16,10 @@ type MailchimpPayload = {
 }
 
 function readMailchimpConfig(): MailchimpConfig | null {
-  const apiKey = process.env.IIODE_MAILCHIMP_API_KEY?.trim() || ""
-  const audienceId = process.env.IIODE_MAILCHIMP_AUDIENCE_ID?.trim() || ""
+  const apiKey = readRuntimeEnv("IIODE_MAILCHIMP_API_KEY")
+  const audienceId = readRuntimeEnv("IIODE_MAILCHIMP_AUDIENCE_ID")
   const serverFromKey = apiKey.split("-")[1] || ""
-  const serverPrefix =
-    process.env.IIODE_MAILCHIMP_SERVER_PREFIX?.trim() || serverFromKey
+  const serverPrefix = readRuntimeEnv("IIODE_MAILCHIMP_SERVER_PREFIX") || serverFromKey
 
   if (!apiKey || !audienceId || !serverPrefix) {
     return null

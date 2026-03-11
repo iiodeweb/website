@@ -1,6 +1,6 @@
 "use client"
 
-import { FormEvent, useMemo, useState } from "react"
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react"
 
 type DownloadAccessFormProps = {
   fields: {
@@ -16,11 +16,20 @@ export function DownloadAccessForm({ fields, buttonLabel, assetHref }: DownloadA
   const [name, setName] = useState("")
   const [surname, setSurname] = useState("")
   const [email, setEmail] = useState("")
-  const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle")
+  const [status, setStatus] = useState<"idle" | "submitting" | "starting" | "error">("idle")
+  const resetTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const canSubmit = useMemo(() => {
     return Boolean(name.trim() && surname.trim() && email.trim())
   }, [email, name, surname])
+
+  useEffect(() => {
+    return () => {
+      if (resetTimer.current) {
+        clearTimeout(resetTimer.current)
+      }
+    }
+  }, [])
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -51,7 +60,13 @@ export function DownloadAccessForm({ fields, buttonLabel, assetHref }: DownloadA
       document.body.appendChild(anchor)
       anchor.click()
       document.body.removeChild(anchor)
-      setStatus("idle")
+      setStatus("starting")
+      if (resetTimer.current) {
+        clearTimeout(resetTimer.current)
+      }
+      resetTimer.current = setTimeout(() => {
+        setStatus("idle")
+      }, 5000)
     } catch {
       setStatus("error")
     }
@@ -94,11 +109,18 @@ export function DownloadAccessForm({ fields, buttonLabel, assetHref }: DownloadA
 
       <button
         type="submit"
-        disabled={!canSubmit || status === "submitting"}
+        disabled={!canSubmit || status === "submitting" || status === "starting"}
         className="w-full bg-foreground px-6 py-3 text-xs uppercase text-background disabled:cursor-not-allowed disabled:opacity-60 md:w-fit"
       >
-        {status === "submitting" ? "Preparing..." : buttonLabel}
+        {status === "submitting" ? "Preparing..." : status === "starting" ? "Starting..." : buttonLabel}
       </button>
+
+      {status === "starting" ? (
+        <p className="flex items-center gap-2 text-sm text-foreground">
+          <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-foreground/30 border-t-foreground" />
+          Download is starting...
+        </p>
+      ) : null}
 
       {status === "error" ? (
         <p className="text-sm text-foreground">Download failed. Please try again.</p>
