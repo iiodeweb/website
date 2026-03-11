@@ -36,10 +36,16 @@ function parseRuntimeEnv(content: string) {
 
 function getCandidateRuntimeEnvPaths(): string[] {
   const configuredPath = process.env.IIODE_RUNTIME_ENV_FILE?.trim()
+  const cwd = process.cwd()
   const candidates = [
     configuredPath,
-    path.resolve(process.cwd(), "../logs/WebsiteLogs/.env.runtime"),
-    path.resolve(process.cwd(), "logs/WebsiteLogs/.env.runtime"),
+    path.resolve(cwd, "../logs/WebsiteLogs/.env.runtime"),
+    path.resolve(cwd, "../logs/Websitelogs/.env.runtime"),
+    path.resolve(cwd, "logs/WebsiteLogs/.env.runtime"),
+    path.resolve(cwd, "logs/Websitelogs/.env.runtime"),
+    path.resolve(cwd, "../../logs/WebsiteLogs/.env.runtime"),
+    "/srv/customer/logs/WebsiteLogs/.env.runtime",
+    "/logs/WebsiteLogs/.env.runtime",
   ].filter(Boolean) as string[]
 
   return [...new Set(candidates)]
@@ -75,4 +81,3 @@ export function readRuntimeEnv(key: string): string {
   ensureRuntimeEnvLoaded()
   return runtimeEnvCache.get(key)?.trim() || ""
 }
-

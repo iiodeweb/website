@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs"
 import { appendFile, mkdir } from "node:fs/promises"
 import path from "node:path"
 
@@ -14,6 +15,21 @@ function getConfiguredLogFilePath(): string {
   const legacyDir = readRuntimeEnv("IIODE_DATA_DIR")
   if (legacyDir) {
     return path.join(legacyDir, "contacts.ndjson")
+  }
+
+  const cwd = process.cwd()
+  const defaultCandidates = [
+    path.resolve(cwd, "../logs/WebsiteLogs/contacts.ndjson"),
+    path.resolve(cwd, "../logs/Websitelogs/contacts.ndjson"),
+    path.resolve(cwd, "logs/WebsiteLogs/contacts.ndjson"),
+    path.resolve(cwd, "logs/Websitelogs/contacts.ndjson"),
+    "/srv/customer/logs/WebsiteLogs/contacts.ndjson",
+  ]
+
+  for (const candidate of defaultCandidates) {
+    if (existsSync(path.dirname(candidate))) {
+      return candidate
+    }
   }
 
   return ""
