@@ -3,10 +3,12 @@ import Link from "next/link"
 import { getPagesCopy } from "@/content/pages"
 import { siteConfig } from "@/content/site"
 import { getLocale } from "@/lib/locale-server"
+import { readServerAccessProbe } from "@/lib/server-access-probe"
 
 export default async function AboutPage() {
   const locale = await getLocale()
   const copy = getPagesCopy(locale).about
+  const accessProbe = readServerAccessProbe()
 
   return (
     <section className="bg-background text-foreground">
@@ -44,6 +46,10 @@ export default async function AboutPage() {
                   {siteConfig.email}
                 </Link>
               </p>
+              <div className="border-t border-foreground/20 pt-4 text-sm">
+                <p>Server access probe: {accessProbe.found ? "connected" : "not found"}</p>
+                <p>{accessProbe.found ? accessProbe.content : "No readable file found at connect/access."}</p>
+              </div>
             </div>
           </div>
         </div>
