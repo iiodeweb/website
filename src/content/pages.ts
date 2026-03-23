@@ -10,14 +10,6 @@ export type PagesCopy = {
     eyebrow: string
     title: string
     description: string
-    fields: {
-      name: string
-      surname: string
-      company: string
-      email: string
-      quantity: string
-      note: string
-    }
     submit: string
   }
   about: {
@@ -98,16 +90,8 @@ const sharedPagesCopy = {
     eyebrow: "Preorder",
     title: "Pre-Order",
     description:
-      "We currently collect preorder interest manually. Send your request and we will follow up with availability and pricing.",
-    fields: {
-      name: "Name",
-      surname: "Surname",
-      company: "Company",
-      email: "E-mail",
-      quantity: "Quantity",
-      note: "Note",
-    },
-    submit: "Send preorder request",
+      "Open the pre-order form to register your interest and receive availability or pricing updates from iiode.",
+    submit: "Open pre-order form",
   },
   about: {
     eyebrow: "About",

@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
+import Script from "next/script"
 
+import { hubspotConfig } from "@/content/hubspot"
 import { getLocale } from "@/lib/locale-server"
 import { getTheme } from "@/lib/theme-server"
 
@@ -61,7 +63,19 @@ export default async function RootLayout({
       className={theme === "dark" ? "dark" : ""}
       suppressHydrationWarning
     >
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        <Script
+          id="hubspot-tracking-script"
+          src={hubspotConfig.trackingScriptSrc}
+          strategy="afterInteractive"
+        />
+        <Script
+          id="hubspot-forms-script"
+          src={hubspotConfig.embedScriptSrc}
+          strategy="afterInteractive"
+        />
+        {children}
+      </body>
     </html>
   )
 }

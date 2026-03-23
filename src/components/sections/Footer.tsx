@@ -1,5 +1,7 @@
 import Link from "next/link"
 
+import { HubspotFormModalTrigger } from "@/components/forms/HubspotFormModalTrigger"
+import { hubspotConfig } from "@/content/hubspot"
 import { getSiteCopy, siteConfig } from "@/content/site"
 import type { Locale } from "@/lib/locale"
 
@@ -28,15 +30,29 @@ export function Footer({ locale }: FooterProps) {
           </div>
           <div className="iiode-hover-group grid content-start gap-y-1 text-right xl:text-left">
             {siteConfig.footerLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="block text-base leading-6"
-                target={link.href.startsWith("http") ? "_blank" : undefined}
-                rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-              >
-                {copy.links[link.key]}
-              </Link>
+              link.key === "newsletter" ? (
+                <HubspotFormModalTrigger
+                  key={link.key}
+                  triggerLabel={copy.links[link.key]}
+                  modalTitle={hubspotConfig.forms.newsletter.modalTitle}
+                  modalDescription={hubspotConfig.forms.newsletter.modalDescription}
+                  portalId={hubspotConfig.forms.newsletter.portalId}
+                  formId={hubspotConfig.forms.newsletter.formId}
+                  region={hubspotConfig.forms.newsletter.region}
+                  fallbackEmail={siteConfig.email}
+                  className="block text-base leading-6"
+                />
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="block text-base leading-6"
+                  target={link.href.startsWith("http") ? "_blank" : undefined}
+                  rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                >
+                  {copy.links[link.key]}
+                </Link>
+              )
             ))}
           </div>
           <div className="col-span-2 text-justify text-[9px] leading-[1.08] sm:text-[9.5px] sm:leading-[1.12] xl:col-span-2 xl:text-[10px] xl:leading-[1.24]">

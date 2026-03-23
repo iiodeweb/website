@@ -1,5 +1,7 @@
-import { PreorderRequestForm } from "@/components/forms/PreorderMailtoForm"
+import { HubspotFormModalTrigger } from "@/components/forms/HubspotFormModalTrigger"
+import { hubspotConfig } from "@/content/hubspot"
 import { getPagesCopy } from "@/content/pages"
+import { siteConfig } from "@/content/site"
 import { getLocale } from "@/lib/locale-server"
 
 export default async function PreorderPage() {
@@ -21,11 +23,20 @@ export default async function PreorderPage() {
           </div>
 
           <div className="iiode-split-half iiode-media-half iiode-media-half-right iiode-text-half iiode-half-pad-2 flex items-start pt-10 md:pt-8">
-            <div className="iiode-copy-narrow w-full md:mr-auto">
-              <PreorderRequestForm
-                labels={copy.fields}
-                submitLabel={copy.submit}
+            <div className="iiode-copy-narrow grid w-full gap-5 md:mr-auto">
+              <HubspotFormModalTrigger
+                triggerLabel={copy.submit}
+                modalTitle={hubspotConfig.forms.preorder.modalTitle}
+                modalDescription={hubspotConfig.forms.preorder.modalDescription}
+                portalId={hubspotConfig.forms.preorder.portalId}
+                formId={hubspotConfig.forms.preorder.formId}
+                region={hubspotConfig.forms.preorder.region}
+                fallbackEmail={siteConfig.email}
+                className="w-full bg-foreground px-6 py-3 text-xs uppercase text-background md:w-fit"
               />
+              <p className="text-sm text-foreground/70">
+                The form opens in a modal and sends your request directly to HubSpot.
+              </p>
             </div>
           </div>
         </div>

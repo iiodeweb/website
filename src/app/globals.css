@@ -155,6 +155,100 @@ body {
   font-stretch: normal;
 }
 
+.iiode-hubspot-form-shell form {
+  display: grid;
+  gap: 1rem;
+}
+
+.iiode-hubspot-form-shell fieldset {
+  display: grid;
+  gap: 1rem;
+  max-width: none;
+}
+
+.iiode-hubspot-form-shell .hs-form-field,
+.iiode-hubspot-form-shell .legal-consent-container {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.iiode-hubspot-form-shell label,
+.iiode-hubspot-form-shell legend {
+  font-size: 0.92rem;
+  color: var(--foreground);
+}
+
+.iiode-hubspot-form-shell .hs-input,
+.iiode-hubspot-form-shell textarea,
+.iiode-hubspot-form-shell select {
+  width: 100%;
+  border: 1px solid color-mix(in srgb, var(--foreground) 18%, transparent);
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  color: var(--foreground);
+  padding: 0.85rem 1rem;
+  outline: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.iiode-hubspot-form-shell .hs-input:focus,
+.iiode-hubspot-form-shell textarea:focus,
+.iiode-hubspot-form-shell select:focus {
+  border-color: var(--foreground);
+}
+
+.iiode-hubspot-form-shell .inputs-list {
+  display: grid;
+  gap: 0.6rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.iiode-hubspot-form-shell .hs-error-msgs {
+  padding-left: 0;
+  list-style: none;
+  color: #b42318;
+  font-size: 0.8rem;
+}
+
+.iiode-hubspot-form-shell .submitted-message {
+  font-size: 0.92rem;
+  color: var(--foreground);
+}
+
+.iiode-hubspot-form-shell .actions {
+  padding-top: 0.5rem;
+}
+
+.iiode-hubspot-form-shell .hs-button {
+  border: 0;
+  background: var(--foreground);
+  color: var(--background);
+  padding: 0.85rem 1.25rem;
+  font-size: 0.72rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.iiode-hubspot-form-shell .hs-button:hover {
+  opacity: 0.92;
+}
+
+.iiode-hubspot-form-shell .hs-richtext,
+.iiode-hubspot-form-shell .legal-consent-container {
+  font-size: 0.82rem;
+  color: color-mix(in srgb, var(--foreground) 78%, transparent);
+}
+
+.iiode-hubspot-form-shell a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
 @media (max-width: 767px) {
   .iiode-media-half {
     width: calc(100% + (2 * var(--content-padding)));

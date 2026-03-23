@@ -136,7 +136,7 @@ export const siteConfig = {
     { key: "preorder" as FooterLinkKey, href: "/preorder#top" },
     {
       key: "newsletter" as FooterLinkKey,
-      href: "https://mailchi.mp/7b98e90f02f7/ii-e27",
+      href: "#newsletter",
     },
   ],
   locations: [
