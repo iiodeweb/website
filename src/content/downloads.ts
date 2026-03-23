@@ -6,7 +6,6 @@ export type DownloadsContent = {
   previewBody: string
   requestBody: string
   previewButtonLabel: string
-  previewNote: string
   pressContactLine: string
 }
 
@@ -19,7 +18,6 @@ const downloadsContent: Record<Locale, DownloadsContent> = {
     requestBody:
       "For full-resolution files, detailed press requests, or publication review, please contact iiode directly by e-mail.",
     previewButtonLabel: "Open Press Preview Form",
-    previewNote: "The preview request form opens in a modal and is handled directly by HubSpot.",
     pressContactLine: "For full press inquiries, write to",
   },
   fr: {
@@ -30,7 +28,6 @@ const downloadsContent: Record<Locale, DownloadsContent> = {
     requestBody:
       "For full-resolution files, detailed press requests, or publication review, please contact iiode directly by e-mail.",
     previewButtonLabel: "Open Press Preview Form",
-    previewNote: "The preview request form opens in a modal and is handled directly by HubSpot.",
     pressContactLine: "For full press inquiries, write to",
   },
   de: {
@@ -41,7 +38,6 @@ const downloadsContent: Record<Locale, DownloadsContent> = {
     requestBody:
       "For full-resolution files, detailed press requests, or publication review, please contact iiode directly by e-mail.",
     previewButtonLabel: "Open Press Preview Form",
-    previewNote: "The preview request form opens in a modal and is handled directly by HubSpot.",
     pressContactLine: "For full press inquiries, write to",
   },
 }

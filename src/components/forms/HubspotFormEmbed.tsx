@@ -19,6 +19,7 @@ type HubspotFormEmbedProps = {
   portalId: string
   formId: string
   fallbackEmail?: string
+  onSubmitted?: () => void
 }
 
 let hubspotEmbedLoadPromise: Promise<void> | null = null
@@ -80,6 +81,7 @@ export function HubspotFormEmbed({
   portalId,
   formId,
   fallbackEmail,
+  onSubmitted,
 }: HubspotFormEmbedProps) {
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading")
   const targetId = useId().replace(/:/g, "")
@@ -103,6 +105,10 @@ export function HubspotFormEmbed({
           portalId,
           formId,
           target: `#${targetId}`,
+          formInstanceId: targetId,
+          onFormSubmitted: () => {
+            onSubmitted?.()
+          },
         })
         setStatus("ready")
       } catch {
@@ -120,7 +126,7 @@ export function HubspotFormEmbed({
         containerRef.current.innerHTML = ""
       }
     }
-  }, [formId, portalId, region, targetId])
+  }, [formId, onSubmitted, portalId, region, targetId])
 
   return (
     <div className="iiode-hubspot-form-shell">

@@ -1,4 +1,6 @@
-import Link from "next/link"
+import { HubspotFormModalTrigger } from "@/components/forms/HubspotFormModalTrigger"
+import { hubspotConfig } from "@/content/hubspot"
+import { siteConfig } from "@/content/site"
 
 import type { Re27Copy } from "@/content/re27"
 
@@ -37,9 +39,16 @@ export function WorkWithUs({ copy }: WorkWithUsProps) {
             />
             <div className="absolute inset-0 bg-black/25" />
             <div className="iiode-half-pad-1 relative z-10 flex h-full items-center justify-center text-center">
-              <Link href="/preorder" className="iiode-type-1 text-white">
-                {copy.rightTitle}
-              </Link>
+              <HubspotFormModalTrigger
+                triggerLabel={copy.rightTitle}
+                modalTitle={hubspotConfig.forms.preorder.modalTitle}
+                portalId={hubspotConfig.forms.preorder.portalId}
+                formId={hubspotConfig.forms.preorder.formId}
+                region={hubspotConfig.forms.preorder.region}
+                fallbackEmail={siteConfig.email}
+                successMessage="Thanks. Your pre-order request has been sent."
+                className="iiode-type-1 text-white"
+              />
             </div>
           </div>
         </div>

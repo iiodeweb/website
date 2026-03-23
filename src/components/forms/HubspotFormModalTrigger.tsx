@@ -7,25 +7,28 @@ import { HubspotFormEmbed } from "@/components/forms/HubspotFormEmbed"
 type HubspotFormModalTriggerProps = {
   triggerLabel: string
   modalTitle: string
-  modalDescription: string
   portalId: string
   formId: string
   region: string
   className?: string
   fallbackEmail?: string
+  successMessage?: string
+  downloadHref?: string
 }
 
 export function HubspotFormModalTrigger({
   triggerLabel,
   modalTitle,
-  modalDescription,
   portalId,
   formId,
   region,
   className,
   fallbackEmail,
+  successMessage,
+  downloadHref,
 }: HubspotFormModalTriggerProps) {
   const [open, setOpen] = useState(false)
+  const [notice, setNotice] = useState("")
 
   useEffect(() => {
     if (!open) {
@@ -48,40 +51,72 @@ export function HubspotFormModalTrigger({
     }
   }, [open])
 
+  useEffect(() => {
+    if (!notice) {
+      return
+    }
+
+    const timeout = window.setTimeout(() => setNotice(""), 5000)
+    return () => window.clearTimeout(timeout)
+  }, [notice])
+
+  const handleSubmitted = () => {
+    setOpen(false)
+
+    if (downloadHref) {
+      const anchor = document.createElement("a")
+      anchor.href = downloadHref
+      anchor.setAttribute("download", "")
+      document.body.appendChild(anchor)
+      anchor.click()
+      document.body.removeChild(anchor)
+    }
+
+    if (successMessage) {
+      setNotice(successMessage)
+    }
+  }
+
   return (
     <>
-      <button type="button" className={className} onClick={() => setOpen(true)}>
+      <button
+        type="button"
+        className={`cursor-pointer bg-transparent p-0 text-left font-inherit ${className ?? ""}`}
+        onClick={() => setOpen(true)}
+      >
         {triggerLabel}
       </button>
       {open ? (
         <div className="fixed inset-0 z-[120] flex items-center justify-center bg-black/60 px-4 py-6" onClick={() => setOpen(false)}>
           <div
-            className="w-full max-w-2xl overflow-hidden border border-foreground/15 bg-background text-foreground shadow-2xl"
+            className="relative w-full max-w-xl bg-background text-foreground shadow-2xl"
+            aria-label={modalTitle}
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="flex items-start justify-between gap-6 border-b border-foreground/15 px-5 py-4 md:px-7">
-              <div className="grid gap-2">
-                <h2 className="iiode-type-2">{modalTitle}</h2>
-                <p className="text-sm text-foreground/70">{modalDescription}</p>
-              </div>
-              <button
-                type="button"
-                className="shrink-0 text-xs uppercase text-foreground/70 transition-colors hover:text-foreground"
-                onClick={() => setOpen(false)}
-              >
-                Close
-              </button>
-            </div>
-            <div className="max-h-[80svh] overflow-y-auto px-5 py-5 md:px-7 md:py-6">
+            <button
+              type="button"
+              className="absolute right-4 top-4 z-10 text-lg leading-none text-foreground/70 transition-colors hover:text-foreground"
+              aria-label={`Close ${modalTitle}`}
+              onClick={() => setOpen(false)}
+            >
+              ×
+            </button>
+            <div className="max-h-[80svh] overflow-y-auto px-5 py-8 md:px-7">
               <HubspotFormEmbed
                 region={region}
                 portalId={portalId}
                 formId={formId}
                 fallbackEmail={fallbackEmail}
+                onSubmitted={handleSubmitted}
               />
             </div>
           </div>
         </div>
+      ) : null}
+      {notice ? (
+        <p className="fixed bottom-4 left-4 z-[121] max-w-sm border border-foreground/15 bg-background px-4 py-3 text-sm text-foreground shadow-xl">
+          {notice}
+        </p>
       ) : null}
     </>
   )

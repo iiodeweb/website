@@ -31,14 +31,13 @@ export default async function DownloadsPage() {
               <HubspotFormModalTrigger
                 triggerLabel={content.previewButtonLabel}
                 modalTitle={hubspotConfig.forms.pressPreview.modalTitle}
-                modalDescription={hubspotConfig.forms.pressPreview.modalDescription}
                 portalId={hubspotConfig.forms.pressPreview.portalId}
                 formId={hubspotConfig.forms.pressPreview.formId}
                 region={hubspotConfig.forms.pressPreview.region}
                 fallbackEmail={siteConfig.email}
+                downloadHref="/api/downloads/press-preview"
                 className="w-full bg-foreground px-6 py-3 text-xs uppercase text-background md:w-fit"
               />
-              <p className="text-sm text-foreground/70">{content.previewNote}</p>
               <div className="border-t border-foreground/20 pt-4">
                 <p>{content.pressContactLine}</p>
                 <p className="pt-2">

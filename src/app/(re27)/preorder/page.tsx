@@ -27,16 +27,13 @@ export default async function PreorderPage() {
               <HubspotFormModalTrigger
                 triggerLabel={copy.submit}
                 modalTitle={hubspotConfig.forms.preorder.modalTitle}
-                modalDescription={hubspotConfig.forms.preorder.modalDescription}
                 portalId={hubspotConfig.forms.preorder.portalId}
                 formId={hubspotConfig.forms.preorder.formId}
                 region={hubspotConfig.forms.preorder.region}
                 fallbackEmail={siteConfig.email}
+                successMessage="Thanks. Your pre-order request has been sent."
                 className="w-full bg-foreground px-6 py-3 text-xs uppercase text-background md:w-fit"
               />
-              <p className="text-sm text-foreground/70">
-                The form opens in a modal and sends your request directly to HubSpot.
-              </p>
             </div>
           </div>
         </div>

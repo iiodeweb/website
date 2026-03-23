@@ -30,16 +30,28 @@ export function Footer({ locale }: FooterProps) {
           </div>
           <div className="iiode-hover-group grid content-start gap-y-1 text-right xl:text-left">
             {siteConfig.footerLinks.map((link) => (
-              link.key === "newsletter" ? (
+              link.key === "preorder" ? (
+                <HubspotFormModalTrigger
+                  key={link.key}
+                  triggerLabel={copy.links[link.key]}
+                  modalTitle={hubspotConfig.forms.preorder.modalTitle}
+                  portalId={hubspotConfig.forms.preorder.portalId}
+                  formId={hubspotConfig.forms.preorder.formId}
+                  region={hubspotConfig.forms.preorder.region}
+                  fallbackEmail={siteConfig.email}
+                  successMessage="Thanks. Your pre-order request has been sent."
+                  className="block text-base leading-6"
+                />
+              ) : link.key === "newsletter" ? (
                 <HubspotFormModalTrigger
                   key={link.key}
                   triggerLabel={copy.links[link.key]}
                   modalTitle={hubspotConfig.forms.newsletter.modalTitle}
-                  modalDescription={hubspotConfig.forms.newsletter.modalDescription}
                   portalId={hubspotConfig.forms.newsletter.portalId}
                   formId={hubspotConfig.forms.newsletter.formId}
                   region={hubspotConfig.forms.newsletter.region}
                   fallbackEmail={siteConfig.email}
+                  successMessage="Thanks. You are now subscribed to the iiode newsletter."
                   className="block text-base leading-6"
                 />
               ) : (

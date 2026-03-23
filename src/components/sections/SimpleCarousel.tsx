@@ -42,12 +42,6 @@ export function SimpleCarousel({ images, alt }: SimpleCarouselProps) {
       return
     }
 
-    const bounds = event.currentTarget.getBoundingClientRect()
-    const clickOnLeft = event.clientX - bounds.left < bounds.width / 2
-    if (clickOnLeft) {
-      showPrevious()
-      return
-    }
     showNext()
   }
 

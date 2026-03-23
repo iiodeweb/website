@@ -212,8 +212,7 @@ body {
 }
 
 .iiode-hubspot-form-shell .submitted-message {
-  font-size: 0.92rem;
-  color: var(--foreground);
+  display: none;
 }
 
 .iiode-hubspot-form-shell .actions {

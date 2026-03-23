@@ -26,7 +26,7 @@ export default async function CollaborationsPage() {
                       <img
                         src={image.desktop}
                         alt="Collaborations intro"
-                        className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                        className="h-full w-full object-cover"
                         loading="lazy"
                       />
                     </picture>
