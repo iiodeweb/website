@@ -3,12 +3,14 @@ import Link from "next/link"
 import { getPagesCopy } from "@/content/pages"
 import { siteConfig } from "@/content/site"
 import { getLocale } from "@/lib/locale-server"
+import { getRuntimeEnvProbe } from "@/lib/runtime-env"
 import { readServerAccessProbe } from "@/lib/server-access-probe"
 
 export default async function AboutPage() {
   const locale = await getLocale()
   const copy = getPagesCopy(locale).about
   const accessProbe = readServerAccessProbe()
+  const runtimeEnvProbe = getRuntimeEnvProbe()
 
   return (
     <section className="bg-background text-foreground">
@@ -47,8 +49,38 @@ export default async function AboutPage() {
                 </Link>
               </p>
               <div className="border-t border-foreground/20 pt-4 text-sm">
+                <p>Runtime cwd: {accessProbe.cwd}</p>
                 <p>Server access probe: {accessProbe.found ? "connected" : "not found"}</p>
+                <p>{accessProbe.sourcePath ? `Access source: ${accessProbe.sourcePath}` : "Access source: none"}</p>
                 <p>{accessProbe.found ? accessProbe.content : "No readable file found at connect/access."}</p>
+                <p className="pt-3">Runtime env probe: {runtimeEnvProbe.found ? "found" : "not found"}</p>
+                <p>
+                  {runtimeEnvProbe.sourcePath
+                    ? `Runtime env source: ${runtimeEnvProbe.sourcePath}`
+                    : "Runtime env source: none"}
+                </p>
+                <div className="grid gap-3 pt-3 font-mono text-[11px] leading-4">
+                  <div className="grid gap-1">
+                    <p>Access candidates</p>
+                    {accessProbe.candidates.map((candidate) => (
+                      <p key={candidate.path}>
+                        [{candidate.exists ? (candidate.readable ? "readable" : "unreadable") : "missing"}]{" "}
+                        {candidate.path}
+                        {candidate.error ? ` (${candidate.error})` : ""}
+                      </p>
+                    ))}
+                  </div>
+                  <div className="grid gap-1">
+                    <p>Runtime env candidates</p>
+                    {runtimeEnvProbe.candidates.map((candidate) => (
+                      <p key={candidate.path}>
+                        [{candidate.exists ? (candidate.readable ? "readable" : "unreadable") : "missing"}]{" "}
+                        {candidate.path}
+                        {candidate.error ? ` (${candidate.error})` : ""}
+                      </p>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -1,5 +1,4 @@
-import { existsSync, readFileSync } from "node:fs"
-import path from "node:path"
+import { probeTextFile, type TextFileProbe } from "@/lib/server-file-probe"
 
 const runtimeEnvCache = new Map<string, string>()
 let runtimeEnvLoaded = false
@@ -34,21 +33,12 @@ function parseRuntimeEnv(content: string) {
   }
 }
 
-function getCandidateRuntimeEnvPaths(): string[] {
-  const configuredPath = process.env.IIODE_RUNTIME_ENV_FILE?.trim()
-  const cwd = process.cwd()
-  const candidates = [
-    configuredPath,
-    path.resolve(cwd, "../logs/WebsiteLogs/.env.runtime"),
-    path.resolve(cwd, "../logs/Websitelogs/.env.runtime"),
-    path.resolve(cwd, "logs/WebsiteLogs/.env.runtime"),
-    path.resolve(cwd, "logs/Websitelogs/.env.runtime"),
-    path.resolve(cwd, "../../logs/WebsiteLogs/.env.runtime"),
-    "/srv/customer/logs/WebsiteLogs/.env.runtime",
-    "/logs/WebsiteLogs/.env.runtime",
-  ].filter(Boolean) as string[]
-
-  return [...new Set(candidates)]
+export function getRuntimeEnvProbe(): TextFileProbe {
+  return probeTextFile({
+    configuredPath: process.env.IIODE_RUNTIME_ENV_FILE?.trim(),
+    relativePaths: ["logs/WebsiteLogs/.env.runtime", "logs/Websitelogs/.env.runtime"],
+    absolutePaths: ["/srv/customer/logs/WebsiteLogs/.env.runtime", "/logs/WebsiteLogs/.env.runtime"],
+  })
 }
 
 function ensureRuntimeEnvLoaded() {
@@ -57,18 +47,9 @@ function ensureRuntimeEnvLoaded() {
   }
 
   runtimeEnvLoaded = true
-  for (const candidatePath of getCandidateRuntimeEnvPaths()) {
-    if (!existsSync(candidatePath)) {
-      continue
-    }
-
-    try {
-      const content = readFileSync(candidatePath, "utf8")
-      parseRuntimeEnv(content)
-      return
-    } catch {
-      // Keep trying the next location.
-    }
+  const probe = getRuntimeEnvProbe()
+  if (probe.found) {
+    parseRuntimeEnv(probe.content)
   }
 }
 
