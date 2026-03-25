@@ -25,7 +25,12 @@ export default async function AboutPage() {
               ))}
               <p className="border-t border-foreground/20 pt-4">
                 {copy.servicesLabel}{" "}
-                <Link href={siteConfig.archiveUrl} className="underline underline-offset-4">
+                <Link
+                  href={siteConfig.archiveUrl}
+                  className="underline underline-offset-4"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   services.iiode.com
                 </Link>
               </p>

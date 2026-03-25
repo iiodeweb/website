@@ -4,7 +4,13 @@ import path from "node:path"
 import JSZip from "jszip"
 import { NextResponse } from "next/server"
 
-const PRESS_ROOT_DIR = path.join(process.cwd(), "public", "assets", "press", "01 abat-jour")
+const PRESS_ROOT_DIR = path.join(
+  process.cwd(),
+  "public",
+  "assets",
+  "press",
+  "collaboration 01 abat-jour",
+)
 const PRESS_PREVIEW_DIR = path.join(PRESS_ROOT_DIR, "previews")
 const PRESS_INFO_FILE = path.join(PRESS_ROOT_DIR, "iiode 01 abat-jour.txt")
 const OUTPUT_FILE_NAME = "iiode-press-preview-01-abat-jour.zip"

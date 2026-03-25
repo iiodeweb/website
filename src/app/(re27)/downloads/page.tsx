@@ -21,8 +21,7 @@ export default async function DownloadsPage() {
             <div className="iiode-type-2 iiode-copy-narrow grid gap-5 text-foreground md:ml-auto">
               <h1 className="iiode-type-2">{content.title}</h1>
               <p>{content.intro}</p>
-              <p>{content.previewBody}</p>
-              <p>{content.requestBody}</p>
+              <p>{content.copyrightBody}</p>
             </div>
           </div>
 
@@ -36,7 +35,7 @@ export default async function DownloadsPage() {
                 region={hubspotConfig.forms.pressPreview.region}
                 fallbackEmail={siteConfig.email}
                 downloadHref="/api/downloads/press-preview"
-                className="w-full bg-foreground px-6 py-3 text-xs uppercase text-background md:w-fit"
+                className="inline-flex w-full items-center justify-center bg-foreground px-6 py-3 text-xs uppercase text-background md:w-fit"
               />
               <div className="border-t border-foreground/20 pt-4">
                 <p>{content.pressContactLine}</p>

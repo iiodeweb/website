@@ -87,21 +87,24 @@ export function HubspotFormModalTrigger({
         {triggerLabel}
       </button>
       {open ? (
-        <div className="fixed inset-0 z-[120] flex items-center justify-center bg-black/60 px-4 py-6" onClick={() => setOpen(false)}>
+        <div
+          className="fixed inset-0 z-[120] flex items-center justify-center bg-black/60 px-4 py-6"
+          onClick={() => setOpen(false)}
+        >
           <div
-            className="relative w-full max-w-xl bg-background text-foreground shadow-2xl"
+            className="relative w-full max-w-xl text-foreground"
             aria-label={modalTitle}
             onClick={(event) => event.stopPropagation()}
           >
             <button
               type="button"
-              className="absolute right-4 top-4 z-10 text-lg leading-none text-foreground/70 transition-colors hover:text-foreground"
+              className="absolute -top-8 right-0 z-10 text-xs uppercase text-white/80 transition-colors hover:text-white"
               aria-label={`Close ${modalTitle}`}
               onClick={() => setOpen(false)}
             >
-              ×
+              Close
             </button>
-            <div className="max-h-[80svh] overflow-y-auto px-5 py-8 md:px-7">
+            <div className="max-h-[80svh] overflow-y-auto">
               <HubspotFormEmbed
                 region={region}
                 portalId={portalId}
