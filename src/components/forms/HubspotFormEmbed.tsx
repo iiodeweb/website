@@ -22,6 +22,21 @@ type HubspotFormEmbedProps = {
   onSubmitted?: () => void
 }
 
+type HubspotSubmissionEventDetail = {
+  formId?: string
+  instanceId?: string
+}
+
+type HubspotLegacyMessageData = {
+  type?: string
+  eventName?: string
+  id?: string
+  formId?: string
+  formGuid?: string
+  instanceId?: string
+  formInstanceId?: string
+}
+
 let hubspotEmbedLoadPromise: Promise<void> | null = null
 
 function loadHubspotEmbedScript(): Promise<void> {
@@ -86,6 +101,62 @@ export function HubspotFormEmbed({
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading")
   const targetId = useId().replace(/:/g, "")
   const containerRef = useRef<HTMLDivElement | null>(null)
+  const submissionHandledRef = useRef(false)
+
+  useEffect(() => {
+    submissionHandledRef.current = false
+  }, [formId, targetId])
+
+  useEffect(() => {
+    const handleSubmitted = () => {
+      if (submissionHandledRef.current) {
+        return
+      }
+
+      submissionHandledRef.current = true
+      onSubmitted?.()
+    }
+
+    const handleSuccessEvent = (event: Event) => {
+      const detail = (event as CustomEvent<HubspotSubmissionEventDetail>).detail
+      if (!detail) {
+        return
+      }
+
+      const matchesForm = !detail.formId || detail.formId === formId
+      const matchesInstance = !detail.instanceId || detail.instanceId === targetId
+      if (matchesForm && matchesInstance) {
+        handleSubmitted()
+      }
+    }
+
+    const handleLegacyMessage = (event: MessageEvent<HubspotLegacyMessageData>) => {
+      const data = event.data
+      if (!data || typeof data !== "object") {
+        return
+      }
+
+      if (data.type !== "hsFormCallback" || data.eventName !== "onFormSubmitted") {
+        return
+      }
+
+      const messageFormId = data.id ?? data.formGuid ?? data.formId
+      const messageInstanceId = data.formInstanceId ?? data.instanceId
+      const matchesForm = !messageFormId || messageFormId === formId
+      const matchesInstance = !messageInstanceId || messageInstanceId === targetId
+      if (matchesForm && matchesInstance) {
+        handleSubmitted()
+      }
+    }
+
+    window.addEventListener("hs-form-event:on-submission:success", handleSuccessEvent as EventListener)
+    window.addEventListener("message", handleLegacyMessage)
+
+    return () => {
+      window.removeEventListener("hs-form-event:on-submission:success", handleSuccessEvent as EventListener)
+      window.removeEventListener("message", handleLegacyMessage)
+    }
+  }, [formId, onSubmitted, targetId])
 
   useEffect(() => {
     let cancelled = false
@@ -107,6 +178,11 @@ export function HubspotFormEmbed({
           target: `#${targetId}`,
           formInstanceId: targetId,
           onFormSubmitted: () => {
+            if (submissionHandledRef.current) {
+              return
+            }
+
+            submissionHandledRef.current = true
             onSubmitted?.()
           },
         })

@@ -30,6 +30,33 @@ export function HubspotFormModalTrigger({
   const [open, setOpen] = useState(false)
   const [notice, setNotice] = useState("")
 
+  const startDownload = async (href: string) => {
+    try {
+      const response = await fetch(href, { cache: "no-store" })
+      if (!response.ok) {
+        throw new Error("Download request failed")
+      }
+
+      const archive = await response.blob()
+      const objectUrl = URL.createObjectURL(archive)
+      const disposition = response.headers.get("Content-Disposition") ?? ""
+      const fileNameMatch =
+        disposition.match(/filename\*=UTF-8''([^;]+)/i) ?? disposition.match(/filename="?([^";]+)"?/i)
+
+      const anchor = document.createElement("a")
+      anchor.href = objectUrl
+      anchor.download = fileNameMatch?.[1] ? decodeURIComponent(fileNameMatch[1]) : ""
+      document.body.appendChild(anchor)
+      anchor.click()
+      document.body.removeChild(anchor)
+
+      window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000)
+      setNotice("Your download should start automatically.")
+    } catch {
+      setNotice("The download could not be started. Please try again.")
+    }
+  }
+
   useEffect(() => {
     if (!open) {
       return
@@ -64,12 +91,7 @@ export function HubspotFormModalTrigger({
     setOpen(false)
 
     if (downloadHref) {
-      const anchor = document.createElement("a")
-      anchor.href = downloadHref
-      anchor.setAttribute("download", "")
-      document.body.appendChild(anchor)
-      anchor.click()
-      document.body.removeChild(anchor)
+      void startDownload(downloadHref)
     }
 
     if (successMessage) {
