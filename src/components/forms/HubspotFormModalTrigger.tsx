@@ -81,7 +81,7 @@ export function HubspotFormModalTrigger({
     <>
       <button
         type="button"
-        className={`cursor-pointer bg-transparent p-0 text-left font-inherit ${className ?? ""}`}
+        className={`cursor-pointer appearance-none border-0 p-0 text-left font-inherit ${className ?? ""}`}
         onClick={() => setOpen(true)}
       >
         {triggerLabel}
@@ -92,7 +92,7 @@ export function HubspotFormModalTrigger({
           onClick={() => setOpen(false)}
         >
           <div
-            className="relative w-full max-w-xl text-foreground"
+            className="relative w-full max-w-xl bg-background text-foreground"
             aria-label={modalTitle}
             onClick={(event) => event.stopPropagation()}
           >

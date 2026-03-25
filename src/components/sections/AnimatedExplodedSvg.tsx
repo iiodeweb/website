@@ -15,18 +15,23 @@ type AnimatedExplodedSvgProps = {
 
 const STICKY_TOP_PX = 64
 const MIN_STROKE_WIDTH = 1.25
-const BASE_STROKE = "#000000"
+const LIGHT_STROKE = "#000000"
+const DARK_STROKE = "#ffffff"
 
 function clamp(value: number, min = 0, max = 1) {
   return Math.min(max, Math.max(min, value))
 }
 
-function applyStrokeStyles(svg: SVGSVGElement) {
+function getStrokeColor() {
+  return document.documentElement.classList.contains("dark") ? DARK_STROKE : LIGHT_STROKE
+}
+
+function applyStrokeStyles(svg: SVGSVGElement, strokeColor: string) {
   const drawingNodes = svg.querySelectorAll<SVGElement>(
     "path, line, polyline, polygon, circle, ellipse, rect",
   )
   drawingNodes.forEach((node) => {
-    node.setAttribute("stroke", BASE_STROKE)
+    node.setAttribute("stroke", strokeColor)
     node.setAttribute("fill", "none")
   })
 
@@ -34,7 +39,7 @@ function applyStrokeStyles(svg: SVGSVGElement) {
   strokeNodes.forEach((node) => {
     const stroke = node.getAttribute("stroke")
     if (!stroke || stroke.toLowerCase() === "none") return
-    node.setAttribute("stroke", BASE_STROKE)
+    node.setAttribute("stroke", strokeColor)
   })
 
   const widthNodes = svg.querySelectorAll<SVGElement>("[stroke-width]")
@@ -61,11 +66,6 @@ function sanitizeSvgMarkup(text: string) {
       return `begin="${firstBegin ?? "0s"}"`
     })
     .replace(/\srepeatCount="indefinite"/g, "")
-}
-
-function syncThemeFilter(host: HTMLElement) {
-  const isDark = document.documentElement.classList.contains("dark")
-  host.style.filter = isDark ? "invert(1)" : "none"
 }
 
 export function AnimatedExplodedSvg({
@@ -202,8 +202,7 @@ export function AnimatedExplodedSvg({
     svg.style.height = "100%"
     svg.style.display = "block"
 
-    applyStrokeStyles(svg)
-    syncThemeFilter(host)
+    applyStrokeStyles(svg, getStrokeColor())
 
     const canControl =
       typeof svg.pauseAnimations === "function" && typeof svg.setCurrentTime === "function"
@@ -224,8 +223,7 @@ export function AnimatedExplodedSvg({
     const observer = new MutationObserver(() => {
       const live = svgRef.current
       if (!live) return
-      applyStrokeStyles(live)
-      syncThemeFilter(host)
+      applyStrokeStyles(live, getStrokeColor())
       const isPlaying = playRafRef.current !== null
       if (!isPlaying && mode === "ready") {
         live.pauseAnimations?.()
@@ -256,7 +254,7 @@ export function AnimatedExplodedSvg({
         if (!startTime) startTime = timestamp
         const elapsed = (timestamp - startTime) / 1000
         const time = Math.min(durationSeconds, elapsed)
-        applyStrokeStyles(svg)
+        applyStrokeStyles(svg, getStrokeColor())
         svg.pauseAnimations()
         svg.setCurrentTime(time)
         if (time < durationSeconds) {
