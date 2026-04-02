@@ -16,6 +16,12 @@ type HubspotFormModalTriggerProps = {
   downloadHref?: string
 }
 
+type NoticeState = {
+  text: string
+  actionHref?: string
+  actionLabel?: string
+}
+
 export function HubspotFormModalTrigger({
   triggerLabel,
   modalTitle,
@@ -28,33 +34,22 @@ export function HubspotFormModalTrigger({
   downloadHref,
 }: HubspotFormModalTriggerProps) {
   const [open, setOpen] = useState(false)
-  const [notice, setNotice] = useState("")
+  const [notice, setNotice] = useState<NoticeState | null>(null)
 
-  const startDownload = async (href: string) => {
-    try {
-      const response = await fetch(href, { cache: "no-store" })
-      if (!response.ok) {
-        throw new Error("Download request failed")
-      }
+  const startDownload = (href: string) => {
+    const frame = document.createElement("iframe")
+    frame.hidden = true
+    frame.src = href
+    document.body.appendChild(frame)
+    window.setTimeout(() => {
+      frame.remove()
+    }, 60_000)
 
-      const archive = await response.blob()
-      const objectUrl = URL.createObjectURL(archive)
-      const disposition = response.headers.get("Content-Disposition") ?? ""
-      const fileNameMatch =
-        disposition.match(/filename\*=UTF-8''([^;]+)/i) ?? disposition.match(/filename="?([^";]+)"?/i)
-
-      const anchor = document.createElement("a")
-      anchor.href = objectUrl
-      anchor.download = fileNameMatch?.[1] ? decodeURIComponent(fileNameMatch[1]) : ""
-      document.body.appendChild(anchor)
-      anchor.click()
-      document.body.removeChild(anchor)
-
-      window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000)
-      setNotice("Your download should start automatically.")
-    } catch {
-      setNotice("The download could not be started. Please try again.")
-    }
+    setNotice({
+      text: "Your download should start automatically.",
+      actionHref: href,
+      actionLabel: "Download manually",
+    })
   }
 
   useEffect(() => {
@@ -83,7 +78,7 @@ export function HubspotFormModalTrigger({
       return
     }
 
-    const timeout = window.setTimeout(() => setNotice(""), 5000)
+    const timeout = window.setTimeout(() => setNotice(null), 8000)
     return () => window.clearTimeout(timeout)
   }, [notice])
 
@@ -95,7 +90,7 @@ export function HubspotFormModalTrigger({
     }
 
     if (successMessage) {
-      setNotice(successMessage)
+      setNotice({ text: successMessage })
     }
   }
 
@@ -140,7 +135,15 @@ export function HubspotFormModalTrigger({
       ) : null}
       {notice ? (
         <p className="fixed bottom-4 left-4 z-[121] max-w-sm border border-foreground/15 bg-background px-4 py-3 text-sm text-foreground shadow-xl">
-          {notice}
+          {notice.text}
+          {notice.actionHref && notice.actionLabel ? (
+            <>
+              {" "}
+              <a href={notice.actionHref} className="underline underline-offset-4">
+                {notice.actionLabel}
+              </a>
+            </>
+          ) : null}
         </p>
       ) : null}
     </>
