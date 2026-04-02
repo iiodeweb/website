@@ -24,7 +24,6 @@ type HubspotFormEmbedProps = {
 
 type HubspotSubmissionEventDetail = {
   formId?: string
-  instanceId?: string
 }
 
 type HubspotLegacyMessageData = {
@@ -33,8 +32,6 @@ type HubspotLegacyMessageData = {
   id?: string
   formId?: string
   formGuid?: string
-  instanceId?: string
-  formInstanceId?: string
 }
 
 let hubspotEmbedLoadPromise: Promise<void> | null = null
@@ -123,9 +120,7 @@ export function HubspotFormEmbed({
         return
       }
 
-      const matchesForm = !detail.formId || detail.formId === formId
-      const matchesInstance = !detail.instanceId || detail.instanceId === targetId
-      if (matchesForm && matchesInstance) {
+      if (!detail.formId || detail.formId === formId) {
         handleSubmitted()
       }
     }
@@ -141,10 +136,7 @@ export function HubspotFormEmbed({
       }
 
       const messageFormId = data.id ?? data.formGuid ?? data.formId
-      const messageInstanceId = data.formInstanceId ?? data.instanceId
-      const matchesForm = !messageFormId || messageFormId === formId
-      const matchesInstance = !messageInstanceId || messageInstanceId === targetId
-      if (matchesForm && matchesInstance) {
+      if (!messageFormId || messageFormId === formId) {
         handleSubmitted()
       }
     }
