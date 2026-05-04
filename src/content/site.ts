@@ -1,5 +1,7 @@
 import type { Locale } from "@/lib/locale"
 
+import { localizedContent, type SiteCopy } from "./locales"
+
 type NavKey =
   | "re27"
   | "collaborations"
@@ -13,105 +15,6 @@ type FooterLinkKey =
   | "preorder"
   | "newsletter"
 
-type SiteCopy = {
-  nav: {
-    re27: string
-    contact: string
-    collaborations: string
-    about: string
-    downloads: string
-    preorder: string
-  }
-  ctas: {
-    primary: string
-  }
-  links: {
-    services: string
-    preorder: string
-    newsletter: string
-  }
-  footer: {
-    brandTagline: string
-    instagram: string
-    legal: string
-  }
-}
-
-const siteCopy: Record<Locale, SiteCopy> = {
-  en: {
-    nav: {
-      re27: "Re27",
-      contact: "Contact",
-      collaborations: "Collaborations",
-      about: "About",
-      downloads: "Downloads",
-      preorder: "Preorder",
-    },
-    ctas: {
-      primary: "Preorder",
-    },
-    links: {
-      services: "Services",
-      preorder: "Pre-Order",
-      newsletter: "Newsletter",
-    },
-    footer: {
-      brandTagline: "Re27",
-      instagram: "@iiode",
-      legal:
-        "Copyright Notice. Unless otherwise stated, all content on this website, including text, images and downloadable materials, is protected by copyright and related rights. No part of this website may be copied, reproduced, modified, distributed, stored, transmitted or otherwise used in any form without the prior written consent of iiode, except for strictly personal, non-commercial use or as expressly permitted by applicable terms on this website. (c) 2026 iiode. All rights reserved.",
-    },
-  },
-  fr: {
-    nav: {
-      re27: "Re27",
-      contact: "Contact",
-      collaborations: "Collaborations",
-      about: "A propos",
-      downloads: "Telechargements",
-      preorder: "Precommande",
-    },
-    ctas: {
-      primary: "Precommande",
-    },
-    links: {
-      services: "Services",
-      preorder: "Pre-Order",
-      newsletter: "Newsletter",
-    },
-    footer: {
-      brandTagline: "Re27",
-      instagram: "@iiode",
-      legal:
-        "Copyright Notice. Unless otherwise stated, all content on this website, including text, images and downloadable materials, is protected by copyright and related rights. No part of this website may be copied, reproduced, modified, distributed, stored, transmitted or otherwise used in any form without the prior written consent of iiode, except for strictly personal, non-commercial use or as expressly permitted by applicable terms on this website. (c) 2026 iiode. All rights reserved.",
-    },
-  },
-  de: {
-    nav: {
-      re27: "Re27",
-      contact: "Kontakt",
-      collaborations: "Kooperationen",
-      about: "Ueber uns",
-      downloads: "Downloads",
-      preorder: "Vorbestellung",
-    },
-    ctas: {
-      primary: "Vorbestellung",
-    },
-    links: {
-      services: "Services",
-      preorder: "Pre-Order",
-      newsletter: "Newsletter",
-    },
-    footer: {
-      brandTagline: "Re27",
-      instagram: "@iiode",
-      legal:
-        "Copyright Notice. Unless otherwise stated, all content on this website, including text, images and downloadable materials, is protected by copyright and related rights. No part of this website may be copied, reproduced, modified, distributed, stored, transmitted or otherwise used in any form without the prior written consent of iiode, except for strictly personal, non-commercial use or as expressly permitted by applicable terms on this website. (c) 2026 iiode. All rights reserved.",
-    },
-  },
-}
-
 export const siteConfig = {
   name: "iiode",
   description:
@@ -119,6 +22,9 @@ export const siteConfig = {
   email: "info@iiode.com",
   archiveUrl: "https://services.iiode.com",
   instagramUrl: "https://www.instagram.com/iiode/",
+  analytics: {
+    googleMeasurementId: "G-95N9191CK7",
+  },
   nav: {
     items: [
       { key: "re27" as NavKey, href: "/" },
@@ -154,5 +60,5 @@ export const siteConfig = {
 }
 
 export function getSiteCopy(locale: Locale): SiteCopy {
-  return siteCopy[locale] ?? siteCopy.en
+  return localizedContent[locale]?.site ?? localizedContent.en.site
 }

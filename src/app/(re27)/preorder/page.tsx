@@ -31,7 +31,7 @@ export default async function PreorderPage() {
                 formId={hubspotConfig.forms.preorder.formId}
                 region={hubspotConfig.forms.preorder.region}
                 fallbackEmail={siteConfig.email}
-                successMessage="Thanks. Your pre-order request has been sent."
+                successMessage={copy.successMessage}
                 className="inline-flex w-full items-center justify-center bg-foreground px-6 py-3 text-xs uppercase text-background md:w-fit"
               />
             </div>

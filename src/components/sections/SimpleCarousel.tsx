@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef, useState } from "react"
-import type { MouseEvent, TouchEvent } from "react"
+import type { TouchEvent } from "react"
 
 type ResponsiveImage = {
   desktop: string
@@ -37,7 +37,7 @@ export function SimpleCarousel({ images, alt }: SimpleCarouselProps) {
     setIndex((current) => (current + 1) % safeImages.length)
   }
 
-  const handleAreaClick = (event: MouseEvent<HTMLDivElement>) => {
+  const handleAreaClick = () => {
     if (safeImages.length <= 1) {
       return
     }

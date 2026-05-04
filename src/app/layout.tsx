@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
-import Script from "next/script"
 
+import { CookieConsent } from "@/components/privacy/CookieConsent"
 import { hubspotConfig } from "@/content/hubspot"
+import { getSiteCopy, siteConfig } from "@/content/site"
 import { getLocale } from "@/lib/locale-server"
 import { getTheme } from "@/lib/theme-server"
 
@@ -56,6 +57,10 @@ export default async function RootLayout({
 }>) {
   const locale = await getLocale()
   const theme = await getTheme()
+  const copy = getSiteCopy(locale)
+  const googleMeasurementId =
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ||
+    siteConfig.analytics.googleMeasurementId
 
   return (
     <html
@@ -64,15 +69,10 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="font-sans antialiased">
-        <Script
-          id="hubspot-tracking-script"
-          src={hubspotConfig.trackingScriptSrc}
-          strategy="afterInteractive"
-        />
-        <Script
-          id="hubspot-forms-script"
-          src={hubspotConfig.embedScriptSrc}
-          strategy="afterInteractive"
+        <CookieConsent
+          copy={copy.cookieConsent}
+          googleMeasurementId={googleMeasurementId}
+          hubspotTrackingScriptSrc={hubspotConfig.trackingScriptSrc}
         />
         {children}
       </body>

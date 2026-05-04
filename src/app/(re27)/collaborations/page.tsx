@@ -25,7 +25,7 @@ export default async function CollaborationsPage() {
                       <source media="(max-width: 767px)" srcSet={image.mobile} />
                       <img
                         src={image.desktop}
-                        alt="Collaborations intro"
+                        alt={copy.introImageAlt}
                         className="h-full w-full object-cover"
                         loading="lazy"
                       />
@@ -57,7 +57,7 @@ export default async function CollaborationsPage() {
               </div>
             </div>
             <div className="iiode-split-half iiode-media-half iiode-media-half-right overflow-hidden">
-              <SimpleCarousel images={copy.images} alt="Abat-jour collaborations" />
+              <SimpleCarousel images={copy.images} alt={copy.carouselAlt} />
             </div>
           </div>
         </div>
