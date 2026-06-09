@@ -19,10 +19,6 @@ export const de: LocaleContent = {
       collaborations: "Kooperationen",
       about: "Über uns",
       downloads: "Downloads",
-      preorder: "Vorbestellung",
-    },
-    ctas: {
-      primary: "Vorbestellung",
     },
     links: {
       services: "Services",
@@ -42,7 +38,6 @@ export const de: LocaleContent = {
   },
   pages: {
     preorder: {
-      eyebrow: "Vorbestellung",
       title: "Vorbestellung",
       description:
         "Öffnen Sie das Vorbestellformular, um Ihr Interesse zu registrieren und Informationen zu Verfügbarkeit oder Preisen von iiode zu erhalten.",
@@ -50,7 +45,6 @@ export const de: LocaleContent = {
       successMessage: "Danke. Ihre Vorbestellanfrage wurde gesendet.",
     },
     about: {
-      eyebrow: "Über uns",
       title: "Mehr als eine Glühbirne",
       sections: [
         "iiode setzt sich dafür ein, die Zukunft nachhaltiger Elektronik mit langlebigen und verantwortungsvollen Lösungen zu gestalten, mit besonderem Fokus auf bewusstes Licht.",
@@ -102,8 +96,6 @@ export const de: LocaleContent = {
       leftTitle:
         "iiode Re27 ist die einzige Glühbirne, die natürliche Lichtqualität, integrierte smarte Steuerung und recycelte Materialien in einem servicefähigen Design vereint.",
       leftImage: re27Assets.useCasesImage,
-      intro:
-        "iiode Re27 ist die einzige Glühbirne, die natürliche Lichtqualität, integrierte smarte Steuerung und recycelte Materialien in einem servicefähigen Design vereint.",
       bridge: "Sie macht das Leben drinnen so schön wie draussen.",
       groups: [
         {
@@ -133,18 +125,12 @@ export const de: LocaleContent = {
       ],
       note: "* Farbwiedergabeindex",
     },
-    features: {
-      eyebrow: "",
-      title: "",
-      items: [""],
-    },
     threeD: {
       animationSrc: re27Assets.animationSrc,
       animationPoster: re27Assets.animationPoster,
       explodedPosterSrc: re27Assets.explodedPosterSrc,
       triggerProgress: 0.32,
       durationSeconds: 1.0,
-      compositionTitle: "Aufbau",
       compositionItems: [
         "Optische Linse aus 100% post-production recyceltem Polycarbonat für effiziente Lichtstreuung",
         "LED-Leiterplatte mit zweikanaligem, abstimmbarem Weisslicht-LED-Array für natürliche Farben",
@@ -184,10 +170,6 @@ export const de: LocaleContent = {
       ],
       rightTitle: "Vorbestellung",
       rightImage: re27Assets.workWithUsImage,
-    },
-    cta: {
-      eyebrow: "",
-      title: "",
     },
   },
 }

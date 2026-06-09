@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 import type { Re27Copy } from "@/content/re27"
 
 type StoryProps = {
@@ -21,11 +23,12 @@ export function Story({ copy }: StoryProps) {
             </div>
           </div>
           <div className="iiode-split-half iiode-media-half iiode-media-half-right order-1 relative overflow-hidden md:order-2">
-            <img
+            <Image
               src={copy.rightImage}
               alt="Lighting made conscious"
-              className="absolute inset-0 h-full w-full object-cover"
-              loading="lazy"
+              fill
+              sizes="(max-width: 767px) 100vw, 50vw"
+              className="object-cover"
             />
             <div className="absolute inset-0 bg-black/25" />
             <div className="iiode-half-pad-1 relative z-10 flex h-full items-center justify-center text-center">

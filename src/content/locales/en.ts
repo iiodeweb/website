@@ -19,10 +19,6 @@ export const en: LocaleContent = {
       collaborations: "Collaborations",
       about: "About",
       downloads: "Downloads",
-      preorder: "Preorder",
-    },
-    ctas: {
-      primary: "Preorder",
     },
     links: {
       services: "Services",
@@ -42,7 +38,6 @@ export const en: LocaleContent = {
   },
   pages: {
     preorder: {
-      eyebrow: "Preorder",
       title: "Pre-Order",
       description:
         "Open the pre-order form to register your interest and receive availability or pricing updates from iiode.",
@@ -50,7 +45,6 @@ export const en: LocaleContent = {
       successMessage: "Thanks. Your pre-order request has been sent.",
     },
     about: {
-      eyebrow: "About",
       title: "Beyond the bulb",
       sections: [
         "iiode is committed to charting the future of sustainable electronics through the development of lasting and responsible solutions, with a focus on conscious lighting.",
@@ -102,8 +96,6 @@ export const en: LocaleContent = {
       leftTitle:
         "iiode Re27 is the only light bulb that combines natural light quality, smart integrated control, and recycled materials in one serviceable design.",
       leftImage: re27Assets.useCasesImage,
-      intro:
-        "iiode Re27 is the only light bulb that combines natural light quality, smart integrated control, and recycled materials in one serviceable design.",
       bridge: "It makes life inside as beautiful as life outside.",
       groups: [
         {
@@ -133,18 +125,12 @@ export const en: LocaleContent = {
       ],
       note: "* Colour Rendering Index",
     },
-    features: {
-      eyebrow: "",
-      title: "",
-      items: [""],
-    },
     threeD: {
       animationSrc: re27Assets.animationSrc,
       animationPoster: re27Assets.animationPoster,
       explodedPosterSrc: re27Assets.explodedPosterSrc,
       triggerProgress: 0.32,
       durationSeconds: 1.0,
-      compositionTitle: "Composition",
       compositionItems: [
         "Optical lens in 100% post-production recycled polycarbonate for efficient light diffusion",
         "LED Printed Circuit Board with dual-channel, tunable white LED array for natural colours",
@@ -184,10 +170,6 @@ export const en: LocaleContent = {
       ],
       rightTitle: "Pre-Order",
       rightImage: re27Assets.workWithUsImage,
-    },
-    cta: {
-      eyebrow: "",
-      title: "",
     },
   },
 }

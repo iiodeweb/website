@@ -8,7 +8,6 @@ type NavKey =
   | "about"
   | "downloads"
   | "contact"
-  | "preorder"
 
 type FooterLinkKey =
   | "services"
@@ -17,8 +16,6 @@ type FooterLinkKey =
 
 export const siteConfig = {
   name: "iiode",
-  description:
-    "iiode Re27 is a conscious lighting system that combines natural light quality, smart control, and recycled materials in a serviceable design.",
   email: "info@iiode.com",
   archiveUrl: "https://services.iiode.com",
   instagramUrl: "https://www.instagram.com/iiode/",
@@ -34,27 +31,12 @@ export const siteConfig = {
       { key: "contact" as NavKey, href: "mailto:info@iiode.com" },
     ],
   },
-  ctas: {
-    primary: { href: "/preorder" },
-  },
   footerLinks: [
     { key: "services" as FooterLinkKey, href: "https://services.iiode.com" },
     { key: "preorder" as FooterLinkKey, href: "/preorder#top" },
     {
       key: "newsletter" as FooterLinkKey,
       href: "#newsletter",
-    },
-  ],
-  locations: [
-    {
-      country: "Switzerland",
-      line1: "Avenue des Alpes 9",
-      line2: "CH - 1006 Lausanne",
-    },
-    {
-      country: "France",
-      line1: "Rue d'Hauteville 25",
-      line2: "FR - 75010 Paris",
     },
   ],
 }

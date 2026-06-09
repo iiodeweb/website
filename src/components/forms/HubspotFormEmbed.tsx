@@ -152,17 +152,18 @@ export function HubspotFormEmbed({
 
   useEffect(() => {
     let cancelled = false
+    const container = containerRef.current
 
     async function mountForm() {
       setStatus("loading")
 
       try {
         await waitForHubspotApi()
-        if (cancelled || !containerRef.current) {
+        if (cancelled || !container) {
           return
         }
 
-        containerRef.current.innerHTML = ""
+        container.innerHTML = ""
         window.hbspt?.forms?.create({
           region,
           portalId,
@@ -190,8 +191,8 @@ export function HubspotFormEmbed({
 
     return () => {
       cancelled = true
-      if (containerRef.current) {
-        containerRef.current.innerHTML = ""
+      if (container) {
+        container.innerHTML = ""
       }
     }
   }, [formId, onSubmitted, portalId, region, targetId])

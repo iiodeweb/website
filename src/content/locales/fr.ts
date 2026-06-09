@@ -19,10 +19,6 @@ export const fr: LocaleContent = {
       collaborations: "Collaborations",
       about: "À propos",
       downloads: "Téléchargements",
-      preorder: "Précommande",
-    },
-    ctas: {
-      primary: "Précommande",
     },
     links: {
       services: "Services",
@@ -42,7 +38,6 @@ export const fr: LocaleContent = {
   },
   pages: {
     preorder: {
-      eyebrow: "Précommande",
       title: "Précommande",
       description:
         "Ouvrez le formulaire de précommande pour signaler votre intérêt et recevoir les informations de disponibilité ou de prix de iiode.",
@@ -50,7 +45,6 @@ export const fr: LocaleContent = {
       successMessage: "Merci. Votre demande de précommande a été envoyée.",
     },
     about: {
-      eyebrow: "À propos",
       title: "Au-delà de l'ampoule",
       sections: [
         "iiode s'engage à dessiner l'avenir de l'électronique durable en développant des solutions responsables et faites pour durer, avec une attention particulière portée à l'éclairage conscient.",
@@ -102,8 +96,6 @@ export const fr: LocaleContent = {
       leftTitle:
         "iiode Re27 est la seule ampoule qui associe qualité de lumière naturelle, contrôle intelligent intégré et matériaux recyclés dans un design réparable.",
       leftImage: re27Assets.useCasesImage,
-      intro:
-        "iiode Re27 est la seule ampoule qui associe qualité de lumière naturelle, contrôle intelligent intégré et matériaux recyclés dans un design réparable.",
       bridge: "Nous souhaitons rendre la vie à l'intérieur aussi belle que dehors.",
       groups: [
         {
@@ -133,18 +125,12 @@ export const fr: LocaleContent = {
       ],
       note: "* Indice de rendu des couleurs",
     },
-    features: {
-      eyebrow: "",
-      title: "",
-      items: [""],
-    },
     threeD: {
       animationSrc: re27Assets.animationSrc,
       animationPoster: re27Assets.animationPoster,
       explodedPosterSrc: re27Assets.explodedPosterSrc,
       triggerProgress: 0.32,
       durationSeconds: 1.0,
-      compositionTitle: "Composition",
       compositionItems: [
         "Lentille optique en polycarbonate 100% recyclé post-production pour une diffusion efficace de la lumière",
         "Circuit imprimé LED avec réseau LED blanc réglable à double canal pour des couleurs naturelles",
@@ -184,10 +170,6 @@ export const fr: LocaleContent = {
       ],
       rightTitle: "Précommande",
       rightImage: re27Assets.workWithUsImage,
-    },
-    cta: {
-      eyebrow: "",
-      title: "",
     },
   },
 }

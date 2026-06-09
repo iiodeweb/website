@@ -1,5 +1,7 @@
 "use client"
 
+/* eslint-disable @next/next/no-img-element -- SVG posters stay unoptimized and preserve theme filtering. */
+
 import { useEffect, useRef, useState } from "react"
 
 type AnimatedExplodedSvgProps = {
@@ -90,10 +92,11 @@ export function AnimatedExplodedSvg({
   const [mode, setMode] = useState<"loading" | "ready" | "static">("loading")
   const [errored, setErrored] = useState(false)
   const [showExplodedPoster, setShowExplodedPoster] = useState(false)
-  const [explodedPosterReady, setExplodedPosterReady] = useState(false)
+  const [readyPosterSrc, setReadyPosterSrc] = useState<string | null>(null)
   const [isDarkTheme, setIsDarkTheme] = useState(false)
 
   const finalPosterSrc = explodedPosterSrc ?? posterSrc
+  const explodedPosterReady = !finalPosterSrc || readyPosterSrc === finalPosterSrc
 
   useEffect(() => {
     onCompleteRef.current = onPlaybackComplete
@@ -120,27 +123,21 @@ export function AnimatedExplodedSvg({
     let cancelled = false
 
     if (!finalPosterSrc) {
-      setExplodedPosterReady(true)
       return () => {
         cancelled = true
       }
     }
 
-    setExplodedPosterReady(false)
     const image = new Image()
     image.decoding = "async"
     image.onload = () => {
-      if (!cancelled) setExplodedPosterReady(true)
+      if (!cancelled) setReadyPosterSrc(finalPosterSrc)
     }
     image.onerror = () => {
       // Do not block the swap forever if preloading fails.
-      if (!cancelled) setExplodedPosterReady(true)
+      if (!cancelled) setReadyPosterSrc(finalPosterSrc)
     }
     image.src = finalPosterSrc
-
-    if (image.complete) {
-      setExplodedPosterReady(true)
-    }
 
     return () => {
       cancelled = true
@@ -155,6 +152,8 @@ export function AnimatedExplodedSvg({
       cancelAnimationFrame(playRafRef.current)
       playRafRef.current = null
     }
+    // These resets intentionally synchronize component state with a new SVG source.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMarkup(null)
     setMode("loading")
     setErrored(false)

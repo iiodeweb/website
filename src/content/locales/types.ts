@@ -10,10 +10,6 @@ export type SiteCopy = {
     collaborations: string
     about: string
     downloads: string
-    preorder: string
-  }
-  ctas: {
-    primary: string
   }
   links: {
     services: string
@@ -34,14 +30,12 @@ export type SiteCopy = {
 
 export type PagesCopy = {
   preorder: {
-    eyebrow: string
     title: string
     description: string
     submit: string
     successMessage: string
   }
   about: {
-    eyebrow: string
     title: string
     sections: string[]
     servicesLabel: string
@@ -83,15 +77,9 @@ export type Re27Copy = {
   useCases: {
     leftTitle: string
     leftImage: string
-    intro: string
     bridge: string
     groups: Array<{ heading: string; bullets: string[] }>
     note: string
-  }
-  features: {
-    eyebrow: string
-    title: string
-    items: string[]
   }
   threeD: {
     animationSrc: string
@@ -99,7 +87,6 @@ export type Re27Copy = {
     explodedPosterSrc: string
     triggerProgress: number
     durationSeconds: number
-    compositionTitle: string
     compositionItems: string[]
     compositionNote: string
     rightTitle: string
@@ -115,10 +102,6 @@ export type Re27Copy = {
     items: { title: string; body: string }[]
     rightTitle: string
     rightImage: string
-  }
-  cta: {
-    eyebrow: string
-    title: string
   }
 }
 

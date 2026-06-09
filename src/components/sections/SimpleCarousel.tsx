@@ -19,26 +19,22 @@ export function SimpleCarousel({ images, alt }: SimpleCarouselProps) {
   const [index, setIndex] = useState(0)
   const touchStartX = useRef<number | null>(null)
 
-  const safeImages =
-    images.length > 0
-      ? images
-      : [
-          {
-            desktop: "/assets/collaborations/01 abat-jour/images/Re27-Suspension.jpg",
-            mobile: "/assets/collaborations/01 abat-jour/images/Re27-Suspension.jpg",
-          },
-        ]
+  if (images.length === 0) {
+    return null
+  }
+
+  const currentImage = images[index] ?? images[0]
 
   const showPrevious = () => {
-    setIndex((current) => (current - 1 + safeImages.length) % safeImages.length)
+    setIndex((current) => (current - 1 + images.length) % images.length)
   }
 
   const showNext = () => {
-    setIndex((current) => (current + 1) % safeImages.length)
+    setIndex((current) => (current + 1) % images.length)
   }
 
   const handleAreaClick = () => {
-    if (safeImages.length <= 1) {
+    if (images.length <= 1) {
       return
     }
 
@@ -50,7 +46,7 @@ export function SimpleCarousel({ images, alt }: SimpleCarouselProps) {
   }
 
   const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
-    if (touchStartX.current === null || safeImages.length <= 1) {
+    if (touchStartX.current === null || images.length <= 1) {
       return
     }
 
@@ -78,15 +74,15 @@ export function SimpleCarousel({ images, alt }: SimpleCarouselProps) {
       onTouchEnd={handleTouchEnd}
     >
       <picture>
-        <source media="(max-width: 767px)" srcSet={safeImages[index].mobile} />
+        <source media="(max-width: 767px)" srcSet={currentImage.mobile} />
         <img
-          src={safeImages[index].desktop}
+          src={currentImage.desktop}
           alt={alt}
           className="h-full w-full object-cover"
           loading="lazy"
         />
       </picture>
-      {safeImages.length > 1 ? (
+      {images.length > 1 ? (
         <div className="pointer-events-none absolute inset-x-4 bottom-4 flex items-center justify-between">
           <button
             type="button"

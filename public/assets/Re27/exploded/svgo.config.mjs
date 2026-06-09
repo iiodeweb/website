@@ -1,4 +1,4 @@
-export default {
+const config = {
   multipass: true,
   plugins: [
     // Run preset-default without trying to override removeViewBox
@@ -22,4 +22,6 @@ export default {
       },
     },
   ],
-};
+}
+
+export default config
