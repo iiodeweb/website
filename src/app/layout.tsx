@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 
 import { CookieConsent } from "@/components/privacy/CookieConsent"
-import { hubspotConfig } from "@/content/hubspot"
 import { getSiteCopy, siteConfig } from "@/content/site"
 import { getLocale } from "@/lib/locale-server"
 import { getTheme } from "@/lib/theme-server"
@@ -72,7 +71,6 @@ export default async function RootLayout({
         <CookieConsent
           copy={copy.cookieConsent}
           googleMeasurementId={googleMeasurementId}
-          hubspotTrackingScriptSrc={hubspotConfig.trackingScriptSrc}
         />
         {children}
       </body>

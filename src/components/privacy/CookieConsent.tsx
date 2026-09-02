@@ -1,6 +1,5 @@
 "use client"
 
-import Script from "next/script"
 import { useSyncExternalStore } from "react"
 
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics"
@@ -11,7 +10,6 @@ type ConsentState = "accepted" | "rejected" | "unset" | "loading"
 type CookieConsentProps = {
   copy: SiteCopy["cookieConsent"]
   googleMeasurementId: string
-  hubspotTrackingScriptSrc: string
 }
 
 const storageKey = "iiode-cookie-consent"
@@ -43,7 +41,6 @@ function subscribeToConsent(callback: () => void) {
 export function CookieConsent({
   copy,
   googleMeasurementId,
-  hubspotTrackingScriptSrc,
 }: CookieConsentProps) {
   const consent = useSyncExternalStore(
     subscribeToConsent,
@@ -61,14 +58,7 @@ export function CookieConsent({
   return (
     <>
       {hasAccepted ? (
-        <>
-          <GoogleAnalytics measurementId={googleMeasurementId} />
-          <Script
-            id="hubspot-tracking-script"
-            src={hubspotTrackingScriptSrc}
-            strategy="afterInteractive"
-          />
-        </>
+        <GoogleAnalytics measurementId={googleMeasurementId} />
       ) : null}
       {consent === "unset" ? (
         <div className="fixed inset-x-0 bottom-0 z-[140] border-t border-foreground/15 bg-background/95 px-4 py-3 text-foreground shadow-xl backdrop-blur">
