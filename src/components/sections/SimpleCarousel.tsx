@@ -1,113 +1,103 @@
-"use client"
+'use client';
 
-import { useRef, useState } from "react"
-import type { TouchEvent } from "react"
+import { useRef, useState } from 'react';
+import type { TouchEvent } from 'react';
 
 type ResponsiveImage = {
-  desktop: string
-  mobile: string
-}
+  desktop: string;
+  mobile: string;
+};
 
 type SimpleCarouselProps = {
-  images: ResponsiveImage[]
-  alt: string
-}
+  images: ResponsiveImage[];
+  alt: string;
+};
 
-const SWIPE_THRESHOLD = 40
+const SWIPE_THRESHOLD = 40;
 
 export function SimpleCarousel({ images, alt }: SimpleCarouselProps) {
-  const [index, setIndex] = useState(0)
-  const touchStartX = useRef<number | null>(null)
+  const [index, setIndex] = useState(0);
+  const touchStartX = useRef<number | null>(null);
 
   if (images.length === 0) {
-    return null
+    return null;
   }
 
-  const currentImage = images[index] ?? images[0]
+  const currentImage = images[index] ?? images[0];
 
   const showPrevious = () => {
-    setIndex((current) => (current - 1 + images.length) % images.length)
-  }
+    setIndex((current) => (current - 1 + images.length) % images.length);
+  };
 
   const showNext = () => {
-    setIndex((current) => (current + 1) % images.length)
-  }
+    setIndex((current) => (current + 1) % images.length);
+  };
 
   const handleAreaClick = () => {
     if (images.length <= 1) {
-      return
+      return;
     }
 
-    showNext()
-  }
+    showNext();
+  };
 
   const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
-    touchStartX.current = event.touches[0]?.clientX ?? null
-  }
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  };
 
   const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
     if (touchStartX.current === null || images.length <= 1) {
-      return
+      return;
     }
 
-    const endX = event.changedTouches[0]?.clientX ?? touchStartX.current
-    const delta = endX - touchStartX.current
-    touchStartX.current = null
+    const endX = event.changedTouches[0]?.clientX ?? touchStartX.current;
+    const delta = endX - touchStartX.current;
+    touchStartX.current = null;
 
     if (Math.abs(delta) < SWIPE_THRESHOLD) {
-      return
+      return;
     }
 
     if (delta < 0) {
-      showNext()
-      return
+      showNext();
+      return;
     }
 
-    showPrevious()
-  }
+    showPrevious();
+  };
 
   return (
-    <div
-      className="relative h-full w-full overflow-hidden"
-      onClick={handleAreaClick}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-    >
+    <div className='relative h-full w-full overflow-hidden' onClick={handleAreaClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       <picture>
-        <source media="(max-width: 767px)" srcSet={currentImage.mobile} />
-        <img
-          src={currentImage.desktop}
-          alt={alt}
-          className="h-full w-full object-cover"
-          loading="lazy"
-        />
+        <source media='(max-width: 767px)' srcSet={currentImage.mobile} />
+        <img src={currentImage.desktop} alt={alt} className='h-full w-full object-cover' loading='lazy' />
       </picture>
       {images.length > 1 ? (
-        <div className="pointer-events-none absolute inset-x-4 bottom-4 flex items-center justify-between">
+        <div className='pointer-events-none absolute inset-x-4 bottom-4 flex items-center justify-between'>
           <button
-            type="button"
+            type='button'
             onClick={(event) => {
-              event.stopPropagation()
-              showPrevious()
+              event.stopPropagation();
+              showPrevious();
             }}
-            className="pointer-events-auto h-8 w-8 bg-black/30 text-lg leading-none text-white backdrop-blur-sm transition hover:bg-black/45"
-            aria-label="Previous image"
+            className='cursor-pointer pointer-events-auto h-8 w-8 bg-black/30 text-lg leading-none text-white backdrop-blur-sm transition hover:bg-black/45'
+            aria-label='Previous image'
           >
             &#8592;
           </button>
           <button
-            type="button"
+            type='button'
             onClick={(event) => {
-              event.stopPropagation()
-              showNext()
+              event.stopPropagation();
+              showNext();
             }}
-            className="pointer-events-auto h-8 w-8 bg-black/30 text-lg leading-none text-white backdrop-blur-sm transition hover:bg-black/45"
-            aria-label="Next image"
+            className='cursor-pointer pointer-events-auto h-8 w-8 bg-black/30 text-lg leading-none text-white backdrop-blur-sm transition hover:bg-black/45'
+            aria-label='Next image'
           >
             &#8594;
           </button>
         </div>
       ) : null}
     </div>
-  )
+  );
 }

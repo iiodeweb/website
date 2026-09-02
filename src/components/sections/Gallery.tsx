@@ -1,42 +1,29 @@
-import type { Re27Copy } from "@/content/re27"
-import { getMobileVariant } from "@/lib/responsive-asset"
+import Image from 'next/image';
+import type { Re27Copy } from '@/content/re27';
+import { getMobileVariant } from '@/lib/responsive-asset';
 
 type GalleryProps = {
-  copy: Re27Copy["gallery"]
-}
+  copy: Re27Copy['gallery'];
+};
 
 export function Gallery({ copy }: GalleryProps) {
-  const mobileLeftImage = getMobileVariant(copy.leftImage)
-
   return (
-    <section className="bg-background">
-      <div className="iiode-section-wrap" data-scroll-track="true">
-        <div
-          className="iiode-container iiode-section-panel iiode-split-grid grid grid-cols-1 md:grid-cols-2"
-          data-scroll-panel="true"
-        >
-          <div className="iiode-split-half iiode-media-half iiode-media-half-left relative overflow-hidden">
-            <picture>
-              {mobileLeftImage ? <source media="(max-width: 767px)" srcSet={mobileLeftImage} /> : null}
-              <img
-                src={copy.leftImage}
-                alt={copy.leftTitle}
-                className="absolute inset-0 h-full w-full object-cover"
-                loading="lazy"
-              />
-            </picture>
-            <div className="absolute inset-0 bg-black/25" />
-            <div className="iiode-half-pad-1 relative z-10 flex h-full items-center justify-center text-center">
-              <h2 className="iiode-type-1 text-white">{copy.leftTitle}</h2>
+    <section className='bg-background'>
+      <div className='iiode-section-wrap'>
+        <div className='iiode-section-panel grid grid-cols-1 md:grid-cols-2'>
+          <div className='iiode-split-half relative overflow-hidden min-h-[80vh] md:min-h-auto'>
+            <Image src={copy.leftImage} alt='One bulb for every environment' fill sizes='(max-width: 767px) 100vw, 50vw' className='object-cover absolute inset-0 h-full w-full' />
+
+            <div className='iiode-half-pad-1 relative z-10 flex h-full items-center justify-center text-center'>
+              <h2 className='iiode-type-1 text-white text-shadow-lg'>{copy.leftTitle}</h2>
             </div>
           </div>
-          <div className="iiode-split-half iiode-media-half iiode-media-half-right iiode-text-half iiode-half-pad-1 flex items-start pt-10 md:pt-8">
-            <p className="iiode-type-1 w-full text-foreground">
-              {copy.rightText}
-            </p>
+
+          <div className='iiode-split-half iiode-half-pad-1 py-8'>
+            <p className='iiode-type-1 text-foreground '>{copy.rightText}</p>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

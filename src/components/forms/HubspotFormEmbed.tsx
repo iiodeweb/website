@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useId, useRef, useState } from "react"
+import { useEffect, useId, useRef } from "react"
 
 import { hubspotConfig } from "@/content/hubspot"
 
@@ -20,6 +20,8 @@ type HubspotFormEmbedProps = {
   formId: string
   fallbackEmail?: string
   onSubmitted?: () => void
+  onClose?: () => void
+  closeLabel?: string
 }
 
 type HubspotSubmissionEventDetail = {
@@ -94,10 +96,10 @@ export function HubspotFormEmbed({
   formId,
   fallbackEmail,
   onSubmitted,
+  onClose,
+  closeLabel,
 }: HubspotFormEmbedProps) {
-  const [status, setStatus] = useState<"loading" | "ready" | "error">("loading")
   const targetId = useId().replace(/:/g, "")
-  const containerRef = useRef<HTMLDivElement | null>(null)
   const submissionHandledRef = useRef(false)
 
   useEffect(() => {
@@ -152,18 +154,35 @@ export function HubspotFormEmbed({
 
   useEffect(() => {
     let cancelled = false
-    const container = containerRef.current
+    const wrapper = document.createElement("div")
+    wrapper.className = "iiode-hubspot-form-body-host"
+
+    if (onClose) {
+      const closeButton = document.createElement("button")
+      closeButton.type = "button"
+      closeButton.className = "cursor-pointer absolute top-2 right-3 z-10 text-xs uppercase !text-black"
+      closeButton.setAttribute("aria-label", closeLabel ?? "Close")
+      closeButton.textContent = "Close"
+      closeButton.addEventListener("click", (event) => {
+        event.stopPropagation()
+        onClose()
+      })
+      wrapper.appendChild(closeButton)
+    }
+
+    const host = document.createElement("div")
+    host.id = targetId
+    host.className = "iiode-hubspot-form-shell"
+    wrapper.appendChild(host)
+    document.body.appendChild(wrapper)
 
     async function mountForm() {
-      setStatus("loading")
-
       try {
         await waitForHubspotApi()
-        if (cancelled || !container) {
+        if (cancelled) {
           return
         }
 
-        container.innerHTML = ""
         window.hbspt?.forms?.create({
           region,
           portalId,
@@ -179,10 +198,14 @@ export function HubspotFormEmbed({
             onSubmitted?.()
           },
         })
-        setStatus("ready")
       } catch {
         if (!cancelled) {
-          setStatus("error")
+          const errorMessage = document.createElement("p")
+          errorMessage.className = "text-sm text-foreground"
+          errorMessage.textContent = fallbackEmail
+            ? `The form could not be loaded right now. Please contact ${fallbackEmail}.`
+            : "The form could not be loaded right now."
+          host.replaceChildren(errorMessage)
         }
       }
     }
@@ -191,22 +214,9 @@ export function HubspotFormEmbed({
 
     return () => {
       cancelled = true
-      if (container) {
-        container.innerHTML = ""
-      }
+      wrapper.remove()
     }
-  }, [formId, onSubmitted, portalId, region, targetId])
+  }, [closeLabel, fallbackEmail, formId, onClose, onSubmitted, portalId, region, targetId])
 
-  return (
-    <div className="iiode-hubspot-form-shell">
-      {status === "loading" ? <p className="text-sm text-foreground/70">Loading form...</p> : null}
-      {status === "error" ? (
-        <p className="text-sm text-foreground">
-          The form could not be loaded right now.
-          {fallbackEmail ? ` Please contact ${fallbackEmail}.` : ""}
-        </p>
-      ) : null}
-      <div id={targetId} ref={containerRef} className={status === "loading" ? "hidden" : ""} />
-    </div>
-  )
+  return null
 }
