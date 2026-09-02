@@ -72,6 +72,7 @@ scripts/                    Build, start, and SVG optimization helpers
 - `/about` - company and contact information
 - `/downloads` - HubSpot-gated press-preview download
 - `/preorder` - local pre-order product and price selection flow
+- `/terms-and-services` - text-heavy terms and services page
 - `/api/downloads/press-preview` - creates the press ZIP in memory
 - `/api/locale` - persists the selected locale
 - `/api/theme` - persists the selected theme

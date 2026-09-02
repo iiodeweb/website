@@ -18,6 +18,7 @@ export type SiteCopy = {
     instagram: string;
     services: string;
     preorder: string;
+    terms: string;
     newsletter: string;
   };
   footer: {
@@ -48,6 +49,16 @@ export type PagesCopy = {
     contactIntro: string;
     addresses: string[];
     contactLine: string;
+  };
+  terms: {
+    title: string;
+    updatedLabel: string;
+    updatedAt: string;
+    intro: string;
+    sections: Array<{
+      heading: string;
+      paragraphs: string[];
+    }>;
   };
   collaborations: {
     introLeft: string;

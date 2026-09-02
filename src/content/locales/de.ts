@@ -1,4 +1,5 @@
 import { collaborationCarouselImages, collaborationIntroImages, re27Assets } from './assets';
+import { termsContent } from './terms';
 import type { LocaleContent } from './types';
 
 const copyrightText = 'Wenn Sie Ihren Namen, Vornamen und Ihre E-Mail-Adresse angeben und Bilder von dieser Website herunterladen, erhalten Sie von iiode eine beschränkte, nicht exklusive, nicht übertragbare und widerrufbare Erlaubnis, diese Bilder ausschliesslich für persönliche Zwecke sowie für redaktionelle oder Presseberichte über iiode zu verwenden. Die Bilder dürfen ohne vorherige schriftliche Genehmigung von iiode nicht verkauft, unterlizenziert, als eigenständige Dateien weitergegeben, für nicht damit verbundene kommerzielle Zwecke genutzt oder in irreführender oder rechtswidriger Weise verwendet werden. Bitte nennen Sie, soweit angemessen, (c) iiode als Bildnachweis. Für jede andere Nutzung kontaktieren Sie bitte info@iiode.com.';
@@ -21,6 +22,7 @@ export const de: LocaleContent = {
       instagram: '@iiode',
       services: 'Services',
       preorder: 'Vorbestellung',
+      terms: 'Terms & Services',
       newsletter: 'Newsletter',
     },
     footer: {
@@ -58,6 +60,7 @@ export const de: LocaleContent = {
       addresses: ['Av. des Alpes 9, CH - 1006 Lausanne', "Rue d'Hauteville 25, FR - 75010 Paris"],
       contactLine: 'Kontaktieren Sie uns gerne per E-Mail an',
     },
+    terms: termsContent,
     collaborations: {
       introLeft: 'Kooperationen\n\nNeben unserer Re27-Serie entwickeln wir limitierte Editionen rund um die Glühbirne. Diese Kooperationen mit bewusst arbeitenden Gestalterinnen und Gestaltern untersuchen, wie Re27 zu einem Lichtobjekt wird - wie es in einem Raum lebt, wie es genutzt wird und was es über ein eigenständiges Produkt hinaus werden kann.\n\nDiese Kooperationen sind als adaptives Format gedacht, das sich im Laufe der Zeit weiterentwickelt - von einem Thema zum nächsten und von einem Ort zum anderen - immer ausgehend von derselben Basis: Re27.',
       introImages: collaborationIntroImages,

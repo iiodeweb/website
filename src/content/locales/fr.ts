@@ -1,4 +1,5 @@
 import { collaborationCarouselImages, collaborationIntroImages, re27Assets } from './assets';
+import { termsContent } from './terms';
 import type { LocaleContent } from './types';
 
 const copyrightText = "En soumettant votre nom, votre prénom et votre adresse e-mail, puis en téléchargeant des images depuis ce site, vous recevez de la part d'iiode une autorisation limitée, non exclusive, non transférable et révocable d'utiliser ces images pour un usage personnel ainsi que pour une couverture éditoriale ou presse concernant iiode uniquement. Les images ne peuvent pas être vendues, sous-licenciées, redistribuées sous forme de fichiers autonomes, utilisées à des fins commerciales sans rapport avec iiode, ni utilisées de manière trompeuse ou illicite sans autorisation écrite préalable d'iiode. Merci de créditer (c) iiode lorsque cela est raisonnablement possible. Pour tout autre usage, veuillez contacter info@iiode.com.";
@@ -21,6 +22,7 @@ export const fr: LocaleContent = {
       instagram: '@iiode',
       services: 'Services',
       preorder: 'Précommande',
+      terms: 'Terms & Services',
       newsletter: 'Newsletter',
     },
     footer: {
@@ -58,6 +60,7 @@ export const fr: LocaleContent = {
       addresses: ['Av. des Alpes 9, CH - 1006 Lausanne', "Rue d'Hauteville 25, FR - 75010 Paris"],
       contactLine: 'Pour nous contacter, envoyez-nous un message à',
     },
+    terms: termsContent,
     collaborations: {
       introLeft: "Collaborations\n\nEn parallèle de notre série Re27, nous développons des éditions limitées autour de l'ampoule. Ces collaborations avec des praticiens conscients explorent la manière dont Re27 devient un objet lumineux - comment il habite un espace, comment il est utilisé et ce qu'il peut devenir au-delà d'un produit autonome.\n\nCes collaborations sont conçues comme un format adaptatif, amené à évoluer dans le temps - d'un thème à l'autre, d'un lieu à l'autre - en partant toujours de la même base : Re27.",
       introImages: collaborationIntroImages,
