@@ -71,7 +71,8 @@ scripts/                    Build, start, and SVG optimization helpers
 - `/collaborations` - collaboration overview and image carousel
 - `/about` - company and contact information
 - `/downloads` - HubSpot-gated press-preview download
-- `/preorder` - HubSpot pre-order form
+- `/preorder` - local pre-order product and price selection flow
+- `/terms-and-services` - text-heavy terms and services page
 - `/api/downloads/press-preview` - creates the press ZIP in memory
 - `/api/locale` - persists the selected locale
 - `/api/theme` - persists the selected theme
@@ -113,12 +114,15 @@ complete Selecta family is intentionally retained in
 HubSpot configuration is centralized in `src/content/hubspot.ts`. It contains:
 
 - portal and region
-- tracking and embed script URLs
-- form IDs for pre-order, newsletter, and press preview
+- the embed script URL
+- form IDs for newsletter and press preview
 
-The embed script is loaded by `HubspotFormEmbed`. Tracking is loaded only after
-analytics consent. Form submission handling and download redirects are managed
-by `HubspotFormModalTrigger`.
+The global HubSpot tracking script is intentionally not loaded. That prevents
+HubSpot-hosted pop-up forms from appearing on page load or navigation.
+
+The embed script is loaded by `HubspotFormEmbed` only when a user opens an
+explicit form trigger. Form submission handling and download redirects are
+managed by `HubspotFormModalTrigger`.
 
 When changing a form in HubSpot, update its ID in `src/content/hubspot.ts` and
 test both successful submission and the email fallback.
@@ -132,8 +136,8 @@ it falls back to the ID in `src/content/site.ts`.
 NEXT_PUBLIC_GA_MEASUREMENT_ID=
 ```
 
-`CookieConsent` gates Google Analytics and the HubSpot tracking script. The
-HubSpot form embed remains available without analytics consent.
+`CookieConsent` gates Google Analytics. The HubSpot form embed remains available
+without analytics consent because it loads only after an explicit form action.
 
 ## Assets
 

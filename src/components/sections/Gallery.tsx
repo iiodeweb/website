@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import type { Re27Copy } from '@/content/re27';
-import { getMobileVariant } from '@/lib/responsive-asset';
 
 type GalleryProps = {
   copy: Re27Copy['gallery'];

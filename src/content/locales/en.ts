@@ -1,4 +1,5 @@
 import { collaborationCarouselImages, collaborationIntroImages, re27Assets } from './assets';
+import { termsContent } from './terms';
 import type { LocaleContent } from './types';
 
 const copyrightText = 'By submitting your name, surname and email address and downloading any images from this website, you receive a limited, non-exclusive, non-transferable, revocable permission from iiode to use those images for personal use and for editorial or press coverage about iiode only. The images may not be sold, sublicensed, redistributed as standalone files, used for unrelated commercial purposes, or used in any misleading or unlawful manner without prior written permission from iiode. Please credit (c) iiode where reasonably possible. For any other use, please contact info@iiode.com.';
@@ -21,6 +22,7 @@ export const en: LocaleContent = {
       instagram: '@iiode',
       services: 'Services',
       preorder: 'Pre-Order',
+      terms: 'Terms & Services',
       newsletter: 'Newsletter',
     },
     footer: {
@@ -58,6 +60,7 @@ export const en: LocaleContent = {
       addresses: ['Av. des Alpes 9, CH - 1006 Lausanne', "Rue d'Hauteville 25, FR - 75010 Paris"],
       contactLine: 'To contact us, kindly send us a message at',
     },
+    terms: termsContent,
     collaborations: {
       introLeft: 'Collaborations\n\nAlongside our Re27 series, we develop limited editions around the bulb. These collaborations with conscious practitioners explore how Re27 becomes a lighting object - how it lives in a space, how it is used, and what it can become beyond a standalone product.\n\nThese collaborations are conceived as an adaptive format, meant to evolve over time - moving from one theme to another, and from one place to another - always starting from the same base: Re27.',
       introImages: collaborationIntroImages,

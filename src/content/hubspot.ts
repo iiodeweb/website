@@ -8,15 +8,8 @@ export type HubspotFormConfig = {
 export const hubspotConfig = {
   portalId: '147603542',
   region: 'eu1',
-  trackingScriptSrc: 'https://js-eu1.hs-scripts.com/147603542.js',
   embedScriptSrc: 'https://js-eu1.hsforms.net/forms/embed/v2.js',
   forms: {
-    // preorder: {
-    //   region: "eu1",
-    //   portalId: "147603542",
-    //   formId: "6e264a4c-a83f-4cd6-b25d-3ec3a0d13f77",
-    //   modalTitle: "Pre-Order",
-    // },
     newsletter: {
       region: 'eu1',
       portalId: '147603542',
@@ -33,7 +26,6 @@ export const hubspotConfig = {
 } as const satisfies {
   portalId: string;
   region: string;
-  trackingScriptSrc: string;
   embedScriptSrc: string;
   forms: Record<string, HubspotFormConfig>;
 };
