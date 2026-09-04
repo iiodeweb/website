@@ -2,7 +2,6 @@ import type { ReactNode } from 'react';
 
 import { TopNav } from '@/components/nav/TopNav';
 import { Footer } from '@/components/sections/Footer';
-// import { SectionSoftLock } from "@/components/sections/SectionSoftLock"
 import { getLocale } from '@/lib/locale-server';
 import { getTheme } from '@/lib/theme-server';
 

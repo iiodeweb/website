@@ -1,9 +1,5 @@
 import Image from 'next/image';
 
-import { HubspotFormModalTrigger } from '@/components/forms/HubspotFormModalTrigger';
-import { hubspotConfig } from '@/content/hubspot';
-import { siteConfig } from '@/content/site';
-
 import type { Re27Copy } from '@/content/re27';
 
 type WorkWithUsProps = {
@@ -30,7 +26,13 @@ export function WorkWithUs({ copy }: WorkWithUsProps) {
           <div className='order-1 md:order-2 iiode-split-half relative flex items-center justify-center min-h-[50vh]'>
             <Image src={copy.rightImage} alt={copy.rightTitle} fill sizes='(max-width: 767px) 100vw, 50vw' className='object-cover' />
 
-            <div className='iiode-half-pad-1 relative z-10 flex h-full items-center justify-center text-center'>{/* <HubspotFormModalTrigger triggerLabel={copy.rightTitle} modalTitle={hubspotConfig.forms.preorder.modalTitle} portalId={hubspotConfig.forms.preorder.portalId} formId={hubspotConfig.forms.preorder.formId} region={hubspotConfig.forms.preorder.region} fallbackEmail={siteConfig.email} successMessage='Thanks. Your pre-order request has been sent.' className='iiode-type-1 text-white' /> */}</div>
+            <div className='iiode-half-pad-1 relative z-10 flex h-full items-center justify-center text-center'>
+              <h2 className='iiode-type-1 text-white text-shadow-lg'>
+                <a href='/preorder' className='transition-colors'>
+                  {copy.rightTitle}
+                </a>
+              </h2>
+            </div>
           </div>
         </div>
       </div>

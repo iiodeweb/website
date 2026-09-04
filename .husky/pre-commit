@@ -1,5 +1,11 @@
 set -e
 
+if git diff --cached -U0 | grep -qE "[sr]k_(live|test)_[A-Za-z0-9]{8}"; then
+  echo "Refusing to commit: the staged changes contain what looks like a Stripe API key."
+  echo "Move it into an untracked env file, and roll the key if it was ever pushed."
+  exit 1
+fi
+
 changed_svgs=$(git diff --cached --name-only --diff-filter=ACMR | grep -E "^public/assets/Re27/exploded/.*\\.svg$" || true)
 
 if [ -z "$changed_svgs" ]; then
