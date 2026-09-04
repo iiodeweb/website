@@ -23,7 +23,7 @@ export const preorderPrices: readonly PreorderPriceItem[] = [
       fr: 'Une seule lampe Re27, expédiée dans des emballages recyclés. Réservez maintenant pour garantir une unité de la première production.',
     },
     amounts: { EUR: 130, CHF: 125, GBP: 110 },
-    image: '/assets/collaborations/01 abat-jour/intro/desktop/iiode-Re27-AlexandraGerber-detail.webp',
+    image: '/assets/Re27/pre-orders/iiode-Re27-solo.webp',
     checkoutUrls: {
       CHF: 'https://example.com/checkout/re27-1-chf',
       EUR: 'https://example.com/checkout/re27-1-eur',
@@ -39,7 +39,7 @@ export const preorderPrices: readonly PreorderPriceItem[] = [
       fr: 'Une seule lampe Re27 associée à son lampholder correspondant, prête à être montée directement hors de la boîte.',
     },
     amounts: { EUR: 150, CHF: 145, GBP: 130 },
-    image: '/assets/collaborations/01 abat-jour/intro/desktop/iiode-Re27-BIG-GAME-detail.webp',
+    image: '/assets/Re27/pre-orders/iiode-Re27-pendant.webp',
     checkoutUrls: {
       CHF: 'https://example.com/checkout/re27-1-lampholder-chf',
       EUR: 'https://example.com/checkout/re27-1-lampholder-eur',
@@ -55,7 +55,7 @@ export const preorderPrices: readonly PreorderPriceItem[] = [
       fr: 'Un couple de lampes Re27 pour une petite installation ou un remplacement, expédiées ensemble dans un seul paquet.',
     },
     amounts: { EUR: 260, CHF: 250, GBP: 220 },
-    image: '/assets/collaborations/01 abat-jour/intro/desktop/iiode-Re27-FromLighting-detail.webp',
+    image: '/assets/Re27/pre-orders/iiode-Re27-duo.webp',
     checkoutUrls: {
       CHF: 'https://example.com/checkout/re27-2-chf',
       EUR: 'https://example.com/checkout/re27-2-eur',
@@ -71,7 +71,7 @@ export const preorderPrices: readonly PreorderPriceItem[] = [
       fr: "Cinq lampes Re27 pour une installation complète d'une pièce ou d'un studio, au meilleur prix unitaire de la précommande.",
     },
     amounts: { EUR: 650, CHF: 625, GBP: 550 },
-    image: '/assets/collaborations/01 abat-jour/intro/desktop/iiode-Re27-JoergBoner-detail.webp',
+    image: '/assets/Re27/pre-orders/iiode-Re27-group.webp',
     checkoutUrls: {
       CHF: 'https://example.com/checkout/re27-5-chf',
       EUR: 'https://example.com/checkout/re27-5-eur',

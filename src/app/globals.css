@@ -6,7 +6,6 @@
   --interactive-dim: #7a7a7a;
   --content-width: 64rem;
   --content-padding: 1.5rem;
-  /* --section-lock-length: 185svh; */
   --section-lock-length: 100vh;
   color-scheme: light;
 }
@@ -77,29 +76,12 @@ html {
 }
 
 .iiode-copy-narrow {
-  /* width: 100%; */
   width: calc((var(--content-width) / 2) - (var(--content-padding) * 2));
   max-width: 50ch;
 }
 
-/* .iiode-media-half {
-  position: relative;
-} */
-
-/* .iiode-text-half {
-  position: relative;
-} */
-
 .iiode-section-panel {
-  /* position: sticky; */
-  /* top: 4rem; */
   min-height: calc(100vh - 4rem);
-  /* transform: translate3d(0, var(--iiode-lock-y, 0), 0);
-  opacity: var(--iiode-lock-o, 1);
-  will-change: transform, opacity;
-  transition:
-    transform 140ms linear,
-    opacity 140ms linear; */
 }
 
 .iiode-hover-group {

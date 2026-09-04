@@ -40,6 +40,7 @@ export type PagesCopy = {
     submit: string;
     successMessage: string;
     imageRight: string;
+    imageLeft: string;
   };
   about: {
     title: string;
@@ -62,11 +63,11 @@ export type PagesCopy = {
   };
   collaborations: {
     introLeft: string;
-    introImages: ResponsiveImage[];
+    introImages: string[];
     introImageAlt: string;
     abatJourTitle: string;
     contributors: string[];
-    images: ResponsiveImage[];
+    images: string[];
     carouselAlt: string;
   };
 };

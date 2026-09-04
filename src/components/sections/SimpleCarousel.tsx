@@ -3,19 +3,13 @@
 import { useRef, useState } from 'react';
 import type { TouchEvent } from 'react';
 
-type ResponsiveImage = {
-  desktop: string;
-  mobile: string;
-};
-
 type SimpleCarouselProps = {
-  images: ResponsiveImage[];
-  alt: string;
+  images: string[];
 };
 
 const SWIPE_THRESHOLD = 40;
 
-export function SimpleCarousel({ images, alt }: SimpleCarouselProps) {
+export function SimpleCarousel({ images }: SimpleCarouselProps) {
   const [index, setIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
 
@@ -69,8 +63,8 @@ export function SimpleCarousel({ images, alt }: SimpleCarouselProps) {
   return (
     <div className='relative h-full w-full overflow-hidden' onClick={handleAreaClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       <picture>
-        <source media='(max-width: 767px)' srcSet={currentImage.mobile} />
-        <img src={currentImage.desktop} alt={alt} className='h-full w-full object-cover' loading='lazy' />
+        <source media='(max-width: 767px)' srcSet={currentImage} />
+        <img src={currentImage} alt='' className='h-full w-full object-cover' loading='lazy' />
       </picture>
       {images.length > 1 ? (
         <div className='pointer-events-none absolute inset-x-4 bottom-4 flex items-center justify-between'>

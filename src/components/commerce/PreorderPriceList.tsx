@@ -12,7 +12,7 @@ type PreorderPriceListProps = {
   className?: string;
 };
 
-export function PreorderPriceList({ locale, checkoutLabel = 'Checkout', className }: PreorderPriceListProps) {
+export function PreorderPriceList({ locale, checkoutLabel = 'pre-order now', className }: PreorderPriceListProps) {
   const { currency } = useCurrency();
   const { selected, selectedId, setSelectedId } = usePreorderSelection();
 
@@ -35,12 +35,12 @@ export function PreorderPriceList({ locale, checkoutLabel = 'Checkout', classNam
       {selected ? (
         <div className='grid gap-4 border-t border-foreground/20 pt-4'>
           <p>{selected.descriptions[locale]}</p>
-          <form method='post' action='/api/checkout' className='justify-self-start'>
-            <input type='hidden' name='itemId' value={selected.id} />
-            <button type='submit' className='cursor-pointer bg-foreground px-5 py-3 text-xs uppercase tracking-[0.08em] text-background transition-opacity hover:opacity-90'>
+
+          <div>
+            <a href={selected.checkoutUrls[currency]} className='cursor-pointer bg-foreground px-5 py-3 text-xs uppercase tracking-[0.08em] text-background transition-opacity hover:opacity-90' target='_blank'>
               {checkoutLabel}
-            </button>
-          </form>
+            </a>
+          </div>
         </div>
       ) : null}
     </div>

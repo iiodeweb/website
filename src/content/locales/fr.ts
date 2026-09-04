@@ -39,17 +39,11 @@ export const fr: LocaleContent = {
   pages: {
     preorder: {
       title: 'Précommande',
-      description: [
-        'Soutenez iiode Re27 en précommandant dès maintenant.',
-        'Nous lancerons la production lorsque 500 unités Re27 valides et payées auront été commandées. La campagne se déroule du 9 septembre 2026 à 00:00 au 9 mars 2027 à 23:59 CET.',
-        "Le paiement est encaissé lors de la commande. Si nous n'atteignons pas 500 unités, nous annulerons la campagne et rembourserons l'intégralité du montant payé dans un délai de 14 jours calendaires. Une fois que nous aurons annoncé que le seuil a été atteint, la production sera lancée.",
-        'Livraison et annulation',
-        "Si le seuil est atteint d'ici le 9 décembre 2026, l'expédition est estimée au 10 mars 2027. S'il est atteint plus tard, l'expédition est estimée dans un délai d'environ trois mois après notre annonce et au plus tard le 10 juin 2027.",
-        "Vous pouvez annuler à tout moment avant l'expédition et obtenir un remboursement intégral. Vos droits légaux impératifs restent inchangés. Veuillez consulter les conditions générales complètes lors du paiement.",
-      ],
+      description: ['Soutenez iiode Re27 en précommandant dès maintenant.', 'Nous lancerons la production lorsque 500 unités Re27 valides et payées auront été commandées. La campagne se déroule du 9 septembre 2026 à 00:00 au 9 mars 2027 à 23:59 CET.', "Le paiement est encaissé lors de la commande. Si nous n'atteignons pas 500 unités, nous annulerons la campagne et rembourserons l'intégralité du montant payé dans un délai de 14 jours calendaires. Une fois que nous aurons annoncé que le seuil a été atteint, la production sera lancée.", 'Livraison et annulation', "Si le seuil est atteint d'ici le 9 décembre 2026, l'expédition est estimée au 10 mars 2027. S'il est atteint plus tard, l'expédition est estimée dans un délai d'environ trois mois après notre annonce et au plus tard le 10 juin 2027.", "Vous pouvez annuler à tout moment avant l'expédition et obtenir un remboursement intégral. Vos droits légaux impératifs restent inchangés. Veuillez consulter les conditions générales complètes lors du paiement."],
       submit: 'Ouvrir le formulaire de précommande',
       successMessage: 'Merci. Votre demande de précommande a été envoyée.',
       imageRight: re27Assets.preorderImage,
+      imageLeft: re27Assets.preorderImageTwo,
     },
     about: {
       title: "Au-delà de l'ampoule",

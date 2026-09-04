@@ -39,17 +39,11 @@ export const de: LocaleContent = {
   pages: {
     preorder: {
       title: 'Vorbestellung',
-      description: [
-        'Unterstützen Sie iiode Re27, indem Sie jetzt vorbestellen.',
-        'Wir starten die Produktion, sobald 500 gültige, bezahlte Re27-Einheiten bestellt wurden. Die Kampagne läuft vom 9. September 2026 um 00:00 bis zum 9. März 2027 um 23:59 MEZ.',
-        'Die Zahlung wird bei der Bestellung eingezogen. Erreichen wir 500 Einheiten nicht, stornieren wir die Kampagne und erstatten den vollen gezahlten Betrag innerhalb von 14 Kalendertagen. Sobald wir bekannt geben, dass die Schwelle erreicht ist, wird die Produktion aufgenommen.',
-        'Lieferung und Stornierung',
-        'Wird die Schwelle bis zum 9. Dezember 2026 erreicht, erfolgt der Versand voraussichtlich bis zum 10. März 2027. Wird sie später erreicht, erfolgt der Versand voraussichtlich innerhalb von etwa drei Monaten nach unserer Bekanntgabe und spätestens am 10. Juni 2027.',
-        'Sie können jederzeit vor dem Versand gegen volle Rückerstattung stornieren. Ihre zwingenden gesetzlichen Rechte bleiben unberührt. Die vollständigen Allgemeinen Geschäftsbedingungen finden Sie im Checkout.',
-      ],
+      description: ['Unterstützen Sie iiode Re27, indem Sie jetzt vorbestellen.', 'Wir starten die Produktion, sobald 500 gültige, bezahlte Re27-Einheiten bestellt wurden. Die Kampagne läuft vom 9. September 2026 um 00:00 bis zum 9. März 2027 um 23:59 MEZ.', 'Die Zahlung wird bei der Bestellung eingezogen. Erreichen wir 500 Einheiten nicht, stornieren wir die Kampagne und erstatten den vollen gezahlten Betrag innerhalb von 14 Kalendertagen. Sobald wir bekannt geben, dass die Schwelle erreicht ist, wird die Produktion aufgenommen.', 'Lieferung und Stornierung', 'Wird die Schwelle bis zum 9. Dezember 2026 erreicht, erfolgt der Versand voraussichtlich bis zum 10. März 2027. Wird sie später erreicht, erfolgt der Versand voraussichtlich innerhalb von etwa drei Monaten nach unserer Bekanntgabe und spätestens am 10. Juni 2027.', 'Sie können jederzeit vor dem Versand gegen volle Rückerstattung stornieren. Ihre zwingenden gesetzlichen Rechte bleiben unberührt. Die vollständigen Allgemeinen Geschäftsbedingungen finden Sie im Checkout.'],
       submit: 'Vorbestellformular öffnen',
       successMessage: 'Danke. Ihre Vorbestellanfrage wurde gesendet.',
       imageRight: re27Assets.preorderImage,
+      imageLeft: re27Assets.preorderImageTwo,
     },
     about: {
       title: 'Mehr als eine Glühbirne',
