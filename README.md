@@ -10,7 +10,7 @@ analytics, and a server-generated press-preview download.
 - TypeScript
 - Tailwind CSS 4, loaded from `src/app/globals.css`
 - HubSpot embedded forms and tracking
-- JSZip for the protected press-preview archive
+- JSZip for the on-demand press-preview archive
 - pnpm
 - Node.js 24
 
@@ -26,6 +26,9 @@ Open `http://localhost:3000`.
 The required Node version is recorded in `.nvmrc` and enforced by
 `package.json`. Copy `.env.example` to `.env.local` only when overriding an
 environment value.
+
+Keep local drafts, working notes, and review files in `.iiode-data/`. Git,
+ESLint, and TypeScript exclude this directory; its files remain on your machine.
 
 ## Commands
 
@@ -72,7 +75,8 @@ scripts/                    Build, start, and SVG optimization helpers
 - `/about` - company and contact information
 - `/downloads` - HubSpot-gated press-preview download
 - `/preorder` - local pre-order product and price selection flow
-- `/terms-and-services` - text-heavy terms and services page
+- `/termsconditions` - directly accessible terms page, omitted from navigation
+  and the sitemap, with search indexing disabled
 - `/api/downloads/press-preview` - creates the press ZIP in memory
 - `/api/locale` - persists the selected locale
 - `/api/theme` - persists the selected theme
@@ -93,6 +97,11 @@ All locales implement the shared contract in
 
 The locale switch writes an `iiode-locale` cookie. The default locale is
 English. Theme selection uses the `iiode-theme` cookie and defaults to dark.
+
+Product prices and the nine regional HubSpot payment links live in
+`src/content/pricing.ts`. Prices exclude VAT and shipping. The pre-order page
+defaults to Re27 Solo and uses the selected delivery region to choose a payment
+link; the region is stored in the `iiode-currency` cookie.
 
 ## Styling
 
@@ -149,8 +158,14 @@ Only files below `public/` are served at runtime. Important groups:
 - `public/assets/press` - files included in the generated press ZIP
 - `public/assets/fonts/Selecta` - complete font family; Medium is currently loaded
 
-The exploded SVG is fetched and injected client-side so its SMIL timeline and
-stroke color can be controlled by `AnimatedExplodedSvg`.
+The homepage loads and decodes its photos and static bulb posters before
+fetching the exploded SVG. This includes images below the viewport, so the
+animation never waits for the visitor to scroll through all the photos. The
+closed-bulb poster stays visible during loading and if the animation request
+fails. Navigation cancels the pending animation load.
+
+The SVG is then injected client-side so its SMIL timeline and stroke color can
+be controlled by `AnimatedExplodedSvg`; playback still starts on scroll.
 
 ## Production
 

@@ -18,13 +18,13 @@ export default async function DownloadsPage() {
             <div className='iiode-type-2 iiode-copy-narrow grid gap-5 text-foreground md:ml-auto'>
               <h1 className='iiode-type-2'>{content.title}</h1>
               <p>{content.intro}</p>
-              <p>{content.copyrightBody}</p>
+              <p className='iiode-type-small'>{content.copyrightBody}</p>
             </div>
           </div>
 
           <div className='iiode-split-half iiode-media-half iiode-media-half-right iiode-text-half iiode-half-pad-2 flex items-start py-8'>
             <div className='iiode-copy-narrow grid w-full gap-5 md:mr-auto'>
-              <HubspotFormModalTrigger triggerLabel={content.previewButtonLabel} modalTitle={hubspotConfig.forms.pressPreview.modalTitle} portalId={hubspotConfig.forms.pressPreview.portalId} formId={hubspotConfig.forms.pressPreview.formId} region={hubspotConfig.forms.pressPreview.region} fallbackEmail={siteConfig.email} downloadHref='/api/downloads/press-preview' className='inline-flex w-full items-center justify-center bg-foreground px-6 py-3 text-xs uppercase text-background md:w-fit' />
+              <HubspotFormModalTrigger triggerLabel={content.previewButtonLabel} modalTitle={hubspotConfig.forms.pressPreview.modalTitle} portalId={hubspotConfig.forms.pressPreview.portalId} formId={hubspotConfig.forms.pressPreview.formId} region={hubspotConfig.forms.pressPreview.region} fallbackEmail={siteConfig.email} downloadHref='/api/downloads/press-preview' className='inline-flex w-full items-center justify-center bg-foreground px-6 py-3 iiode-type-small uppercase text-background md:w-fit' />
               <div className='border-t border-foreground/20 pt-4'>
                 <p>{content.pressContactLine}</p>
                 <p className='pt-2'>

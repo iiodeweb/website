@@ -18,7 +18,7 @@ export function Story({ copy }: StoryProps) {
           </div>
 
           <div className='iiode-split-half order-1 relative md:order-2 min-h-[50vh]'>
-            <Image src={copy.rightImage} alt='Lighting made conscious' fill sizes='(max-width: 767px) 100vw, 50vw' className='object-cover absolute inset-0 h-full w-full' />
+            <Image src={copy.rightImage} alt='Lighting made conscious' fill loading='eager' sizes='(max-width: 767px) 100vw, 50vw' className='object-cover absolute inset-0 h-full w-full' />
 
             <div className='iiode-half-pad-1 relative z-1 flex h-full items-center justify-center text-center'>
               <h2 className='iiode-type-1 text-white text-shadow-lg'>{copy.rightTitle}</h2>

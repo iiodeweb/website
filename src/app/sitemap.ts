@@ -30,11 +30,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
-    {
-      url: `${baseUrl}/terms-and-services`,
-      lastModified,
-      changeFrequency: "yearly",
-      priority: 0.4,
-    },
   ]
 }

@@ -2,12 +2,15 @@
 
 import { useCurrency } from '@/components/commerce/CurrencyProvider';
 import { currencyOptions, currencyOrder, isCurrency } from '@/lib/currency';
+import type { Locale } from '@/lib/locale';
 
 type CurrencySelectProps = {
+  locale: Locale;
+  label: string;
   className?: string;
 };
 
-export function CurrencySelect({ className }: CurrencySelectProps) {
+export function CurrencySelect({ locale, label, className }: CurrencySelectProps) {
   const { currency, setCurrency } = useCurrency();
 
   const handleChange = (value: string) => {
@@ -20,12 +23,12 @@ export function CurrencySelect({ className }: CurrencySelectProps) {
 
   return (
     <div className={`grid gap-2 ${className ?? ''}`}>
-      <label htmlFor='iiode-currency-select'>Your Location:</label>
+      <label htmlFor='iiode-currency-select'>{label}</label>
       <div className='relative'>
-        <select id='iiode-currency-select' value={currency} onChange={(event) => handleChange(event.target.value)} aria-label='Currency' className='w-full cursor-pointer appearance-none rounded-none border border-foreground/20 bg-foreground/5 py-3 pl-4 pr-11 text-left text-base text-foreground outline-none transition-colors hover:border-foreground/40 focus-visible:border-foreground'>
+        <select id='iiode-currency-select' value={currency} onChange={(event) => handleChange(event.target.value)} className='w-full cursor-pointer appearance-none rounded-none border border-foreground/20 bg-foreground/5 py-3 pl-4 pr-11 text-left iiode-type-2 text-foreground outline-none transition-colors hover:border-foreground/40 focus-visible:border-foreground'>
           {currencyOrder.map((option) => (
             <option key={option} value={option} className='bg-background text-foreground'>
-              {`${currencyOptions[option].regionLabel} \u2014 ${currencyOptions[option].currencyLabel}`}
+              {`${currencyOptions[option].regionLabel[locale]} \u2014 ${currencyOptions[option].currencyLabel}`}
             </option>
           ))}
         </select>

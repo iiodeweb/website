@@ -12,7 +12,7 @@ export function UseCases({ copy }: UseCasesProps) {
       <div>
         <div className='iiode-section-panel grid grid-cols-1 md:grid-cols-2'>
           <div className='iiode-split-half relative min-h-[50vh]'>
-            <Image src={copy.leftImage} alt='Re27 product image' fill sizes='(max-width: 767px) 100vw, 50vw' className='object-cover absolute inset-0 h-full w-full' />
+            <Image src={copy.leftImage} alt='Re27 product image' fill loading='eager' sizes='(max-width: 767px) 100vw, 50vw' className='object-cover absolute inset-0 h-full w-full' />
 
             <div className='iiode-half-pad-1 relative flex h-full items-start py-8'>
               <h2 className='iiode-type-1 text-white text-shadow-lg'>{copy.leftTitle}</h2>
@@ -32,7 +32,7 @@ export function UseCases({ copy }: UseCasesProps) {
                   </ul>
                 </div>
               ))}
-              <p className='text-[0.72em]'>{copy.note}</p>
+              <p className='iiode-type-small'>{copy.note}</p>
             </div>
           </div>
         </div>

@@ -20,6 +20,48 @@ const MIN_STROKE_WIDTH = 1.25
 const LIGHT_STROKE = "#000000"
 const DARK_STROKE = "#ffffff"
 
+function waitForImage(image: HTMLImageElement, signal: AbortSignal): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const cleanup = () => {
+      image.removeEventListener("load", finish)
+      image.removeEventListener("error", finish)
+      signal.removeEventListener("abort", abort)
+    }
+    const finish = () => {
+      cleanup()
+      resolve()
+    }
+    const abort = () => {
+      cleanup()
+      reject(signal.reason)
+    }
+
+    image.addEventListener("load", finish, { once: true })
+    image.addEventListener("error", finish, { once: true })
+    signal.addEventListener("abort", abort, { once: true })
+
+    if (signal.aborted) abort()
+    else if (image.complete) finish()
+  })
+}
+
+// Use the browser-selected picture/srcset sources, including images below the fold.
+async function loadImagesBeforeAnimation(
+  images: Iterable<HTMLImageElement>,
+  signal: AbortSignal,
+): Promise<void> {
+  signal.throwIfAborted()
+  await Promise.all(Array.from(images, async (image) => {
+    image.loading = "eager"
+    await waitForImage(image, signal)
+    if (image.naturalWidth > 0) {
+      // A failed decode should not prevent the remaining page from working.
+      await image.decode().catch(() => {})
+    }
+    signal.throwIfAborted()
+  }))
+}
+
 function clamp(value: number, min = 0, max = 1) {
   return Math.min(max, Math.max(min, value))
 }
@@ -93,7 +135,6 @@ export function AnimatedExplodedSvg({
   const [errored, setErrored] = useState(false)
   const [showExplodedPoster, setShowExplodedPoster] = useState(false)
   const [readyPosterSrc, setReadyPosterSrc] = useState<string | null>(null)
-  const [isDarkTheme, setIsDarkTheme] = useState(false)
 
   const finalPosterSrc = explodedPosterSrc ?? posterSrc
   const explodedPosterReady = !finalPosterSrc || readyPosterSrc === finalPosterSrc
@@ -103,49 +144,8 @@ export function AnimatedExplodedSvg({
   }, [onPlaybackComplete])
 
   useEffect(() => {
-    const updateTheme = () => {
-      setIsDarkTheme(document.documentElement.classList.contains("dark"))
-    }
-
-    updateTheme()
-    const observer = new MutationObserver(updateTheme)
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    })
-
-    return () => {
-      observer.disconnect()
-    }
-  }, [])
-
-  useEffect(() => {
-    let cancelled = false
-
-    if (!finalPosterSrc) {
-      return () => {
-        cancelled = true
-      }
-    }
-
-    const image = new Image()
-    image.decoding = "async"
-    image.onload = () => {
-      if (!cancelled) setReadyPosterSrc(finalPosterSrc)
-    }
-    image.onerror = () => {
-      // Do not block the swap forever if preloading fails.
-      if (!cancelled) setReadyPosterSrc(finalPosterSrc)
-    }
-    image.src = finalPosterSrc
-
-    return () => {
-      cancelled = true
-    }
-  }, [finalPosterSrc])
-
-  useEffect(() => {
-    let cancelled = false
+    const controller = new AbortController()
+    const { signal } = controller
     playedRef.current = false
     completedRef.current = false
     if (playRafRef.current) {
@@ -158,24 +158,41 @@ export function AnimatedExplodedSvg({
     setMode("loading")
     setErrored(false)
     setShowExplodedPoster(false)
+    setReadyPosterSrc(null)
 
     async function loadSvg() {
       try {
-        const response = await fetch(src)
+        const images = Array.from(document.images)
+        const finalPoster = finalPosterSrc ? new Image() : null
+        if (finalPoster && finalPosterSrc) {
+          finalPoster.decoding = "async"
+          finalPoster.src = finalPosterSrc
+          images.push(finalPoster)
+        }
+
+        // Finish the page photos and the closed-bulb poster first. The static
+        // poster stays visible throughout the animation download and parsing.
+        await loadImagesBeforeAnimation(images, signal)
+        signal.throwIfAborted()
+        if (finalPosterSrc && finalPoster && finalPoster.naturalWidth > 0) {
+          setReadyPosterSrc(finalPosterSrc)
+        }
+
+        const response = await fetch(src, { signal })
         if (!response.ok) throw new Error("Failed to fetch SVG")
         const text = await response.text()
         const sanitized = sanitizeSvgMarkup(text)
-        if (!cancelled) setMarkup(sanitized)
+        if (!signal.aborted) setMarkup(sanitized)
       } catch {
-        if (!cancelled) setErrored(true)
+        if (!signal.aborted) setErrored(true)
       }
     }
 
     loadSvg()
     return () => {
-      cancelled = true
+      controller.abort()
     }
-  }, [src])
+  }, [src, posterSrc, finalPosterSrc])
 
   useEffect(() => {
     if (!markup) return
@@ -315,7 +332,7 @@ export function AnimatedExplodedSvg({
     }
   }, [durationSeconds, mode, triggerProgress])
 
-  if (errored) return <>{fallback}</>
+  if (errored && !posterSrc) return <>{fallback}</>
 
   const canShowExplodedPoster = showExplodedPoster && Boolean(finalPosterSrc) && explodedPosterReady
 
@@ -328,11 +345,10 @@ export function AnimatedExplodedSvg({
         <img
           src={finalPosterSrc}
           alt=""
-          className="h-full w-full object-contain"
-          style={{ filter: isDarkTheme ? "invert(1)" : "none" }}
+          className="iiode-exploded-poster h-full w-full object-contain"
           aria-hidden
         />
-      ) : markup ? (
+      ) : markup && !errored ? (
         <div
           ref={hostRef}
           className="h-full w-full"
@@ -344,8 +360,9 @@ export function AnimatedExplodedSvg({
             <img
               src={posterSrc}
               alt=""
-              className="h-full w-full object-contain"
-              style={{ filter: isDarkTheme ? "invert(1)" : "none" }}
+              className="iiode-exploded-poster h-full w-full object-contain"
+              loading="eager"
+              decoding="async"
               aria-hidden
             />
           ) : (

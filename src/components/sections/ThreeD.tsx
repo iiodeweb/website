@@ -28,7 +28,7 @@ export function ThreeD({ copy }: ThreeDProps) {
           </div>
 
           <div className='iiode-split-half order-1 relative md:order-2 min-h-[50vh]'>
-            <Image src={copy.rightImage} alt={copy.rightTitle} fill sizes='(max-width: 767px) 100vw, 50vw' className='object-cover absolute inset-0 h-full w-full' />
+            <Image src={copy.rightImage} alt={copy.rightTitle} fill loading='eager' sizes='(max-width: 767px) 100vw, 50vw' className='object-cover absolute inset-0 h-full w-full' />
 
             <div className='iiode-half-pad-1 relative z-1 flex h-full items-center justify-center text-center'>
               <h2 className='iiode-type-1 text-white text-shadow-lg'>{copy.rightTitle}</h2>
@@ -104,7 +104,7 @@ function CompositionOverlay({ enabled, partMarkers, items, note }: CompositionOv
         </p>
       ) : null}
 
-      {note ? <p className='pointer-events-none absolute bottom-3 left-4 text-[0.72em] text-foreground md:left-10'>{note}</p> : null}
+      {note ? <p className='pointer-events-none absolute bottom-3 left-4 iiode-type-small text-foreground md:left-10'>{note}</p> : null}
     </div>
   );
 }

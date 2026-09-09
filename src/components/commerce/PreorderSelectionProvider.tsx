@@ -5,22 +5,24 @@ import { createContext, useContext, useMemo, useState, type ReactNode } from 're
 import { preorderPrices, type PreorderPriceItem } from '@/content/pricing';
 
 type PreorderSelectionContextValue = {
-  selected: PreorderPriceItem | null;
-  selectedId: string | null;
-  setSelectedId: (next: string | null) => void;
+  selected: PreorderPriceItem;
+  selectedId: string;
+  setSelectedId: (next: string) => void;
 };
 
+const defaultSelection = preorderPrices[0];
+
 const PreorderSelectionContext = createContext<PreorderSelectionContextValue>({
-  selected: null,
-  selectedId: null,
+  selected: defaultSelection,
+  selectedId: defaultSelection.id,
   setSelectedId: () => {},
 });
 
 export function PreorderSelectionProvider({ children }: { children: ReactNode }) {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState(defaultSelection.id);
 
   const value = useMemo(() => {
-    const selected = preorderPrices.find((item) => item.id === selectedId) ?? null;
+    const selected = preorderPrices.find((item) => item.id === selectedId) ?? defaultSelection;
 
     return { selected, selectedId, setSelectedId };
   }, [selectedId]);

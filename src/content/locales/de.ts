@@ -39,10 +39,33 @@ export const de: LocaleContent = {
   pages: {
     preorder: {
       title: 'Vorbestellung',
-      description: ['Unterstützen Sie iiode Re27, indem Sie jetzt vorbestellen.', 'Wir starten die Produktion, sobald 500 gültige, bezahlte Re27-Einheiten bestellt wurden. Die Kampagne läuft vom 9. September 2026 um 00:00 bis zum 9. März 2027 um 23:59 MEZ.', 'Die Zahlung wird bei der Bestellung eingezogen. Erreichen wir 500 Einheiten nicht, stornieren wir die Kampagne und erstatten den vollen gezahlten Betrag innerhalb von 14 Kalendertagen. Sobald wir bekannt geben, dass die Schwelle erreicht ist, wird die Produktion aufgenommen.', 'Lieferung und Stornierung', 'Wird die Schwelle bis zum 9. Dezember 2026 erreicht, erfolgt der Versand voraussichtlich bis zum 10. März 2027. Wird sie später erreicht, erfolgt der Versand voraussichtlich innerhalb von etwa drei Monaten nach unserer Bekanntgabe und spätestens am 10. Juni 2027.', 'Sie können jederzeit vor dem Versand gegen volle Rückerstattung stornieren. Ihre zwingenden gesetzlichen Rechte bleiben unberührt. Die vollständigen Allgemeinen Geschäftsbedingungen finden Sie im Checkout.'],
-      submit: 'Vorbestellformular öffnen',
-      successMessage: 'Danke. Ihre Vorbestellanfrage wurde gesendet.',
-      imageRight: re27Assets.preorderImage,
+      order: {
+        intro: [
+          'Unterstützen Sie iiode Re27, indem Sie jetzt vorbestellen.',
+          'Von September 2026 bis März 2027 bieten wir die erste kommerzielle Produktionsserie von Re27 zur Vorbestellung an.',
+          'Helfen Sie uns, unser Produkt auf den Markt zu bringen, indem Sie die Produktion Ihrer künftigen Glühbirnen für bewusstes Licht mitfinanzieren.',
+        ],
+        regionLabel: 'Wählen Sie Ihre Lieferregion',
+        chooseLabel: 'Wählen Sie Ihre Re27',
+        priceNote: 'Die Preise verstehen sich ohne Mehrwertsteuer und Versandkosten. Die Einzelheiten werden beim Bezahlen angegeben.',
+        contactIntro: 'Für grössere Vorbestellungen oder Vorbestellungen für den Einzelhandel kontaktieren Sie bitte',
+        thankYou: 'Vielen Dank für Ihr Vertrauen und Ihre Unterstützung.',
+      },
+      description: [
+        'Die Kampagne läuft vom 9. September 2026 bis zum 9. März 2027. Diese Vorbestellpreise gelten während der Kampagne. Die Zahlung wird bei der Bestellung in voller Höhe eingezogen und hilft, die Produktion zu finanzieren.',
+        'Die Produktion ist geplant, sobald gültige, bezahlte Bestellungen für 500 Re27-Glühbirnen vorliegen. Dies ist eine Mindestmenge für die Produktion, keine Begrenzung der verfügbaren Stückzahl. Wir können diese Mindestmenge senken, werden sie aber nicht erhöhen. Änderungen geben wir spätestens zum Ende der Kampagne bekannt. Wir informieren Sie per E-Mail, sobald die Produktionsschwelle erreicht ist.',
+        'Die Zertifizierung läuft. Im Rahmen dieses Prozesses können die endgültigen technischen Spezifikationen noch geringfügig angepasst werden.',
+      ],
+      details: {
+        title: 'So funktioniert die Vorbestellung',
+        dispatchTitle: 'Versand und Stornierung',
+        dispatchParagraphs: [
+          'Wird die Schwelle bis zum 9. Dezember 2026 erreicht, erfolgt der Versand voraussichtlich bis zum 10. März 2027. Wird sie später erreicht, erfolgt der Versand voraussichtlich innerhalb von etwa drei Monaten nach unserer Bekanntgabe und spätestens am 10. Juni 2027.',
+          'Wird die angekündigte Schwelle bis zum Ende der Kampagne nicht erreicht, erstatten wir den vollen gezahlten Betrag innerhalb von 14 Kalendertagen.',
+          'Sie können jederzeit vor dem Versand per E-Mail an info@iiode.com stornieren und erhalten eine vollständige Rückerstattung. Ihre gesetzlichen Rechte bleiben unberührt. Die vollständigen Allgemeinen Geschäftsbedingungen sind beim Bezahlen verfügbar.',
+        ],
+      },
+      submit: 'Jetzt vorbestellen',
       imageLeft: re27Assets.preorderImageTwo,
     },
     about: {

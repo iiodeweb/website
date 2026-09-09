@@ -7,6 +7,7 @@ import { SimpleCarousel } from '@/components/sections/SimpleCarousel';
 export default async function CollaborationsPage() {
   const locale = await getLocale();
   const copy = getPagesCopy(locale).collaborations;
+  const [title, ...introParagraphs] = copy.introLeft.split('\n\n');
 
   return (
     <>
@@ -14,7 +15,12 @@ export default async function CollaborationsPage() {
         <div className='iiode-section-wrap'>
           <div className='iiode-section-panel grid grid-cols-1 md:grid-cols-2'>
             <div className='iiode-split-half iiode-half-pad-2 flex items-start py-8'>
-              <p className='iiode-type-2 iiode-copy-narrow whitespace-pre-line md:ml-auto'>{copy.introLeft}</p>
+              <div className='iiode-copy-narrow grid gap-5 md:ml-auto'>
+                <h1 className='iiode-type-1'>{title}</h1>
+                {introParagraphs.map((paragraph) => (
+                  <p key={paragraph} className='iiode-type-2 whitespace-pre-line'>{paragraph}</p>
+                ))}
+              </div>
             </div>
             <div className='iiode-split-half min-h-[100vh] md:min-h-[50vh]'>
               <div className='grid h-full w-full grid-cols-2 grid-rows-2'>

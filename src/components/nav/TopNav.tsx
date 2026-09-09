@@ -25,6 +25,17 @@ export function TopNav({ locale, theme }: TopNavProps) {
   const re27Item = navItems.find((item) => item.key === 're27');
   const mobileItems = navItems.filter((item) => item.key !== 're27');
 
+  function handleNavigate(href: string, event: { preventDefault: () => void }) {
+    setIsMenuOpen(false);
+    if (window.location.pathname === href) {
+      event.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+      });
+    }
+  }
+
   return (
     <header className='sticky top-0 z-40 w-full border-b border-foreground/15 bg-background/80 text-foreground backdrop-blur'>
       <div className='iiode-container relative flex h-16 items-center gap-6'>
@@ -44,29 +55,29 @@ export function TopNav({ locale, theme }: TopNavProps) {
               body: JSON.stringify({ theme: nextTheme }),
             });
           }}
-          className='iiode-brand-hint cursor-pointer text-base lowercase'
+          className='iiode-brand-hint cursor-pointer iiode-type-2 lowercase'
           aria-label='Toggle theme'
         >
           {siteConfig.name}
         </button>
         {re27Item ? (
-          <Link href={re27Item.href} className='absolute left-1/2 -translate-x-1/2 text-base md:hidden'>
+          <Link href={re27Item.href} onNavigate={(event) => handleNavigate(re27Item.href, event)} className='absolute left-1/2 -translate-x-1/2 iiode-type-2 md:hidden'>
             {re27Item.label}
           </Link>
         ) : null}
-        <nav className='iiode-hover-group ml-auto hidden items-center gap-7 text-base md:flex'>
+        <nav className='iiode-hover-group ml-auto hidden items-center gap-7 iiode-type-2 md:flex'>
           {navItems.map((item) =>
             item.isMailto ? (
               <a key={item.href} href={item.href} className='transition-colors'>
                 {item.label}
               </a>
             ) : (
-              <Link key={item.href} href={item.href} className='transition-colors'>
+              <Link key={item.href} href={item.href} onNavigate={(event) => handleNavigate(item.href, event)} className='transition-colors'>
                 {item.label}
               </Link>
             ),
           )}
-          {localeSwitchEnabled ? <LanguageToggle locale={locale} pushLayout /> : <span className='w-7 text-center text-base uppercase text-current'>EN</span>}
+          {localeSwitchEnabled ? <LanguageToggle locale={locale} pushLayout /> : <span className='w-7 text-center iiode-type-2 uppercase text-current'>EN</span>}
         </nav>
         <button type='button' onClick={() => setIsMenuOpen((open) => !open)} className='ml-auto flex h-8 w-8 items-center justify-center transition-colors md:hidden' aria-expanded={isMenuOpen} aria-label='Toggle menu'>
           <span className='relative block h-3 w-5'>
@@ -79,19 +90,19 @@ export function TopNav({ locale, theme }: TopNavProps) {
       {isMenuOpen ? (
         <div className='absolute inset-x-0 top-full z-50 h-[calc(100dvh-4rem)] overflow-y-auto border-t border-foreground/15 bg-background/95 text-foreground shadow-lg backdrop-blur md:hidden'>
           <div className='iiode-container py-4'>
-            <div className='iiode-hover-group flex flex-col gap-3 text-sm'>
+            <div className='iiode-hover-group flex flex-col gap-3 iiode-type-2'>
               {mobileItems.map((item) =>
                 item.isMailto ? (
                   <a key={item.href} href={item.href} onClick={() => setIsMenuOpen(false)} className='transition-colors'>
                     {item.label}
                   </a>
                 ) : (
-                  <Link key={item.href} href={item.href} onClick={() => setIsMenuOpen(false)} className='transition-colors'>
+                  <Link key={item.href} href={item.href} onNavigate={(event) => handleNavigate(item.href, event)} className='transition-colors'>
                     {item.label}
                   </Link>
                 ),
               )}
-              <div className='pt-2'>{localeSwitchEnabled ? <LanguageToggle locale={locale} /> : <span className='text-sm uppercase text-current'>EN</span>}</div>
+              <div className='pt-2'>{localeSwitchEnabled ? <LanguageToggle locale={locale} /> : <span className='iiode-type-2 uppercase text-current'>EN</span>}</div>
             </div>
           </div>
         </div>

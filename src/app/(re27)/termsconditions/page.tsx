@@ -6,9 +6,10 @@ import { getLocale } from '@/lib/locale-server';
 export const metadata: Metadata = {
   title: 'General Terms and Conditions',
   description: 'General terms and conditions for the iiode website.',
+  robots: { index: false, follow: true },
 };
 
-export default async function TermsAndServicesPage() {
+export default async function TermsConditionsPage() {
   const locale = await getLocale();
   const copy = getPagesCopy(locale).terms;
 
@@ -18,7 +19,7 @@ export default async function TermsAndServicesPage() {
         <article className='mx-auto max-w-[46rem]'>
           <header className='border-b border-foreground/20 pb-8'>
             <h1 className='iiode-type-1'>{copy.title}</h1>
-            <p className='mt-3 text-sm text-foreground/70'>
+            <p className='mt-3 iiode-type-small text-foreground/70'>
               {copy.updatedLabel}: {copy.updatedAt}
             </p>
             <p className='iiode-type-2 mt-6'>{copy.intro}</p>
@@ -31,7 +32,7 @@ export default async function TermsAndServicesPage() {
                   {section.heading}
                 </h2>
                 {section.paragraphs.length > 0 ? (
-                  <div className='grid gap-4 text-base leading-relaxed text-foreground/85'>
+                  <div className='grid gap-4 iiode-type-2 leading-relaxed text-foreground/85'>
                     {section.paragraphs.map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
                     ))}

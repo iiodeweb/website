@@ -1,9 +1,13 @@
 import type { Metadata } from "next"
 
 import { CookieConsent } from "@/components/privacy/CookieConsent"
+import { re27Assets } from "@/content/locales/assets"
 import { getSiteCopy, siteConfig } from "@/content/site"
 import { getLocale } from "@/lib/locale-server"
 import { getTheme } from "@/lib/theme-server"
+
+import appleTouchIcon from "../../public/apple-touch-icon.png"
+import icon from "../../public/icon.png"
 
 import "./globals.css"
 
@@ -28,7 +32,7 @@ export const metadata: Metadata = {
     description: siteDescription,
     images: [
       {
-        url: "/assets/Re27/images/hero/Re27-Pola.jpg",
+        url: re27Assets.heroImage,
         alt: "iiode Re27",
       },
     ],
@@ -37,15 +41,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "iiode - Lighting made conscious",
     description: siteDescription,
-    images: ["/assets/Re27/images/hero/Re27-Pola.jpg"],
+    images: [re27Assets.heroImage],
   },
   icons: {
-    icon: [
-      { url: "/favicon.ico" },
-      { url: "/icon.png", type: "image/png" },
-    ],
-    apple: [{ url: "/apple-touch-icon.png", type: "image/png" }],
-    shortcut: ["/favicon.ico"],
+    icon: [{ url: icon.src, type: "image/png", sizes: `${icon.width}x${icon.height}` }],
+    apple: [{ url: appleTouchIcon.src, type: "image/png", sizes: `${appleTouchIcon.width}x${appleTouchIcon.height}` }],
+    shortcut: [icon.src],
   },
 }
 

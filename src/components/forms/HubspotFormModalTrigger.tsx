@@ -100,7 +100,7 @@ export function HubspotFormModalTrigger({ triggerLabel, modalTitle, portalId, fo
         : null}
       {notice
         ? createPortal(
-            <p className='fixed bottom-4 left-4 z-[121] max-w-sm border border-foreground/15 bg-background px-4 py-3 text-sm text-foreground shadow-xl'>
+            <p className='fixed bottom-4 left-4 z-[121] max-w-sm border border-foreground/15 bg-background px-4 py-3 iiode-type-2 text-foreground shadow-xl'>
               {notice.text}
               {notice.actionHref && notice.actionLabel ? (
                 <>

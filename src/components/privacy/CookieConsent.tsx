@@ -62,20 +62,20 @@ export function CookieConsent({
       ) : null}
       {consent === "unset" ? (
         <div className="fixed inset-x-0 bottom-0 z-[140] border-t border-foreground/15 bg-background/95 px-4 py-3 text-foreground shadow-xl backdrop-blur">
-          <div className="mx-auto flex max-w-[64rem] flex-col gap-3 text-sm md:flex-row md:items-center md:justify-between">
+          <div className="mx-auto flex max-w-[64rem] flex-col gap-3 iiode-type-small md:flex-row md:items-center md:justify-between">
             <p>{copy.message}</p>
             <div className="flex gap-2">
               <button
                 type="button"
                 onClick={() => updateConsent("rejected")}
-                className="border border-foreground/20 px-4 py-2 text-xs uppercase"
+                className="border border-foreground/20 px-4 py-2 iiode-type-small uppercase"
               >
                 {copy.reject}
               </button>
               <button
                 type="button"
                 onClick={() => updateConsent("accepted")}
-                className="bg-foreground px-4 py-2 text-xs uppercase text-background"
+                className="bg-foreground px-4 py-2 iiode-type-small uppercase text-background"
               >
                 {copy.accept}
               </button>

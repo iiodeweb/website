@@ -8,41 +8,38 @@ import type { Locale } from '@/lib/locale';
 
 type PreorderPriceListProps = {
   locale: Locale;
-  checkoutLabel?: string;
+  chooseLabel: string;
+  checkoutLabel: string;
+  priceNote: string;
   className?: string;
 };
 
-export function PreorderPriceList({ locale, checkoutLabel = 'pre-order now', className }: PreorderPriceListProps) {
+export function PreorderPriceList({ locale, chooseLabel, checkoutLabel, priceNote, className }: PreorderPriceListProps) {
   const { currency } = useCurrency();
   const { selected, selectedId, setSelectedId } = usePreorderSelection();
 
   return (
     <div className={`grid gap-5 ${className ?? ''}`}>
-      Choose your option:
+      {chooseLabel}
       <ul className='iiode-hover-group grid list-none p-0'>
         {preorderPrices.map((item) => {
           const isSelected = item.id === selectedId;
 
           return (
             <li key={item.id}>
-              <button type='button' onClick={() => setSelectedId(isSelected ? null : item.id)} aria-expanded={isSelected} className={`w-full cursor-pointer appearance-none border-0 bg-transparent p-0 text-left underline-offset-4 transition-colors ${isSelected ? 'underline' : ''}`}>
-                {`${item.label} — ${formatPrice(item.amounts[currency], currency)}`}
+              <button type='button' onClick={() => setSelectedId(item.id)} aria-pressed={isSelected} className={`w-full cursor-pointer appearance-none border-0 bg-transparent p-0 text-left underline-offset-4 transition-colors ${isSelected ? 'underline' : ''}`}>
+                {`${item.label[locale]} — ${formatPrice(item.amounts[currency], currency, locale)}`}
               </button>
             </li>
           );
         })}
       </ul>
-      {selected ? (
-        <div className='grid gap-4 border-t border-foreground/20 pt-4'>
-          <p>{selected.descriptions[locale]}</p>
-
-          <div>
-            <a href={selected.checkoutUrls[currency]} className='cursor-pointer bg-foreground px-5 py-3 text-xs uppercase tracking-[0.08em] text-background transition-opacity hover:opacity-90' target='_blank'>
-              {checkoutLabel}
-            </a>
-          </div>
-        </div>
-      ) : null}
+      <p>{priceNote}</p>
+      <div>
+        <a href={selected.checkoutUrls[currency]} className='inline-block cursor-pointer bg-foreground px-5 py-3 iiode-type-small uppercase tracking-[0.08em] text-background transition-opacity hover:opacity-90' target='_blank' rel='noopener'>
+          {checkoutLabel}
+        </a>
+      </div>
     </div>
   );
 }

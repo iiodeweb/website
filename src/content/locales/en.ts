@@ -38,11 +38,34 @@ export const en: LocaleContent = {
   },
   pages: {
     preorder: {
-      title: 'Pre-Order',
-      description: ['Support iiode Re27 by pre-ordering now.', 'We will start production when 500 valid paid Re27 units have been ordered. The campaign runs from 9 September 2026 at 00:00 to 9 March 2027 at 23:59 CET.', 'Payment is collected when you order. If we do not reach 500 units, we will cancel the campaign and refund the full amount paid within 14 calendar days. Once we announce that the threshold has been reached, production will proceed.', 'Delivery and cancellation', 'If the threshold is reached by 9 December 2026, estimated dispatch is by 10 March 2027. If it is reached later, estimated dispatch is within approximately three months of our announcement and no later than 10 June 2027.', 'You may cancel for a full refund at any time before dispatch. Your mandatory statutory rights remain unaffected. Please see complete Terms and conditions in checkout.'],
-      submit: 'Open pre-order form',
-      successMessage: 'Thanks. Your pre-order request has been sent.',
-      imageRight: re27Assets.preorderImage,
+      title: 'Pre-order',
+      order: {
+        intro: [
+          'Support iiode Re27 by pre-ordering now.',
+          'From September 2026 to March 2027, we are offering the first commercial production run of Re27 for pre-order.',
+          'Help us bring our product to market by co-funding the production of your future conscious light bulbs.',
+        ],
+        regionLabel: 'Choose your delivery region',
+        chooseLabel: 'Choose your Re27',
+        priceNote: 'Prices exclude VAT and shipping, as detailed at checkout.',
+        contactIntro: 'For larger and retail pre-orders, please contact',
+        thankYou: 'Thank you for your trust and support.',
+      },
+      description: [
+        'The campaign runs from 9 September 2026 to 9 March 2027. These pre-order prices apply during the campaign. Payment is collected in full when you order and helps fund production.',
+        "Production is planned once 500 valid, paid Re27 bulbs have been ordered. This is a production minimum, not a limit on the number available. We may lower this minimum, but will not increase it; any change will be announced by the campaign's closing date. We will email you when the production threshold has been reached.",
+        'Certification is in progress. Final specifications may undergo minor adjustments as part of this process.',
+      ],
+      details: {
+        title: 'How the pre-order works',
+        dispatchTitle: 'Dispatch and cancellation',
+        dispatchParagraphs: [
+          'If the threshold is reached by 9 December 2026, estimated dispatch is by 10 March 2027. If it is reached later, estimated dispatch is within approximately three months of our announcement and no later than 10 June 2027.',
+          "If the announced threshold is not reached by the campaign's closing date, we will refund the full amount paid within 14 calendar days.",
+          'You may cancel for a full refund at any time before dispatch by emailing info@iiode.com. Your statutory rights remain unaffected. Full Terms and Conditions are available at checkout.',
+        ],
+      },
+      submit: 'Pre-order now',
       imageLeft: re27Assets.preorderImageTwo,
     },
     about: {

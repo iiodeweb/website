@@ -6,7 +6,7 @@ type NavKey = 're27' | 'collaborations' | 'about' | 'downloads' | 'contact' | 'p
 
 type FooterLeftKey = 'home' | 'contact' | 'instagram';
 
-type FooterLinkKey = 'services' | 'preorder' | 'terms' | 'newsletter';
+type FooterLinkKey = 'services' | 'preorder' | 'newsletter';
 
 export const siteConfig = {
   name: 'iiode',
@@ -33,7 +33,6 @@ export const siteConfig = {
     right: [
       { key: 'services' as FooterLinkKey, href: 'https://services.iiode.com' },
       { key: 'preorder' as FooterLinkKey, href: '/preorder' },
-      { key: 'terms' as FooterLinkKey, href: '/terms-and-services' },
       {
         key: 'newsletter' as FooterLinkKey,
         href: '#newsletter',

@@ -37,6 +37,7 @@ type HubspotLegacyMessageData = {
 }
 
 let hubspotEmbedLoadPromise: Promise<void> | null = null
+let hubspotEmbedRetry = 0
 
 function loadHubspotEmbedScript(): Promise<void> {
   if (typeof window === "undefined") {
@@ -56,38 +57,52 @@ function loadHubspotEmbedScript(): Promise<void> {
       `script[data-hubspot-forms="true"], script[src="${hubspotConfig.embedScriptSrc}"]`,
     )
 
-    if (existingScript) {
-      existingScript.addEventListener("load", () => resolve(), { once: true })
-      existingScript.addEventListener("error", () => reject(new Error("HubSpot forms failed to load")), {
-        once: true,
-      })
-      return
+    const script = existingScript ?? document.createElement("script")
+    const cleanup = () => {
+      window.clearTimeout(timeout)
+      window.clearInterval(poll)
+      script.removeEventListener("load", checkReady)
+      script.removeEventListener("error", fail)
     }
+    const checkReady = () => {
+      if (!window.hbspt?.forms?.create) return
+      cleanup()
+      resolve()
+    }
+    const fail = () => {
+      cleanup()
+      script.remove()
+      reject(new Error("HubSpot forms failed to load"))
+    }
+    // Cover both the script request and API initialization, including an
+    // existing script whose load event already fired.
+    const timeout = window.setTimeout(fail, 10000)
+    const poll = window.setInterval(checkReady, 100)
+    script.addEventListener("load", checkReady)
+    script.addEventListener("error", fail)
 
-    const script = document.createElement("script")
-    script.src = hubspotConfig.embedScriptSrc
-    script.async = true
-    script.defer = true
-    script.dataset.hubspotForms = "true"
-    script.addEventListener("load", () => resolve(), { once: true })
-    script.addEventListener("error", () => reject(new Error("HubSpot forms failed to load")), { once: true })
-    document.head.appendChild(script)
+    if (!existingScript) {
+      const scriptUrl = new URL(hubspotConfig.embedScriptSrc)
+      if (hubspotEmbedRetry > 0) {
+        // A removed script can still have a stalled request in the browser.
+        // Give retries a fresh URL so they do not reuse that pending request.
+        scriptUrl.searchParams.set("iiodeRetry", String(hubspotEmbedRetry))
+      }
+      script.src = scriptUrl.toString()
+      script.async = true
+      script.defer = true
+      script.dataset.hubspotForms = "true"
+      document.head.appendChild(script)
+    }
+    checkReady()
+  }).catch((error) => {
+    // Opening a form again should retry after a network failure or timeout.
+    hubspotEmbedLoadPromise = null
+    hubspotEmbedRetry += 1
+    throw error
   })
 
   return hubspotEmbedLoadPromise
-}
-
-async function waitForHubspotApi(timeoutMs = 10000): Promise<void> {
-  await loadHubspotEmbedScript()
-
-  const start = window.performance.now()
-  while (!window.hbspt?.forms?.create) {
-    if (window.performance.now() - start > timeoutMs) {
-      throw new Error("HubSpot forms API timed out")
-    }
-
-    await new Promise((resolve) => window.setTimeout(resolve, 100))
-  }
 }
 
 export function HubspotFormEmbed({
@@ -160,7 +175,7 @@ export function HubspotFormEmbed({
     if (onClose) {
       const closeButton = document.createElement("button")
       closeButton.type = "button"
-      closeButton.className = "cursor-pointer absolute top-2 right-3 z-10 text-xs uppercase !text-black"
+      closeButton.className = "cursor-pointer absolute top-2 right-3 z-10 iiode-type-small uppercase !text-black"
       closeButton.setAttribute("aria-label", closeLabel ?? "Close")
       closeButton.textContent = "Close"
       closeButton.addEventListener("click", (event) => {
@@ -178,7 +193,7 @@ export function HubspotFormEmbed({
 
     async function mountForm() {
       try {
-        await waitForHubspotApi()
+        await loadHubspotEmbedScript()
         if (cancelled) {
           return
         }
@@ -201,7 +216,7 @@ export function HubspotFormEmbed({
       } catch {
         if (!cancelled) {
           const errorMessage = document.createElement("p")
-          errorMessage.className = "text-sm text-foreground"
+          errorMessage.className = "iiode-type-small text-foreground"
           errorMessage.textContent = fallbackEmail
             ? `The form could not be loaded right now. Please contact ${fallbackEmail}.`
             : "The form could not be loaded right now."

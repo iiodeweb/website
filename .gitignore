@@ -43,5 +43,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# runtime intake logs
+# local drafts, working notes, and runtime intake logs
 .iiode-data/

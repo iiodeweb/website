@@ -37,9 +37,20 @@ export type PagesCopy = {
   preorder: {
     title: string;
     description: string[];
+    order: {
+      intro: string[];
+      regionLabel: string;
+      chooseLabel: string;
+      priceNote: string;
+      contactIntro: string;
+      thankYou: string;
+    };
+    details: {
+      title: string;
+      dispatchTitle: string;
+      dispatchParagraphs: string[];
+    };
     submit: string;
-    successMessage: string;
-    imageRight: string;
     imageLeft: string;
   };
   about: {

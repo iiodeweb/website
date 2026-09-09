@@ -13,12 +13,12 @@ export default async function Re27Page() {
 
   return (
     <>
-      <Hero copy={copy.hero} />
-      <WorkWithUs copy={copy.workWithUs} />
+      <Hero copy={copy.hero} preorderLabel={copy.workWithUs.rightTitle} />
       <Story copy={copy.story} />
       <UseCases copy={copy.useCases} />
       <ThreeD copy={copy.threeD} />
       <Gallery copy={copy.gallery} />
+      <WorkWithUs copy={copy.workWithUs} />
     </>
   );
 }

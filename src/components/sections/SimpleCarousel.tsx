@@ -74,7 +74,7 @@ export function SimpleCarousel({ images }: SimpleCarouselProps) {
               event.stopPropagation();
               showPrevious();
             }}
-            className='cursor-pointer pointer-events-auto h-8 w-8 bg-black/30 text-lg leading-none text-white backdrop-blur-sm transition hover:bg-black/45'
+            className='cursor-pointer pointer-events-auto h-8 w-8 bg-black/30 iiode-type-2 leading-none text-white backdrop-blur-sm transition hover:bg-black/45'
             aria-label='Previous image'
           >
             &#8592;
@@ -85,7 +85,7 @@ export function SimpleCarousel({ images }: SimpleCarouselProps) {
               event.stopPropagation();
               showNext();
             }}
-            className='cursor-pointer pointer-events-auto h-8 w-8 bg-black/30 text-lg leading-none text-white backdrop-blur-sm transition hover:bg-black/45'
+            className='cursor-pointer pointer-events-auto h-8 w-8 bg-black/30 iiode-type-2 leading-none text-white backdrop-blur-sm transition hover:bg-black/45'
             aria-label='Next image'
           >
             &#8594;

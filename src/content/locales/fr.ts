@@ -39,10 +39,33 @@ export const fr: LocaleContent = {
   pages: {
     preorder: {
       title: 'Précommande',
-      description: ['Soutenez iiode Re27 en précommandant dès maintenant.', 'Nous lancerons la production lorsque 500 unités Re27 valides et payées auront été commandées. La campagne se déroule du 9 septembre 2026 à 00:00 au 9 mars 2027 à 23:59 CET.', "Le paiement est encaissé lors de la commande. Si nous n'atteignons pas 500 unités, nous annulerons la campagne et rembourserons l'intégralité du montant payé dans un délai de 14 jours calendaires. Une fois que nous aurons annoncé que le seuil a été atteint, la production sera lancée.", 'Livraison et annulation', "Si le seuil est atteint d'ici le 9 décembre 2026, l'expédition est estimée au 10 mars 2027. S'il est atteint plus tard, l'expédition est estimée dans un délai d'environ trois mois après notre annonce et au plus tard le 10 juin 2027.", "Vous pouvez annuler à tout moment avant l'expédition et obtenir un remboursement intégral. Vos droits légaux impératifs restent inchangés. Veuillez consulter les conditions générales complètes lors du paiement."],
-      submit: 'Ouvrir le formulaire de précommande',
-      successMessage: 'Merci. Votre demande de précommande a été envoyée.',
-      imageRight: re27Assets.preorderImage,
+      order: {
+        intro: [
+          'Soutenez iiode Re27 en précommandant dès maintenant.',
+          'De septembre 2026 à mars 2027, nous proposons en précommande la première série commerciale de Re27.',
+          'Aidez-nous à lancer notre produit en cofinançant la production de vos futures ampoules pour un éclairage conscient.',
+        ],
+        regionLabel: 'Choisissez votre région de livraison',
+        chooseLabel: 'Choisissez votre Re27',
+        priceNote: 'Les prix sont hors TVA et frais de livraison, comme indiqué lors du paiement.',
+        contactIntro: 'Pour les précommandes en quantité ou destinées à la revente, veuillez contacter',
+        thankYou: 'Merci pour votre confiance et votre soutien.',
+      },
+      description: [
+        'La campagne se déroule du 9 septembre 2026 au 9 mars 2027. Ces prix de précommande sont valables pendant la campagne. Le paiement est encaissé en totalité lors de la commande et contribue au financement de la production.',
+        "La production est prévue une fois que 500 ampoules Re27 auront fait l'objet de commandes valides et payées. Il s'agit d'un minimum de production, et non d'une limite du nombre disponible. Nous pourrons abaisser ce minimum, mais ne l'augmenterons pas ; tout changement sera annoncé au plus tard à la clôture de la campagne. Nous vous informerons par e-mail lorsque le seuil de production sera atteint.",
+        'La certification est en cours. Les caractéristiques définitives pourront faire l’objet de légers ajustements dans le cadre de ce processus.',
+      ],
+      details: {
+        title: 'Comment fonctionne la précommande',
+        dispatchTitle: 'Expédition et annulation',
+        dispatchParagraphs: [
+          "Si le seuil est atteint au plus tard le 9 décembre 2026, l'expédition est estimée au plus tard le 10 mars 2027. S'il est atteint plus tard, l'expédition est estimée dans un délai d'environ trois mois après notre annonce, et au plus tard le 10 juin 2027.",
+          "Si le seuil annoncé n'est pas atteint à la clôture de la campagne, nous rembourserons l'intégralité du montant payé dans un délai de 14 jours calendaires.",
+          "Vous pouvez annuler à tout moment avant l'expédition et obtenir un remboursement intégral en écrivant à info@iiode.com. Vos droits légaux restent inchangés. Les conditions générales complètes sont disponibles lors du paiement.",
+        ],
+      },
+      submit: 'Précommander maintenant',
       imageLeft: re27Assets.preorderImageTwo,
     },
     about: {
