@@ -74,7 +74,7 @@ export const en: LocaleContent = {
       servicesLabel: 'For design and production see',
       contactTitle: 'Get in touch',
       contactIntro: 'iiode has offices in both Lausanne & Paris',
-      addresses: ['Av. des Alpes 9, CH - 1006 Lausanne', "Rue d'Hauteville 25, FR - 75010 Paris"],
+      addresses: ['Rue de Sébeillon 1, CH-1004 Lausanne', "Rue d'Hauteville 25, FR - 75010 Paris"],
       contactLine: 'To contact us, kindly send us a message at',
     },
     terms: termsContent,

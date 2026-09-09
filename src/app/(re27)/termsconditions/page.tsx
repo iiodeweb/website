@@ -16,7 +16,7 @@ export default async function TermsConditionsPage() {
   return (
     <section className='bg-background text-foreground'>
       <div className='iiode-container py-12 md:py-16 lg:py-20'>
-        <article className='mx-auto max-w-[46rem]'>
+        <article lang='en' className='mx-auto max-w-[46rem]'>
           <header className='border-b border-foreground/20 pb-8'>
             <h1 className='iiode-type-1'>{copy.title}</h1>
             <p className='mt-3 iiode-type-small text-foreground/70'>
@@ -26,11 +26,13 @@ export default async function TermsConditionsPage() {
           </header>
 
           <div className='mt-10 grid gap-10'>
-            {copy.sections.map((section) => (
-              <section key={section.heading} className='grid gap-4 border-t border-foreground/20 pt-5 first:border-t-0 first:pt-0'>
-                <h2 className={section.paragraphs.length > 0 ? 'iiode-type-2' : 'iiode-type-1'}>
-                  {section.heading}
-                </h2>
+            {copy.sections.map((section, index) => (
+              <section key={`${index}-${section.heading}`} className='grid gap-4 border-t border-foreground/20 pt-5 first:border-t-0 first:pt-0'>
+                {section.heading ? (
+                  <h2 className={section.paragraphs.length > 0 ? 'iiode-type-2' : 'iiode-type-1'}>
+                    {section.heading}
+                  </h2>
+                ) : null}
                 {section.paragraphs.length > 0 ? (
                   <div className='grid gap-4 iiode-type-2 leading-relaxed text-foreground/85'>
                     {section.paragraphs.map((paragraph) => (
